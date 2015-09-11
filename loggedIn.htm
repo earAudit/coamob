@@ -1,0 +1,3531 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+		<meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+		<link rel="stylesheet" href="jquery-ui-1.10.3.custom.min.css" />
+		<link rel="stylesheet" href="jquery.mobile-1.3.2.min.css" />
+		<link rel="stylesheet" type="text/css" href="common.min.css" />
+		<link rel="stylesheet" type="text/css" href="easy-responsive-tabs.css" />
+
+		<title>Common Otology Audit</title>
+	</head>
+	<body>
+		<div id="#Loading">
+			Loading...
+		</div>
+		<div id="loggedInPage" data-role="page" data-theme="c">
+			<div data-role="panel" id="mypanel" data-position="right" data-display="overlay">
+				<ul data-role="listview" data-theme="a" id="menuBarV">
+					<li data-role="list-divider" data-theme="b">
+						Welcome <span id="username">User</span>
+					</li>
+					<!--<li>
+						<a href="#tab-MyProfile" data-rel="close">My Profile</a>
+					</li>-->
+					<li>
+						<!--<a href="#Logoff" data-rel="close">Logoff</a>-->
+						<a href="" data-rel="close" onclick="backToDoctorMenu();">Back to Main Menu</a>
+					</li>
+					<li data-role="list-divider" data-theme="c">
+						Menu
+					</li>
+					<li>
+						<a href="#tab-Home" data-rel="close">COA Site Home</a>
+					</li>
+					<li>
+						<a href="#tab-NewCase" data-rel="close">Create New Case</a>
+					</li>
+					<li >
+						<a href="#tab-Review" data-rel="close">Review / Update</a>
+					</li>
+					<!--<li id="tab-DataAnalysis">
+						<a href="#tab-DataAnalysis" data-rel="close">Data Analysis</a>
+					</li>-->
+					<li>
+						<a href="#tab-AboutUs" data-rel="close">About Us</a>
+					</li>
+					<!--<li id="tab-Downloads">
+						<a href="#tab-Downloads" data-rel="close">Downloads</a>
+					</li>
+					<li id="tab-Links">
+						<a href="#tab-Links" data-rel="close">Useful Links</a>
+					</li>-->
+				</ul>
+			</div>
+			<div data-role="header" data-theme="f" class="header resize center ui-state-persist">
+				<a href="#" id="reviewBackBtnSmall" data-icon="back" data-iconpos="notext" class="ui-btn-left">Back</a>
+				<div class="mainTitle center">
+					Common Otology Audit
+				</div>
+				<a href="#mypanel" id='navMenuBtn' data-icon="bars" data-iconpos="notext" class="ui-btn-right">Navigation</a>
+				<div class="headerBar center">
+					&nbsp; <img class="logo" src="EarAudit.gif" />
+				</div>
+			</div>
+			<div data-role="content" class="content resize center">
+				<div class="welcomeDiv">
+					Welcome, <a href="javascript:showMyProfile()" name="Edit My Profile" id="editProfileLink"><span id="username">User</span></a><!-- [<a href="javascript:coaLogoff()" id="a-logoff">Log off</a> ]-->
+				</div>
+				<div data-role="controlgroup" data-type="horizontal" id="menuBarH" data-mini="true">
+					<a href="" data-role="button"   onclick="backToDoctorMenu();" >Main Menu</a>
+					<a href="#tab-Home" data-role="button">COA Site Home</a>
+					<a href="#tab-NewCase" data-role="button">Create New Case</a>
+					<a href="#tab-Review" data-role="button">Review / Update</a>
+					<!--<a href="#tab-DataAnalysis" data-role="button">Data Analysis</a>-->
+					<a href="#tab-AboutUs" data-role="button">About Us</a>
+					<!--<a href="#tab-Downloads" data-role="button">Downloads</a>-->
+					<!--<a href="#tab-Links" data-role="button">Useful Links</a>-->
+				</div>
+				<div id="mainContent ">
+					<ul id="tab-Home" data-title="Welcome" data-role="listview" data-inset="true" data-corners="false" class="contentBlock">
+						<li data-role="list-divider" data-theme="e" class="reponsiveText">
+							<span class="platformName"></span> - Welcome
+						</li>
+						<li data-theme="c">
+							<div class="ui-grid-a grid-breakpoint">
+								<div class="ui-block-a">
+									<form id="welcome-searchPatient">
+										<label for="input-patientCode">Enter Patient Code to review:</label>
+										<input type="search" name="input-patientCode" id="input-patientCode" value="" placeholder="Patient Code" />
+									</form>
+								</div>
+								<div class="ui-block-b">
+									<label for="btn-createNewCase">Click to create New Case:</label>
+									<input type="button" name="btn-createNewCase" id="btn-createNewCase" value="Create New Case (PreOp)" />
+								</div>
+							</div>
+							<div class="contentText">
+								<h2><a>Notice:</a></h2>
+								<p class="word-wrap">
+									Hospitals that do not routinely enter 3KHz readings have been unable to obtain a mean
+									calculation of the audiogram (the system returns null because one of the values included in
+									the mean calculation is null), so it has been decided that a 3KHz reading should be
+									estimated if none is available. In the past some users have estimated their own readings,
+									but there now exists a function within the system that will uniformly calculate and enter a
+									missing 3KHz reading when the user enters 'N/A' in the 3KHz boxes. The formula takes the
+									average of the 2KHz and 4KHz readings.
+									<br />
+									<strong>Users should NOT enter their own estimated values.</strong>
+								</p>
+								<p class="word-wrap">
+									Note also that in order for this to work for Level 1 users we have had to include the 4KHz BC
+									reading (previously not recorded). The pro forma has also been amended to reflect this
+									change.
+								</p>
+								<p class="word-wrap">
+									Please direct any comments or queries to the web master or project leader.
+								</p>
+							</div>
+						</li>
+					</ul>
+					<ul id="tab-NewCase" data-title="New Case" data-role="listview" data-inset="true" data-corners="false" class="contentBlock">
+						<li data-role="list-divider" data-theme="e" class="reponsiveText">
+							<span class="platformName"></span> - Create New Case (PreOp)
+						</li>
+						<li data-theme="c">
+							<form id="NewCaseForm">
+								<h2 class="sectionHeader">Patient Details</h2>
+								<div class="ui-grid-a grid-breakpoint">
+									<div class="ui-block-a">
+										<label for="input-SurgCode">Surg Code:</label>
+										<input type="text" name="input-SurgCode" id="input-SurgCode" value="" disabled="disabled"/>
+									</div>
+									<div class="ui-block-b"></div>
+									<div class="ui-block-a">
+										<label for="input-PatientHospitalNo">Patient's Hospital No.:</label>
+										<input type="text" name="input-PatientHospitalNo" id="input-PatientHospitalNo" value="" />
+									</div>
+									<div class="ui-block-b">
+										<label for="input-ConfirmHospitalNo">Confirm Hospital No.:</label>
+										<input type="text" name="input-ConfirmHospitalNo" id="input-ConfirmHospitalNo" value="" />
+									</div>
+									<div class="ui-block-a">
+										<label for="input-Sex">Sex:</label>
+										<div>
+											<fieldset class="displayInline">
+												<label>
+													<input type="radio" name="input-Sex" id="input-Sex-M" value="M" checked="true" />
+													Male</label>
+											</fieldset>
+											<fieldset class="displayInline">
+												<label>
+													<input type="radio" name="input-Sex" id="input-Sex-F" value="F" />
+													Female</label>
+											</fieldset>
+										</div>
+									</div>
+									<div class="ui-block-b">
+										<label for="input-DoB">Date of Birth (dd/mm/yyyy):</label>
+										<input type="text" name="input-DoB" id="input-DoB" value="" placeholder="dd/mm/yyyy" class="datepicker"/>
+									</div>
+								</div>
+								<h2 class="sectionHeader">PreOp Details</h2>
+								<div class="ui-grid-a grid-breakpoint">
+									<div class="ui-block-a">
+										<label for="input-DateListed">Date Listed (dd/mm/yyyy):</label>
+										<input type="text" name="input-DateListed" id="input-DateListed" value="" placeholder="dd/mm/yyyy" class="datepicker"/>
+									</div>
+									<div class="ui-block-b">
+										<label>Side of Operation:</label>
+										<div id="input-SideOfOperation">
+											<fieldset class="displayInline">
+												<label>
+													<input type="radio" name="input-SideOfOperation" id="input-SideOfOperation-L" value="Left" checked="true" />
+													Left</label>
+											</fieldset>
+											<fieldset class="displayInline">
+												<label>
+													<input type="radio" name="input-SideOfOperation" id="input-SideOfOperation-R" value="Right" />
+													Right</label>
+											</fieldset>
+										</div>
+									</div>
+									<div class="ui-block-a">
+										<label for="input-CaseCode">Case Code:</label>
+										<input type="text" name="input-CaseCode" id="input-CaseCode" value="" placeholder="Auto-Assigned" disabled="disabled" />
+									</div>
+									<div class="ui-block-b">
+										<label>Stage:</label>
+										<div id="input-Stage">
+											<fieldset class="displayInline">
+												<label>
+													<input type="radio" name="input-Stage" id="input-Stage-Primary" value="Primary" checked="true" />
+													Primary</label>
+											</fieldset>
+											<fieldset class="displayInline">
+												<label>
+													<input type="radio" name="input-Stage" id="input-Stage-Revision" value="Revision" />
+													Revision</label>
+											</fieldset>
+										</div>
+									</div>
+								</div>
+								<div class="ui-grid-solo grid-breakpoint">
+									<div class="ui-block-a">
+										<label>Symptoms:</label>
+										<div id="input-Symptoms">
+											<fieldset class="displayInline">
+												<label>
+													<input type="checkbox" value="Y" name="input-Symptoms-Deafness" id="input-Symptoms-Deafness" />
+													Deafness</label>
+											</fieldset>
+											<fieldset class="displayInline level2Only notForMA">
+												<label>
+													<input type="checkbox" value="Y" name="input-Symptoms-Tinnitus" id="input-Symptoms-Tinnitus" />
+													Tinnitus</label>
+											</fieldset>
+											<fieldset class="displayInline level2Only notForMA">
+												<label>
+													<input type="checkbox" value="Y" name="input-Symptoms-Dizziness" id="input-Symptoms-Dizziness" />
+													Dizziness</label>
+											</fieldset>
+											<fieldset class="displayInline">
+												<label>
+													<input type="checkbox" value="Y" name="input-Symptoms-IntermittentDischarge" id="input-Symptoms-IntermittentDischarge" />
+													Intermittent Discharge</label>
+											</fieldset>
+											<fieldset class="displayInline">
+												<label>
+													<input type="checkbox" value="Y" name="input-Symptoms-PersistentDischarge" id="input-Symptoms-PersistentDischarge" />
+													Persistent Discharge</label>
+											</fieldset>
+											<fieldset class="displayInline">
+												<label>
+													<input type="checkbox" value="Y" name="input-Symptoms-Earache" id="input-Symptoms-Earache" />
+													Earache</label>
+											</fieldset>
+											<fieldset class="displayInline notForMA">
+												<label>
+													<input type="checkbox" value="Y" name="input-Symptoms-FacialPalsy" id="input-Symptoms-FacialPalsy" />
+													Facial Palsy</label>
+											</fieldset>
+											<fieldset class="displayInline">
+												<label>
+													<input type="checkbox" value="Y" name="input-Symptoms-None" id="input-Symptoms-None" checked="true" />
+													None</label>
+											</fieldset>
+										</div>
+									</div>
+									<div class="ui-block-a">
+										<label>Aim of Surgery:</label>
+										<div class="chkList" id="input-AimOfSurgery">
+											<fieldset class="displayInline">
+												<label>
+													<input type="checkbox" value="Y" name="input-AimOfSurgery-DryEar" id="input-AimOfSurgery-DryEar" />
+													Dry Ear</label>
+											</fieldset>
+											<fieldset class="displayInline">
+												<label>
+													<input type="checkbox" value="Y" name="input-AimOfSurgery-HearingGain" id="input-AimOfSurgery-HearingGain" />
+													Hearing Gain</label>
+											</fieldset>
+											<fieldset class="displayInline notForMA">
+												<label>
+													<input type="checkbox" value="Y" name="input-AimOfSurgery-RestorationOfNormalAnatomy" id="input-AimOfSurgery-RestorationOfNormalAnatomy" />
+													Restoration of Normal Anatomy</label>
+											</fieldset>
+											<fieldset class="displayInline">
+												<label>
+													<input type="checkbox" value="Y" name="input-AimOfSurgery-Waterproofing" id="input-AimOfSurgery-Waterproofing" />
+													Waterproofing</label>
+											</fieldset>
+											<fieldset class="displayInline notForMA">
+												<label>
+													<input type="checkbox" value="Y" name="input-AimOfSurgery-RemovalOfPathology" id="input-AimOfSurgery-RemovalOfPathology" />
+													Removal of Pathology</label>
+											</fieldset>
+										</div>
+									</div>
+									<div class="ui-block-a">
+										<label>Risk Factors:</label>
+										<div class="chkList" id="input-RiskFactors">
+											<fieldset class="displayInline">
+												<label>
+													<input type="checkbox" value="Y" name="input-RiskFactors-Diabetes" id="input-RiskFactors-Diabetes" />
+													Diabetes</label>
+											</fieldset>
+											<fieldset class="displayInline">
+												<label>
+													<input type="checkbox" value="Y" name="input-RiskFactors-CleftPalate" id="input-RiskFactors-CleftPalate" />
+													Cleft Palate</label>
+											</fieldset>
+											<fieldset class="displayInline notForMA">
+												<label>
+													<input type="checkbox" value="Y" name="input-RiskFactors-DownsSyndrome" id="input-RiskFactors-DownsSyndrome" />
+													Down's Syndromey</label>
+											</fieldset>
+											<fieldset class="displayInline">
+												<label>
+													<input type="checkbox" value="Y" name="input-RiskFactors-Other" id="input-RiskFactors-Other" />
+													Other</label>
+											</fieldset>
+											<fieldset class="displayInline">
+												<label>
+													<input type="checkbox" value="Y" name="input-RiskFactors-None" id="input-RiskFactors-None" checked="true" />
+													None</label>
+											</fieldset>
+										</div>
+									</div>
+								</div>
+								<div class="ui-grid-a grid-breakpoint">
+									<div class="ui-block-a">
+										<label for="input-Smoking">Smoking:</label>
+										<select name="input-Smoking" id="input-Smoking">
+											<option value="Smoker">Smoker</option>
+											<option value="Exposed">Exposed</option>
+											<option value="No" selected="selected">No</option>
+										</select>
+									</div>
+									<div class="ui-block-b">
+										<label for="input-ContralateralEar">Contralateral Ear:</label>
+										<select name="input-ContralateralEar" id="input-ContralateralEar">
+											<option value="Normal">Normal</option>
+											<option value="ActiveCOM">Active COM</option>
+											<option value="InactiveCOM">Inactive COM</option>
+											<option value="OEM">OEM</option>
+											<option value="Other">Other</option>
+										</select>
+									</div>
+								</div>
+								<div class="ui-grid-solo grid-breakpoint">
+									<div class="ui-block-a">
+										<div id="input-isForMA" class="notForMA">
+											<label>Do you wish to enter this record into the Myringoplasty Audit ?</label>
+											<div>
+												<fieldset class="displayInline">
+													<label>
+														<input type="radio" name="input-isForMA" id="input-isForMA-Y" value="Y" />
+														Yes</label>
+												</fieldset>
+												<fieldset class="displayInline">
+													<label>
+														<input type="radio" name="input-isForMA" id="input-isForMA-N" value="N" checked="true" />
+														No</label>
+												</fieldset>
+											</div>
+										</div>
+									</div>
+									<div class="ui-block-a">
+										<label for="input-Comments">Comments:</label>
+										<textarea name="input-Comments" id="input-Comments"></textarea>
+									</div>
+								</div>
+								<div class="alignRight">
+									<fieldset class="displayInline">
+										<input id="submit-newCase" type="submit" value="Submit" data-theme="b"/>
+									</fieldset>
+								</div>
+							</form>
+						</li>
+					</ul>
+					<ul id="tab-Review" data-title="Review" data-role="listview" data-inset="true" data-corners="false" class="contentBlock">
+						<li data-role="list-divider" data-theme="e" class="reponsiveText">
+							<span class="platformName"></span> - Review / Update
+						</li>
+						<li data-theme="c">
+							<div class="ui-grid-solo grid-breakpoint">
+								<div class="ui-block-a">
+									<form id="SearchCaseForm">
+										<label for="input-patientCode">Enter Patient Code to review:</label>
+										<input type="search" name="input-patientCode" id="input-patientCode" value="" placeholder="Patient Code" />
+										<div class="alignRight">
+											<fieldset class="displayInline">
+												<input id="submit-newCase" type="submit" value="Submit" data-theme="b"/>
+											</fieldset>
+										</div>
+									</form>
+								</div>
+								<div class="ui-block-a">
+									<label for="review-CaseList" style="display:none">Select a Case Code:</label>
+									<div class="dataNotFind" id="review-CaseList-dataNotFind" style="display:none">
+										Case not found.
+									</div>
+									<ul data-role="listview" data-inset="true" id="review-CaseList"></ul>
+								</div>
+							</div>
+						</li>
+					</ul>
+					<ul id="tab-Review-2" data-title="Review2" data-role="listview" data-inset="true" data-corners="false" class="contentBlock">
+						<div id="reviewPage-2">
+							<div class="tab" id="review-2-Tab">
+								<ul class="resp-tabs-list">
+									<li>
+										PreOp
+									</li>
+									<li>
+										Operation
+									</li>
+									<li class="level2Only notForMA">
+										Op Procedures
+									</li>
+									<li>
+										Followup
+									</li>
+								</ul>
+								<div class="alignRight" id="reviewBackBtn">
+									<a href="#" data-role="button" data-inline="true" data-mini="true" data-corner="false" data-icon="back" data-iconpos="left">Back to case list</a>
+								</div>
+								<div class="resp-tabs-container">
+									<div class="contentText" id="review-PreOp">
+										<form id="review-PreOpForm">
+											<h2 class="sectionHeader">Patient Details</h2>
+											<div class="ui-grid-a grid-breakpoint">
+												<div class="ui-block-a">
+													<label for="input-SurgCode">Surg Code:</label>
+													<input type="text" name="input-SurgCode" id="input-SurgCode" value="" disabled="disabled" />
+												</div>
+												<div class="ui-block-b">
+													<label for="input-PatientHospitalNo">Patient's Hospital No.:</label>
+													<input type="text" name="input-PatientHospitalNo" id="input-PatientHospitalNo" value="" disabled="disabled"/>
+												</div>
+												<div class="ui-block-a">
+													<label>Sex:</label>
+													<div>
+														<fieldset class="displayInline">
+															<label>
+																<input type="radio" name="input-Sex" id="input-Sex-M" value="M" "checked"="checked" disabled="disabled"/>
+																Male</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="radio" name="input-Sex" id="input-Sex-F" value="F" disabled="disabled"/>
+																Female</label>
+														</fieldset>
+													</div>
+												</div>
+												<div class="ui-block-b">
+													<label for="input-DoB">Date of Birth:</label>
+													<input type="text" name="input-DoB" id="input-DoB" value="" placeholder="dd/mm/yyyy" disabled="disabled" />
+												</div>
+											</div>
+											<h2 class="sectionHeader">PreOp Details</h2>
+											<div class="ui-grid-a grid-breakpoint">
+												<div class="ui-block-a">
+													<label for="input-DateListed">Date Listed:</label>
+													<input type="text" name="input-DateListed" id="input-DateListed" value="" placeholder="dd/mm/yyyy" disabled="disabled"/>
+												</div>
+												<div class="ui-block-b">
+													<label>Side of Operation:</label>
+													<div>
+														<fieldset class="displayInline">
+															<label>
+																<input type="radio" name="input-SideOfOperation" id="input-SideOfOperation-L" value="Left" "checked"="checked" disabled="disabled"/>
+																Left</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="radio" name="input-SideOfOperation" id="input-SideOfOperation-R" value="Right" disabled="disabled"/>
+																Right</label>
+														</fieldset>
+													</div>
+												</div>
+												<div class="ui-block-a">
+													<label for="input-CaseCode">Case Code:</label>
+													<input type="text" name="input-CaseCode" id="input-CaseCode" value="" placeholder="Auto-Assigned" disabled="disabled" />
+												</div>
+												<div class="ui-block-b">
+													<label>Stage:</label>
+													<div>
+														<fieldset class="displayInline">
+															<label>
+																<input type="radio" name="input-Stage" id="input-Stage-Primary" value="Primary" "checked"="checked" disabled="disabled" />
+																Primary</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="radio" name="input-Stage" id="input-Stage-Revision" value="Revision" disabled="disabled"/>
+																Revision</label>
+														</fieldset>
+													</div>
+												</div>
+											</div>
+											<div class="ui-grid-solo grid-breakpoint">
+												<div class="ui-block-a">
+													<label>Symptoms:</label>
+													<div id="input-Symptoms">
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Symptoms-Deafness" id="input-Symptoms-Deafness" disabled="disabled"/>
+																Deafness</label>
+														</fieldset>
+														<fieldset class="displayInline level2Only notForMA">
+															<label>
+																<input type="checkbox" value="Y" name="input-Symptoms-Tinnitus" id="input-Symptoms-Tinnitus" disabled="disabled"/>
+																Tinnitus</label>
+														</fieldset>
+														<fieldset class="displayInline level2Only notForMA">
+															<label>
+																<input type="checkbox" value="Y" name="input-Symptoms-Dizziness" id="input-Symptoms-Dizziness" disabled="disabled"/>
+																Dizziness</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Symptoms-IntermittentDischarge" id="input-Symptoms-IntermittentDischarge" disabled="disabled"/>
+																Intermittent Discharge</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Symptoms-PersistentDischarge" id="input-Symptoms-PersistentDischarge" disabled="disabled"/>
+																Persistent Discharge</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Symptoms-Earache" id="input-Symptoms-Earache" disabled="disabled"/>
+																Earache</label>
+														</fieldset>
+														<fieldset class="displayInline notForMA">
+															<label>
+																<input type="checkbox" value="Y" name="input-Symptoms-FacialPalsy" id="input-Symptoms-FacialPalsy" disabled="disabled"/>
+																Facial Palsy</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Symptoms-None" id="input-Symptoms-None" disabled="disabled"/>
+																None</label>
+														</fieldset>
+													</div>
+												</div>
+												<div class="ui-block-a">
+													<label>Aim of Surgery:</label>
+													<div class="chkList" id="input-AimOfSurgery">
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-AimOfSurgery-DryEar" id="input-AimOfSurgery-DryEar" disabled="disabled"/>
+																Dry Ear</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-AimOfSurgery-HearingGain" id="input-AimOfSurgery-HearingGain" disabled="disabled"/>
+																Hearing Gain</label>
+														</fieldset>
+														<fieldset class="displayInline notForMA">
+															<label>
+																<input type="checkbox" value="Y" name="input-AimOfSurgery-RestorationOfNormalAnatomy" id="input-AimOfSurgery-RestorationOfNormalAnatomy" disabled="disabled"/>
+																Restoration of Normal Anatomy</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-AimOfSurgery-Waterproofing" id="input-AimOfSurgery-Waterproofing" disabled="disabled"/>
+																Waterproofing</label>
+														</fieldset>
+														<fieldset class="displayInline notForMA">
+															<label>
+																<input type="checkbox" value="Y" name="input-AimOfSurgery-RemovalOfPathology" id="input-AimOfSurgery-RemovalOfPathology" disabled="disabled"/>
+																Removal of Pathology</label>
+														</fieldset>
+													</div>
+												</div>
+												<div class="ui-block-a">
+													<label>Risk Factors:</label>
+													<div class="chkList" id="input-RiskFactors">
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-RiskFactors-Diabetes" id="input-RiskFactors-Diabetes" disabled="disabled"/>
+																Diabetes</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-RiskFactors-CleftPalate" id="input-RiskFactors-CleftPalate" disabled="disabled"/>
+																Cleft Palate</label>
+														</fieldset>
+														<fieldset class="displayInline notForMA">
+															<label>
+																<input type="checkbox" value="Y" name="input-RiskFactors-DownsSyndrome" id="input-RiskFactors-DownsSyndrome" disabled="disabled"/>
+																Down's Syndromey</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-RiskFactors-Other" id="input-RiskFactors-Other" disabled="disabled"/>
+																Other</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-RiskFactors-None" id="input-RiskFactors-None" disabled="disabled"/>
+																None</label>
+														</fieldset>
+													</div>
+												</div>
+											</div>
+											<div class="ui-grid-a grid-breakpoint">
+												<div class="ui-block-a">
+													<label for="input-Smoking">Smoking:</label>
+													<select name="input-Smoking" id="input-Smoking" disabled="disabled">
+														<option value="Smoker">Smoker</option>
+														<option value="Exposed">Exposed</option>
+														<option value="No">No</option>
+													</select>
+												</div>
+												<div class="ui-block-b">
+													<label for="input-ContralateralEar">Contralateral Ear:</label>
+													<select name="input-ContralateralEar" id="input-ContralateralEar" disabled="disabled">
+														<option value="Normal">Normal</option>
+														<option value="Active COM">Active COM</option>
+														<option value="Inactive COM">Inactive COM</option>
+														<option value="OEM">OEM</option>
+														<option value="Other">Other</option>
+													</select>
+												</div>
+											</div>
+											<div class="ui-grid-solo grid-breakpoint">
+												<div class="ui-block-a">
+													<div id="input-isForMA" class="notForMA">
+														<label>Do you wish to enter this record into the Myringoplasty Audit ?</label>
+														<div>
+															<fieldset class="displayInline">
+																<label>
+																	<input type="radio" name="input-isMA" id="input-isForMA-Y" value="Y" disabled="disabled"/>
+																	Yes</label>
+															</fieldset>
+															<fieldset class="displayInline">
+																<label>
+																	<input type="radio" name="input-isMA" id="input-isForMA-N" value="N" disabled="disabled" />
+																	No</label>
+															</fieldset>
+														</div>
+													</div>
+												</div>
+												<div class="ui-block-a">
+													<label for="input-Comments">Comments:</label>
+													<textarea name="input-Comments" id="input-Comments" disabled="disabled"></textarea>
+												</div>
+												<div class="ui-block-a displayInResult">
+													<label for="input-EntryDate">Entry Date:</label>
+													<input type="text" name="input-EntryDate" id="input-EntryDate" value="" disabled="disabled"/>
+												</div>
+											</div>
+										</form>
+									</div>
+									<div class="contentText" id="review-Operation">
+										<form id="review-OperationForm">
+											<div class="ui-grid-solo grid-breakpoint displayInResult">
+												<div class="ui-block-a">
+													<a href="#" data-role="button" data-theme="b" id="btnViewOpNote" target="_blank">View Op Note</a>
+												</div>
+											</div>
+											<div class="ui-grid-a grid-breakpoint">
+												<div class="ui-block-a">
+													<label for="input-CaseCode">Case Code:</label>
+													<input type="text" name="input-CaseCode" id="input-CaseCode" value="" disabled="disabled"/>
+												</div>
+												<div class="ui-block-b">
+													<label for="input-OpDate">Op Date (dd/mm/yyyy):</label>
+													<input type="text" name="input-OpDate" id="input-OpDate" value="" placeholder="dd/mm/yyyy" class="datepicker" />
+												</div>
+												<div class="ui-block-a">
+													<label for="input-SurgeonGrade">Surgeon Grade:</label>
+													<select name="input-SurgeonGrade" id="input-SurgeonGrade">
+														<option value="Cons">Cons</option>
+														<option value="SAS">SAS</option>
+														<option value="SpR1">SpR1</option>
+														<option value="SpR2">SpR2</option>
+														<option value="SpR3">SpR3</option>
+														<option value="SpR4">SpR4</option>
+														<option value="SpR5">SpR5</option>
+														<option value="SpR6">SpR6</option>
+														<option value="SHO">SHO</option>
+													</select>
+												</div>
+												<div class="ui-block-b">
+													<label for="input-Supervised">Supervised:</label>
+													<select name="input-Supervised" id="input-Supervised">
+														<option value="N/A">N/A</option>
+														<option value="Yes">Yes</option>
+														<option value="No">No</option>
+													</select>
+												</div>
+												<div class="ui-block-a level2Only">
+													<label for="input-Anaesthetic">Anaesthetic:</label>
+													<select name="input-Anaesthetic" id="input-Anaesthetic">
+														<option value="Local">Local</option>
+														<option value="General">General</option>
+													</select>
+												</div>
+												<div class="ui-block-b"></div>
+											</div>
+											<h2 class="sectionHeader">Audiogram</h2>
+											<fieldset class="displayInline notDisplayInResult">
+												<label>
+													<input type="checkbox" value="Y" name="input-AudiogramNotPossible" id="input-AudiogramNotPossible" />
+													Audiogram not done</label>
+											</fieldset>
+											<div class="ui-grid-a grid-breakpoint" id="AudiogramInputsDiv">
+												<div class="ui-block-a">
+													<label for="input-DateOfMostRecentAudiogram">Date of most recent Audiogram (dd/mm/yyyy):</label>
+													<input type="text" name="input-DateOfMostRecentAudiogram" id="input-DateOfMostRecentAudiogram" value="" placeholder="dd/mm/yyyy" class="datepicker" />
+												</div>
+												<div class="ui-block-b"></div>
+												<div class="ui-block-a">
+													<label for="table-Audiogram-OpEar">Op Ear:</label>
+													<table id="table-Audiogram-OpEar" class="table-Audiogram">
+														<tr>
+															<th Align="Center"></th>
+															<th Align="Center">BC</th>
+															<th Align="Center">AC</th>
+														</tr>
+														<tr>
+															<td>500</td>
+															<td>
+															<select id="OpEarBC500">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+															<td>
+															<select id="OpEarAC500">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+														</tr>
+														<tr>
+															<td>1000</td>
+															<td>
+															<select id="OpEarBC1000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+															<td>
+															<select id="OpEarAC1000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+														</tr>
+														<tr>
+															<td>2000</td>
+															<td>
+															<select id="OpEarBC2000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+															<td>
+															<select id="OpEarAC2000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+														</tr>
+														<tr>
+															<td>3000</td>
+															<td>
+															<select id="OpEarBC3000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+															<td>
+															<select id="OpEarAC3000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+														</tr>
+														<tr>
+															<td>4000</td>
+															<td>
+															<select id="OpEarBC4000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+															<td>
+															<select id="OpEarAC4000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+														</tr>
+														<tr>
+															<td>8000</td>
+															<td>-</td>
+															<td>
+															<select id="OpEarAC8000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+														</tr>
+														<tr class="displayInResult">
+															<td>Mean</td>
+															<td><span id="OpEarBC_Mean">N/A</span></td>
+															<td><span id="OpEarAC_Mean">N/A</span></td>
+														</tr>
+														<tr class="displayInResult">
+															<td>AirBone Gap</td>
+															<td><span id="OpEar_AirBoneGap">N/A</span></td>
+															<td></td>
+														</tr>
+													</table>
+												</div>
+												<div class="ui-block-b">
+													<label for="table-Audiogram-NonOpEar">Non-Op Ear:</label>
+													<table id="table-Audiogram-NonOpEar" class="table-Audiogram">
+														<tr>
+															<th></th>
+															<th>BC</th>
+															<th>AC</th>
+														</tr>
+														<tr>
+															<td>500</td>
+															<td>
+															<select id="NonOpEarBC500">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+															<td>
+															<select id="NonOpEarAC500">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+														</tr>
+														<tr>
+															<td>1000</td>
+															<td>
+															<select id="NonOpEarBC1000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+															<td>
+															<select id="NonOpEarAC1000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+														</tr>
+														<tr>
+															<td>2000</td>
+															<td>
+															<select id="NonOpEarBC2000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+															<td>
+															<select id="NonOpEarAC2000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+														</tr>
+														<tr>
+															<td>3000</td>
+															<td>
+															<select id="NonOpEarBC3000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+															<td>
+															<select id="NonOpEarAC3000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+														</tr>
+														<tr>
+															<td>4000</td>
+															<td>
+															<select id="NonOpEarBC4000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+															<td>
+															<select id="NonOpEarAC4000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+														</tr>
+														<tr>
+															<td>8000</td>
+															<td>-</td>
+															<td>
+															<select id="NonOpEarAC8000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+														</tr>
+														<tr class="displayInResult">
+															<td>Mean</td>
+															<td><span id="NonOpEarBC_Mean">N/A</span></td>
+															<td><span id="NonOpEarAC_Mean">N/A</span></td>
+														</tr>
+														<tr class="displayInResult">
+															<td>AirBone Gap</td>
+															<td><span id="NonOpEar_AirBoneGap">N/A</span></td>
+															<td></td>
+														</tr>
+													</table>
+												</div>
+											</div>
+											<div class="ui-grid-solo grid-breakpoint">
+												<div class="ui-block-a">
+													<label>Cholesteatoma:</label>
+													<div id="input-Cholesteatoma">
+														<fieldset class="displayInline level2Only notForMA">
+															<label>
+																<input type="checkbox" value="Y" name="input-Cholesteatoma-Antrum" id="input-Cholesteatoma-Antrum" />
+																Antrum</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Cholesteatoma-Attic" id="input-Cholesteatoma-Attic" />
+																Attic</label>
+														</fieldset>
+														<fieldset class="displayInline level2Only notForMA">
+															<label>
+																<input type="checkbox" value="Y" name="input-Cholesteatoma-MastoidCells" id="input-Cholesteatoma-MastoidCells" />
+																Mastoid Cells</label>
+														</fieldset>
+														<fieldset class="displayInline level2Only notForMA">
+															<label>
+																<input type="checkbox" value="Y" name="input-Cholesteatoma-ME" id="input-Cholesteatoma-ME" />
+																ME</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Cholesteatoma-Sinus" id="input-Cholesteatoma-Sinus" />
+																Sinus</label>
+														</fieldset>
+														<fieldset class="displayInline level2Only notForMA">
+															<label>
+																<input type="checkbox" value="Y" name="input-Cholesteatoma-UndersurfaceTM" id="input-Cholesteatoma-UndersurfaceTM" />
+																Undersurface TM</label>
+														</fieldset>
+														<fieldset class="displayInline level1Only">
+															<label>
+																<input type="checkbox" value="Y" name="input-Cholesteatoma-Other" id="input-Cholesteatoma-Other" />
+																Other</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Cholesteatoma-NA" id="input-Cholesteatoma-NA" checked="true" />
+																N/A</label>
+														</fieldset>
+													</div>
+												</div>
+												<div class="ui-block-a">
+													<label>Eardrum Collapse:</label>
+													<div id="input-EardrumCollapse">
+														<fieldset class="displayInline level2Only notForMA">
+															<label>
+																<input type="checkbox" value="Y" name="input-EardrumCollapse-Anterior" id="input-EardrumCollapse-Anterior" />
+																Anterior</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-EardrumCollapse-Posterior" id="input-EardrumCollapse-Posterior" />
+																Posterior</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-EardrumCollapse-Flaccida" id="input-EardrumCollapse-Flaccida" />
+																Flaccida</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-EardrumCollapse-NonAeratedME" id="input-EardrumCollapse-NonAeratedME" />
+																Non-aerated ME</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-EardrumCollapse-Other" id="input-EardrumCollapse-Other" />
+																Other</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-EardrumCollapse-NA" id="input-EardrumCollapse-NA" checked="true" />
+																N/A</label>
+														</fieldset>
+													</div>
+												</div>
+												<div class="ui-block-a level2Only notForMA">
+													<label for="input-MobilityOfCollapsedEardrum">Mobility of Collapsed Eardrum:</label>
+													<select name="input-MobilityOfCollapsedEardrum" id="input-MobilityOfCollapsedEardrum">
+														<option value="N/A">N/A</option>
+														<option value="Fixed">Fixed</option>
+														<option value="Mobile">Mobile</option>
+													</select>
+												</div>
+												<div class="ui-block-a">
+													<label for="input-PerforationSize">Perforation Size:</label>
+													<select name="input-PerforationSize" id="input-PerforationSize">
+														<option value="0">0%</option>
+														<option value="10">10%</option>
+														<option value="20">20%</option>
+														<option value="30">30%</option>
+														<option value="40">40%</option>
+														<option value="50">50%</option>
+														<option value="60">60%</option>
+														<option value="70">70%</option>
+														<option value="80">80%</option>
+														<option value="90">90%</option>
+														<option value="100">100%</option>
+													</select>
+												</div>
+												<div class="ui-block-a">
+													<label>Perforation Site:</label>
+													<div id="input-PerforationSite">
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-PerforationSite-Anterior" id="input-PerforationSite-Anterior" />
+																Anterior</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-PerforationSite-Posterior" id="input-PerforationSite-Posterior" />
+																Posterior</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-PerforationSite-Inferior" id="input-PerforationSite-Inferior" />
+																Inferior</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-PerforationSite-Flaccida" id="input-PerforationSite-Flaccida" />
+																Flaccida</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-PerforationSite-SubTotal" id="input-PerforationSite-SubTotal" />
+																SubTotal</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-PerforationSite-Total" id="input-PerforationSite-Total" />
+																Total</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-PerforationSite-NA" id="input-PerforationSite-NA" checked="true" />
+																N/A</label>
+														</fieldset>
+													</div>
+												</div>
+												<div class="ui-block-a level2Only notForMA">
+													<label for="input-FacialNerve ">Facial Nerve:</label>
+													<select name="input-FacialNerve" id="input-FacialNerve">
+														<option value="Bony Covering">Bony Covering</option>
+														<option value="Exposed">Exposed</option>
+														<option value="Not Checked">Not Checked</option>
+													</select>
+												</div>
+												<div class="ui-block-a level2Only notForMA">
+													<label>Fistula:</label>
+													<div id="input-Fistula">
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Fistula-SemicircularCanal" id="input-Fistula-SemicircularCanal" />
+																Semicircular Canal</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Fistula-Footplate" id="input-Fistula-Footplate" />
+																Footplate</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Fistula-NotChecked" id="input-Fistula-NotChecked" />
+																Not Checked</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Fistula-Nil" id="input-Fistula-Nil" checked="true" />
+																Nil</label>
+														</fieldset>
+													</div>
+												</div>
+												<div class="ui-block-a level2Only notForMA">
+													<label>Ossicles Eroded:</label>
+													<div id="input-OssiclesEroded">
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OssiclesEroded-Malleus" id="input-OssiclesEroded-Malleus" />
+																Malleus</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OssiclesEroded-Incus" id="input-OssiclesEroded-Incus" />
+																Incus</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OssiclesEroded-StapesSupra" id="input-OssiclesEroded-StapesSupra" />
+																Stapes supra</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OssiclesEroded-Footplate" id="input-OssiclesEroded-Footplate" />
+																Footplate</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OssiclesEroded-NotChecked" id="input-OssiclesEroded-NotChecked" />
+																Not Checked</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OssiclesEroded-Nil" id="input-OssiclesEroded-Nil" checked="true" />
+																Nil</label>
+														</fieldset>
+													</div>
+												</div>
+												<div class="ui-block-a level1Only">
+													<label>Ossicular Chain:</label>
+													<div id="input-OssicularChain">
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OssicularChain-Mobile" id="input-OssicularChain-Mobile" />
+																Mobile</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OssicularChain-Fixed" id="input-OssicularChain-Fixed" />
+																Fixed</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OssicularChain-Eroded" id="input-OssicularChain-Eroded" />
+																Eroded</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OssicularChain-NotAssessed" id="input-OssicularChain-NotAssessed" checked="true" />
+																Not Assessed</label>
+														</fieldset>
+													</div>
+												</div>
+												<div class="ui-block-a level2Only notForMA">
+													<label>Ossicular Fixed:</label>
+													<div id="input-OssicularFixed">
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OssicularFixed-Footplate" id="input-OssicularFixed-Footplate" />
+																Footplate</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OssicularFixed-MIJoint" id="input-OssicularFixed-MIJoint" />
+																MI Joint</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OssicularFixed-ISJoint" id="input-OssicularFixed-ISJoint" />
+																IS Joint</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OssicularFixed-Nil" id="input-OssicularFixed-Nil" checked="true" />
+																Nil</label>
+														</fieldset>
+													</div>
+												</div>
+												<div class="ui-block-a">
+													<label>ME Mucosa:</label>
+													<div id="input-MEMucosa">
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-MEMucosa-Granulation" id="input-MEMucosa-Granulation" />
+																Granulation</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-MEMucosa-Oedematous" id="input-MEMucosa-Oedematous" />
+																Oedematous</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-MEMucosa-FibroAdhesive" id="input-MEMucosa-FibroAdhesive" />
+																Fibro-Adhesive</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-MEMucosa-TympanosclerosisInME" id="input-MEMucosa-TympanosclerosisInME" />
+																Tympanosclerosis in ME</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-MEMucosa-Normal" id="input-MEMucosa-Normal" checked="true" />
+																Normal</label>
+														</fieldset>
+													</div>
+												</div>
+												<div class="ui-block-a">
+													<label for="input-Discharge">Discharge at time of surgery:</label>
+													<select name="input-Discharge" id="input-Discharge">
+														<option value="No">No</option>
+														<option value="Yes">Yes</option>
+													</select>
+												</div>
+												<div class="ui-block-a level1Only forMA">
+													<label>Procedure:</label>
+													<div id="input-Procedure">
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Procedure-Myringoplasty" id="input-Procedure-Myringoplasty" />
+																Myringoplasty</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Procedure-Ossiculoplasty" id="input-Procedure-Ossiculoplasty" />
+																Ossiculoplasty</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Procedure-Atticotomy" id="input-Procedure-Atticotomy" />
+																Atticotomy</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Procedure-AtticoAntrostomy" id="input-Procedure-AtticoAntrostomy" />
+																Attico-antrostomy</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Procedure-ModRad" id="input-Procedure-ModRad" />
+																Mod Rad</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Procedure-Cortical" id="input-Procedure-Cortical" />
+																Cortical</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Procedure-CombinedApproach" id="input-Procedure-CombinedApproach" />
+																Combined Approach</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Procedure-Stapedotomy" id="input-Procedure-Stapedotomy" />
+																Stapedotomy</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Procedure-Tympanotomy" id="input-Procedure-Tympanotomy" />
+																Tympanotomy</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Procedure-WideningBonyCanal" id="input-Procedure-WideningBonyCanal" />
+																Widening bony canal</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Procedure-Other" id="input-Procedure-Other" />
+																Other</label>
+														</fieldset>
+													</div>
+												</div>
+											</div>
+											<div class="ui-grid-a grid-breakpoint">
+												<div class="ui-block-a level1Only">
+													<label for="input-ChordaTympani">Chorda Tympani:</label>
+													<select name="input-ChordaTympani" id="input-ChordaTympani">
+														<option value="N/A">N/A</option>
+														<option value="Cut">Cut</option>
+														<option value="Displaced">Displaced</option>
+														<option value="NotDisplaced">Not Displaced</option>
+														<option value="Lacerated">Lacerated</option>
+													</select>
+												</div>
+												<div class="ui-block-b level1Only">
+													<label for="input-GraftMethod">Graft Method:</label>
+													<select name="input-GraftMethod" id="input-GraftMethod">
+														<option value="N/A">N/A</option>
+														<option value="OnLay">OnLay</option>
+														<option value="Underlay">Underlay</option>
+														<option value="Other">Other</option>
+													</select>
+												</div>
+											</div>
+											<div class="ui-grid-solo grid-breakpoint">
+												<div class="ui-block-a level1Only">
+													<label>Graft Material:</label>
+													<div id="input-GraftMaterial">
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-GraftMaterial-Fascia" id="input-GraftMaterial-Fascia" />
+																Fascia</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-GraftMaterial-Perichondrium" id="input-GraftMaterial-Perichondrium" />
+																Perichondrium</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-GraftMaterial-PericondCart" id="input-GraftMaterial-PericondCart" />
+																Pericond/Cart</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-GraftMaterial-Cartilage" id="input-GraftMaterial-Cartilage" />
+																Cartilage</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-GraftMaterial-Periostium" id="input-GraftMaterial-Periostium" />
+																Periostium</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-GraftMaterial-Homograft" id="input-GraftMaterial-Homograft" />
+																Homograft</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-GraftMaterial-Fat" id="input-GraftMaterial-Fat" />
+																Fat</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-GraftMaterial-Xenograft" id="input-GraftMaterial-Xenograft" />
+																Xenograft</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-GraftMaterial-Other" id="input-GraftMaterial-Other" />
+																Other</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-GraftMaterial-NA" id="input-GraftMaterial-NA" checked="true" />
+																N/A</label>
+														</fieldset>
+													</div>
+												</div>
+												<div class="ui-block-a">
+													<label for="input-Comments">Comments:</label>
+													<textarea name="input-Comments" id="input-Comments"></textarea>
+												</div>
+												<div class="ui-block-a displayInResult">
+													<label for="input-EntryDate">Entry Date:</label>
+													<input type="text" name="input-EntryDate" id="input-EntryDate" value="" disabled="disabled"/>
+												</div>
+											</div>
+											<div class="alignRight notDisplayInResult">
+												<fieldset class="displayInline">
+													<input id="submit-newOperation" type="submit" value="Submit" data-theme="b"/>
+												</fieldset>
+											</div>
+										</form>
+									</div>
+									<div class="contentText" id="review-OpProcedure">
+										<form id="review-OpProcedureForm">
+											<div class="ui-grid-solo grid-breakpoint displayInResult">
+												<div class="ui-block-a">
+													<a href="#" data-role="button" data-theme="b" id="btnViewOpNote" target="_blank">View Op Note</a>
+												</div>
+											</div>
+											<div class="ui-grid-b grid-breakpoint">
+												<div class="ui-block-a">
+													<label for="input-CaseCode">Case Code:</label>
+													<input type="text" name="input-CaseCode" id="input-CaseCode" value="" />
+												</div>
+												<div class="ui-block-b">
+													<label for="input-Nature">Nature:</label>
+													<select name="input-Nature" id="input-Nature">
+														<option value="Primary">Primary</option>
+														<option value="Revision">Revision</option>
+														<option value="2nd Stage">2nd Stage</option>
+													</select>
+												</div>
+												<div class="ui-block-c">
+													<label for="input-Approach">Approach :</label>
+													<select name="input-Approach" id="input-Approach">
+														<option value="Endaural">Endaural</option>
+														<option value="Permeatal">Permeatal</option>
+														<option value="Postaural">Postaural</option>
+													</select>
+												</div>
+											</div>
+											<div class="ui-grid-solo grid-breakpoint">
+												<div class="ui-block-a">
+													<label>Material in ME:</label>
+													<div id="input-MaterialInME">
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-MaterialInME-GelFilm" id="input-MaterialInME-GelFilm" />
+																Gel Film</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-MaterialInME-GelFoam" id="input-MaterialInME-GelFoam" />
+																Gel Foam</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-MaterialInME-Cartilage" id="input-MaterialInME-Cartilage" />
+																Cartilage</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-MaterialInME-Silastic" id="input-MaterialInME-Silastic" />
+																GSilastic</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-MaterialInME-Nil" id="input-MaterialInME-Nil" checked="true" />
+																Nil</label>
+														</fieldset>
+													</div>
+												</div>
+												<div class="ui-block-a">
+													<label>Meatoplasty:</label>
+													<div id="input-Meatoplasty">
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Meatoplasty-Bony" id="input-Meatoplasty-Bony" />
+																Bony</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Meatoplasty-Cartilaginous" id="input-Meatoplasty-Cartilaginous" />
+																Cartilaginous</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Meatoplasty-Nil" id="input-Meatoplasty-Nil" checked="true" />
+																Nil</label>
+														</fieldset>
+													</div>
+												</div>
+												<div class="ui-block-a">
+													<label for="input-ChordaTympani">Chorda Tympani:</label>
+													<select name="input-ChordaTympani" id="input-ChordaTympani">
+														<option value="N/A">N/A</option>
+														<option value="Cut">Cut</option>
+														<option value="Displaced">Displaced</option>
+														<option value="Not Displaced">Not Displaced</option>
+														<option value="Lacerated">Lacerated</option>
+													</select>
+												</div>
+											</div>
+											<div class="ui-grid-a grid-breakpoint">
+												<div class="ui-block-a">
+													<label for="input-MyringoplastyMaterial">Myringoplasty Material:</label>
+													<select name="input-MyringoplastyMaterial" id="input-MyringoplastyMaterial">
+														<option value="Nil">Nil</option>
+														<option value="Cartilage">Cartilage</option>
+														<option value="Fascia">Fascia</option>
+														<option value="Fat">Fat</option>
+														<option value="Homograft TM">Homograft TM</option>
+														<option value="Peri + Cart">Peri + Cart</option>
+														<option value="Perichondrium">Perichondrium</option>
+														<option value="Periostium">Periostium</option>
+													</select>
+												</div>
+												<div class="ui-block-b">
+													<label for="input-GraftMethod">Graft Method:</label>
+													<select name="input-GraftMethod" id="input-GraftMethod">
+														<option value="N/A">N/A</option>
+														<option value="Overlay">Overlay</option>
+														<option value="Underlay">Underlay</option>
+														<option value="Other">Other</option>
+													</select>
+												</div>
+											</div>
+											<div class="ui-grid-solo grid-breakpoint">
+												<div class="ui-block-a">
+													<label for="input-OtoEndosopicMethod">Oto-Endoscopic Method:</label>
+													<select name="input-OtoEndosopicMethod" id="input-OtoEndosopicMethod">
+														<option value="Not used">Not used</option>
+														<option value="Sole instrument">Sole instrument</option>
+														<option value="In conjunction with microscope">In conjunction with microscope</option>
+													</select>
+												</div>
+											</div>
+											<div class="ui-grid-b grid-breakpoint">
+												<div class="ui-block-a">
+													<label for="input-OtoEndosopicSize">Oto-Endoscopic Size:</label>
+													<select name="input-OtoEndosopicSize" id="input-OtoEndosopicSize">
+														<option value="3 mm">3 mm</option>
+														<option value="4 mm">4 mm</option>
+													</select>
+												</div>
+												<div class="ui-block-b">
+													<label for="input-OtoEndosopicLength">Oto-Endoscopic Length:</label>
+													<select name="input-OtoEndosopicLength" id="input-OtoEndosopicLength">
+														<option value="14 cm">14 cm</option>
+														<option value="18 cm">18 cm</option>
+													</select>
+												</div>
+												<div class="ui-block-c">
+													<label for="input-OtoEndosopicAngle">Oto-Endoscopic Angle:</label>
+													<select name="input-OtoEndosopicAngle" id="input-OtoEndosopicAngle">
+														<option value="0 degree">0 degree</option>
+														<option value="30 degree">30 degree</option>
+														<option value="45 degree">45 degree</option>
+													</select>
+												</div>
+											</div>
+											<h3>Ossiculoplasty</h3>
+											<div class="ui-grid-solo grid-breakpoint">
+												<div class="ui-block-a">
+													<label>Defect before reconstruction</label>
+													<div id="input-Defect">
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Defect-Malleus" id="input-Defect-Malleus" />
+																Malleus</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Defect-Incus" id="input-Defect-Incus" />
+																Incus</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Defect-StapesSupra" id="input-Defect-StapesSupra" />
+																Stapes Supra</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Defect-Footplate" id="input-Defect-Footplate" />
+																Footplate</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Defect-Nil" id="input-Defect-Nil" checked="true" />
+																Nil</label>
+														</fieldset>
+													</div>
+												</div>
+											</div>
+											<div class="ui-grid-b grid-breakpoint">
+												<div class="ui-block-a">
+													<label for="input-Material">Material:</label>
+													<select name="input-Material" id="input-Material">
+														<option value="N/A">N/A</option>
+														<option value="Bone Chip">Bone Chip</option>
+														<option value="Cartilage">Cartilage</option>
+														<option value="HA">HA</option>
+														<option value="Incus">Incus</option>
+														<option value="Malleal Head">Malleal Head</option>
+														<option value="Titanium">Titanium</option>
+														<option value="Whole Malleus">Whole Malleus</option>
+													</select>
+												</div>
+												<div class="ui-block-b">
+													<label for="input-Prosthesis">Prosthesis:</label>
+													<select name="input-Prosthesis" id="input-Prosthesis">
+														<option value="N/A">N/A</option>
+														<option value="Autograft">Autograft</option>
+														<option value="Homograft">Homograft</option>
+													</select>
+												</div>
+												<div class="ui-block-c">
+													<label for="input-Reconstruction">Reconstruction:</label>
+													<select name="input-Reconstruction" id="input-Reconstruction">
+														<option value="N/A">N/A</option>
+														<option value="Incus-Stapes">Incus-Stapes</option>
+														<option value="Malleus-Footsplate">Malleus-Footsplate</option>
+														<option value="Malleus-Stapes">Malleus-Stapes</option>
+														<option value="TM-Footsplate">TM-Footsplate</option>
+														<option value="TM-Stapes">TM-Stapes</option>
+													</select>
+												</div>
+											</div>
+											<div class="ui-grid-solo grid-breakpoint">
+												<div class="ui-block-a">
+													<label for="input-Mastoidectomy">Mastoidectomy:</label>
+													<select name="input-Mastoidectomy" id="input-Mastoidectomy">
+														<option value="N/A">N/A</option>
+														<option value="Attico-antorostomy">Attico-antorostomy</option>
+														<option value="Antorostomy">Antorostomy</option>
+														<option value="Cortical">Cortical</option>
+														<option value="ICW with Post Tym">ICW with Post Tym</option>
+														<option value="Modified Radical">Modified Radical</option>
+													</select>
+												</div>
+												<div class="ui-block-a">
+													<label for="input-OblitFlap">Oblit Flap:</label>
+													<div id="input-OblitFlap">
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OblitFlap-Palva" id="input-OblitFlap-Palva" />
+																Palva</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OblitFlap-Muscle" id="input-OblitFlap-Muscle" />
+																Muscle</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OblitFlap-FascialPeriosteal" id="input-OblitFlap-FascialPeriosteal" />
+																Fascial-Periosteal</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OblitFlap-MidTemporal" id="input-OblitFlap-MidTemporal" />
+																Mid-Temporal</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OblitFlap-TemporoParietalFascial" id="input-OblitFlap-TemporoParietalFascial" />
+																Temporo-Parietal Fascial</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OblitFlap-NA" id="input-OblitFlap-NA" checked="true" />
+																N/A</label>
+														</fieldset>
+													</div>
+												</div>
+												<div class="ui-block-a">
+													<label for="input-OblitMaterial">Oblit Materials:</label>
+													<div id="input-OblitMaterial">
+														
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OblitMaterial-BonePaste" id="input-OblitMaterial-BonePaste" />
+																Bone Paste</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OblitMaterial-BoneChips" id="input-OblitMaterial-BoneChips" />
+																Bone Chips</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OblitMaterial-CartilageSlices" id="input-OblitMaterial-CartilageSlices" />
+																Cartilage Slices</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OblitMaterial-HAGranules" id="input-OblitMaterial-HAGranules" />
+																HA Granules</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OblitMaterial-Bioglass" id="input-OblitMaterial-Bioglass" />
+																Bioglass</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OblitMaterial-SerenoCem" id="input-OblitMaterial-SerenoCem" />
+																SerenoCem</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OblitMaterial-FatAndBlindPit" id="input-OblitMaterial-FatAndBlindPit" />
+																Fat and Blind Pit</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OblitMaterial-NA" id="input-OblitMaterial-NA" checked="true" />
+																N/A</label>
+														</fieldset>
+													</div>
+												</div>
+												<div class="ui-block-a">
+													<label for="input-CanalWallReconstruction">Canal Wall Reconstruction:</label>
+													<select name="input-CanalWallReconstruction" id="input-CanalWallReconstruction">
+														<option value="N/A">N/A</option>
+														<option value="Cartilage">Cartilage</option>
+														<option value="Cortical Bone">Cortical Bone</option>
+														<option value="HA">HA</option>
+														<option value="Original CW">Original CW</option>
+														<option value="Peri + Cart">Peri + Cart</option>
+													</select>
+												</div>
+											</div>
+											<h2>Stapes Surgery</h2>
+											<div class="ui-grid-solo grid-breakpoint">
+												<div class="ui-block-a">
+													<label for="input-Operation">Operation:</label>
+													<select name="input-Operation" id="input-Operation">
+														<option value="N/A">N/A</option>
+														<option value="Central Fenestra">Central Fenestra</option>
+														<option value="Partial Stapedectomy">Partial Stapedectomy</option>
+														<option value="Stapedectomy">Stapedectomy</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="ui-grid-solo grid-breakpoint">
+												<div class="ui-block-a">
+													<label for="input-FenestrationMethod">Fenestration Method:</label>
+													<div id="input-FenestrationMethod">
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-FenestrationMethod-Pick" id="input-FenestrationMethod-Pick" />
+																Pick</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-FenestrationMethod-Drill" id="input-FenestrationMethod-Drill" />
+																Drill</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-FenestrationMethod-Laser" id="input-FenestrationMethod-Laser" />
+																Laser</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-FenestrationMethod-NA" id="input-FenestrationMethod-NA" checked="true" />
+																N/A</label>
+														</fieldset>
+														<fieldset class="displayInline"></fieldset>
+													</div>
+												</div>
+												<div class="ui-block-a">
+													<label for="input-LaserType">Laser Type:</label>
+													<select name="input-LaserType" id="input-LaserType">
+														<option value="Argon">Argon</option>
+														<option value="CO2">CO2</option>
+														<option value="Diode">Diode</option>
+														<option value="Er Yag">Er Yag</option>
+														<option value="KTP">KTP</option>
+													</select>
+												</div>
+												<div class="ui-block-a">
+													<label for="input-FenestrationSize">Fenestration Size:</label>
+													<select name="input-FenestrationSize" id="input-FenestrationSize">
+														<option value="1000">1000</option>
+														<option value="0.3">0.3</option>
+														<option value="0.4">0.4</option>
+														<option value="0.5">0.5</option>
+														<option value="0.6">0.6</option>
+														<option value="0.7">0.7</option>
+														<option value="0.8">0.8</option>
+														<option value="0.9">0.9</option>
+													</select>
+												</div>
+											</div>
+											<div class="ui-grid-b grid-breakpoint">
+												<div class="ui-block-a">
+													<label for="input-ProthesisType">Prosthesis Type:</label>
+													<select name="input-ProthesisType" id="input-ProthesisType">
+														<option value="N/A">N/A</option>
+														<option value="Chip">Chip</option>
+														<option value="Smart">Smart</option>
+														<option value="Telflon">Telflon</option>
+														<option value="Telflon Wire">Telflon Wire</option>
+														<option value="Titanium">Titanium</option>
+													</select>
+												</div>
+												<div class="ui-block-b">
+													<label for="input-ProsthesisSize">Prosthesis Size:</label>
+													<select name="input-ProsthesisSize" id="input-ProsthesisSize">
+														<option value="1000">1000</option>
+														<option value="0.3">0.3</option>
+														<option value="0.4">0.4</option>
+														<option value="0.5">0.5</option>
+														<option value="0.6">0.6</option>
+														<option value="0.7">0.7</option>
+														<option value="0.8">0.8</option>
+														<option value="0.9">0.9</option>
+													</select>
+												</div>
+												<div class="ui-block-c">
+													<label for="input-Attachment">Attachment:</label>
+													<select name="input-Attachment" id="input-Attachment">
+														<option value="N/A">N/A</option>
+														<option value="Incus">Incus</option>
+														<option value="Malleus">Malleus</option>
+													</select>
+												</div>
+											</div>
+											<div class="ui-grid-solo grid-breakpoint">
+												<div class="ui-block-a">
+													<label for="input-InterpositionTissue">Interposition Tissue:</label>
+													<select name="input-InterpositionTissue" id="input-InterpositionTissue">
+														<option value="Nil">Nil</option>
+														<option value="Incus">Facscia</option>
+														<option value="Perichondrium">Perichondrium</option>
+														<option value="Vein">Vein</option>
+													</select>
+												</div>
+												<div class="ui-block-a">
+													<label for="input-OvalWindowSeal">Oval Window Seal:</label>
+													<div id="input-OvalWindowSeal">
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OvalWindowSeal-Fat" id="input-OvalWindowSeal-Fat" />
+																Fat</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OvalWindowSeal-BloodClot" id="input-OvalWindowSeal-BloodClot" />
+																Blood Clot</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OvalWindowSeal-GelFoam" id="input-OvalWindowSeal-GelFoam" />
+																GelFoam</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OvalWindowSeal-OtherConnectiveTissue" id="input-OvalWindowSeal-OtherConnectiveTissue" />
+																Other Connective Tissue </label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OvalWindowSeal-Nil" id="input-OvalWindowSeal-Nil" checked="true" />
+																Nil</label>
+														</fieldset>
+													</div>
+												</div>
+												<div class="ui-block-a">
+													<label for="input-Comments">Comments:</label>
+													<textarea name="input-Comments" id="input-Comments"></textarea>
+												</div>
+												<div class="ui-block-a displayInResult">
+													<label for="input-EntryDate">Entry Date:</label>
+													<input type="text" name="input-EntryDate" id="input-EntryDate" value="" disabled="disabled"/>
+												</div>
+											</div>
+											<div class="alignRight">
+												<fieldset class="displayInline">
+													<input id="submit-newProcedure" type="submit" value="Submit" data-theme="b"/>
+												</fieldset>
+											</div>
+										</form>
+									</div>
+									<div class="contentText" id="review-Followup">
+										<form id="review-FollowupForm">
+											<div class="ui-grid-a grid-breakpoint">
+												<div class="ui-block-a">
+													<label for="input-FollowupPeriod">Followup Period:</label>
+													<select name="input-FollowupPeriod" id="input-FollowupPeriod">
+														<option value="3">3 months</option>
+														<option value="6">6 months</option>
+														<option value="12">12 months</option>
+														<option value="24">24 months</option>
+														<option value="36">36 months</option>
+														<option value="48">48 months</option>
+														<option value="60">60 months</option>
+														<option value="72">6 years</option>
+														<option value="84">7 years</option>
+														<option value="96">8 years</option>
+														<option value="108">9 years</option>
+														<option value="120">10 years</option>
+														<option value="132">11 years</option>
+														<option value="144">12 years</option>
+														<option value="156">13 years</option>
+														<option value="168">14 years</option>
+														<option value="180">15 years</option>
+														<option value="192">16 years</option>
+														<option value="204">17 years</option>
+														<option value="216">18 years</option>
+														<option value="228">19 years</option>
+														<option value="240">20 years</option>
+													</select>
+												</div>
+												<div class="ui-block-b"></div>
+												<div class="ui-block-a">
+													<label for="input-CaseCode">Case Code:</label>
+													<input type="text" name="input-CaseCode" id="input-CaseCode" value="" disabled="disabled"/>
+												</div>
+												<div class="ui-block-b displayInResult">
+													<label for="input-OpDate">Op Date:</label>
+													<input type="text" name="input-OpDate" id="input-OpDate" value="" placeholder="N/A" "disabled"="disabled"/>
+												</div>
+												<div class="ui-block-a">
+													<label for="input-AssessmentDate">Assessment Date (dd/mm/yyyy):</label>
+													<input type="text" name="input-AssessmentDate" id="input-AssessmentDate" value="" placeholder="dd/mm/yyyy" class="datepicker" />
+												</div>
+												<div class="ui-block-b"></div>
+											</div>
+											<div class="ui-grid-solo grid-breakpoint">
+												<div class="ui-block-a">
+													<label>Complications:</label>
+													<div id="input-Complications">
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Complications-AlterationOfTaste" id="input-Complications-AlterationOfTaste" />
+																Alteration of Taste</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Complications-FacialPalsy" id="input-Complications-FacialPalsy" />
+																Facial Palsy</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Complications-HearingLoss" id="input-Complications-HearingLoss" />
+																Hearing Loss</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Complications-Tinnitus" id="input-Complications-Tinnitus" />
+																Tinnitus</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Complications-Vertigo" id="input-Complications-Vertigo" />
+																Vertigo</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Complications-WoundInfection" id="input-Complications-WoundInfection" />
+																Wound Infection</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Complications-Other" id="input-Complications-Other" />
+																Other</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Complications-None" id="input-Complications-None" checked="true" />
+																None</label>
+														</fieldset>
+													</div>
+												</div>
+												<div class="ui-block-a">
+													<label for="input-Discharge">Discharge:</label>
+													<select name="input-Discharge" id="input-Discharge">
+														<option value="Nil">Nil</option>
+														<option value="Intermittent">Intermittent</option>
+														<option value="Presistent">Presistent</option>
+													</select>
+												</div>
+												<div class="ui-block-a">
+													<label>Otoscopic Appearance:</label>
+													<div id="input-OtoscopicAppearance">
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OtoscopicAppearance-Intact" id="input-OtoscopicAppearance-Intact" />
+																Intact</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OtoscopicAppearance-NotIntact" id="input-OtoscopicAppearance-NotIntact" />
+																Not Intact</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OtoscopicAppearance-Myringitis" id="input-OtoscopicAppearance-Myringitis" />
+																Myringitis</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OtoscopicAppearance-AnteriorBlunting" id="input-OtoscopicAppearance-AnteriorBlunting" />
+																Anterior Blunting</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OtoscopicAppearance-Atelectasis" id="input-OtoscopicAppearance-Atelectasis" />
+																Atelectasis</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OtoscopicAppearance-RetractionPocket" id="input-OtoscopicAppearance-RetractionPocket" />
+																Retraction Pocket</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OtoscopicAppearance-Lateralization" id="input-OtoscopicAppearance-Lateralization" />
+																Lateralization</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OtoscopicAppearance-MeatalStenosis" id="input-OtoscopicAppearance-MeatalStenosis" />
+																Meatal Stenosis</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OtoscopicAppearance-Completecollapse" id="input-OtoscopicAppearance-Completecollapse" />
+																Complete collapse</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OtoscopicAppearance-OME" id="input-OtoscopicAppearance-OME" />
+																OME</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OtoscopicAppearance-NotAssessed" id="input-OtoscopicAppearance-NotAssessed" />
+																Not Assessed</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-OtoscopicAppearance-Normal" id="input-OtoscopicAppearance-Normal" checked="true" />
+																Normal</label>
+														</fieldset>
+													</div>
+												</div>
+												<div class="ui-block-a">
+													<label>Cholesteatoma:</label>
+													<div id="input-Cholesteatoma">
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Cholesteatoma-Recurrence" id="input-Cholesteatoma-Recurrence" />
+																Recurrence</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Cholesteatoma-Residual" id="input-Cholesteatoma-Residual" />
+																Residual</label>
+														</fieldset>
+														<fieldset class="displayInline level2Only">
+															<label>
+																<input type="checkbox" value="Y" name="input-Cholesteatoma-None" id="input-Cholesteatoma-None" />
+																None</label>
+														</fieldset>
+														<fieldset class="displayInline">
+															<label>
+																<input type="checkbox" value="Y" name="input-Cholesteatoma-NA" id="input-Cholesteatoma-NA" checked="true" />
+																N/A</label>
+														</fieldset>
+													</div>
+												</div>
+												<div class="ui-block-a level2Only">
+													<label for="input-OssicularProsthesis">Ossicular Prosthesis:</label>
+													<select name="input-OssicularProsthesis" id="input-OssicularProsthesis">
+														<option value="N/A">N/A</option>
+														<option value="Exposed">Exposed</option>
+														<option value="Extruded">Extruded</option>
+														<option value="inME">In ME</option>
+													</select>
+												</div>
+												<h2 class="sectionHeader">Audiogram</h2>
+												<fieldset class="displayInline notDisplayInResult">
+													<label>
+														<input type="checkbox" value="Y" name="input-AudiogramNotPossible" id="input-AudiogramNotPossible" />
+														Audiogram not done</label>
+												</fieldset>
+												<div class="ui-block-a" id="AudiogramInputsDiv">
+													<label for="table-Audiogram-OpEar">Op Ear:</label>
+													<table id="table-Audiogram-OpEar" class="table-Audiogram">
+														<tr>
+															<th Align="Center"></th>
+															<th Align="Center">BC</th>
+															<th Align="Center">AC</th>
+														</tr>
+														<tr>
+															<td>500</td>
+															<td>
+															<select id="OpEarBC500">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+															<td>
+															<select id="OpEarAC500">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+														</tr>
+														<tr>
+															<td>1000</td>
+															<td>
+															<select id="OpEarBC1000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+															<td>
+															<select id="OpEarAC1000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+														</tr>
+														<tr>
+															<td>2000</td>
+															<td>
+															<select id="OpEarBC2000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+															<td>
+															<select id="OpEarAC2000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+														</tr>
+														<tr>
+															<td>3000</td>
+															<td>
+															<select id="OpEarBC3000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+															<td>
+															<select id="OpEarAC3000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+														</tr>
+														<tr>
+															<td>4000</td>
+															<td>
+															<select id="OpEarBC4000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+															<td>
+															<select id="OpEarAC4000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+														</tr>
+														<tr>
+															<td>8000</td>
+															<td>-</td>
+															<td>
+															<select id="OpEarAC8000">
+																<option></option>
+																<option value="-5">-5</option>
+																<option value="0">0</option>
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="15">15</option>
+																<option value="20">20</option>
+																<option value="25">25</option>
+																<option value="30">30</option>
+																<option value="35">35</option>
+																<option value="40">40</option>
+																<option value="45">45</option>
+																<option value="50">50</option>
+																<option value="55">55</option>
+																<option value="60">60</option>
+																<option value="65">65</option>
+																<option value="70">70</option>
+																<option value="75">75</option>
+																<option value="80">80</option>
+																<option value="85">85</option>
+																<option value="90">90</option>
+																<option value="95">95</option>
+																<option value="100">100</option>
+																<option value="105">105</option>
+																<option value="110">110</option>
+																<option value="115">115</option>
+																<option value="120">120</option>
+																<option value="125">125</option>
+																<option value="N/A">N/A</option>
+															</select></td>
+														</tr>
+														<tr class="displayInResult">
+															<td>Mean</td>
+															<td><span id="OpEarBC_Mean">N/A</span></td>
+															<td><span id="OpEarAC_Mean">N/A</span></td>
+														</tr>
+														<tr class="displayInResult">
+															<td>AirBone Gap</td>
+															<td><span id="OpEar_AirBoneGap">N/A</span></td>
+															<td></td>
+														</tr>
+													</table>
+												</div>
+												<div class="ui-block-a">
+													<label for="input-Comments">Comments:</label>
+													<textarea name="input-Comments" id="input-Comments"></textarea>
+												</div>
+												<div class="ui-block-a displayInResult">
+													<label for="input-EntryDate">Entry Date:</label>
+													<input type="text" name="input-EntryDate" id="input-EntryDate" value="" disabled="disabled"/>
+												</div>
+											</div>
+											<div class="alignRight notDisplayInResult">
+												<fieldset class="displayInline">
+													<input id="submit-newFollowUp" type="submit" value="Submit" data-theme="b"/>
+												</fieldset>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</ul>
+					<ul id="tab-DataAnalysis" data-title="Data Analysis" data-role="listview" data-inset="true" data-corners="false" class="contentBlock">
+						<li data-role="list-divider" data-theme="e" class="reponsiveText">
+							<span class="platformName"></span> - Data Analysis
+						</li>
+						<li data-theme="c">
+							<a id="dataAna-AllData" target="_blank" href="#">All Data</a>
+						</li>
+						<li data-theme="c">
+							<a id="dataAna-PreOpData" target="_blank" href="#">PreOp Data</a>
+						</li>
+						<li data-theme="c">
+							<a id="dataAna-OpData" target="_blank" href="#">Op Data</a>
+						</li>
+						<li data-theme="c">
+							<a id="dataAna-PostOpData" target="_blank" href="#">PostOp Data</a>
+						</li>
+						<li id="dataAna-CustomQuery_li" data-theme="c">
+							<a id="dataAna-CustomQuery" target="_blank" href="#">Custom Query</a>
+						</li>
+						<li data-theme="c">
+							<a id="dataAna-ComparativeData" target="_blank" href="#">Comparative Data</a>
+						</li>
+						<li data-theme="c">
+							<a id="dataAna-QuestionnaireData" target="_blank" href="#">Questionnaire Data</a>
+						</li>
+					</ul>
+					<ul id="tab-AboutUs" data-title="About Us" data-role="listview" data-inset="true" data-corners="false" class="contentBlock">
+						<div class="tab" id="aboutUsTab">
+							<ul class="resp-tabs-list">
+								<li>
+									Objectives
+								</li>
+								<li>
+									About Us
+								</li>
+								<li>
+									Methodology
+								</li>
+							</ul>
+							<div class="resp-tabs-container">
+								<div class="contentText">
+									<h2><A Name="AIMS OF THE GROUP">Aims of Common Otology Audit Group</A></h2>
+									<ul class="contentText" id="aimsList">
+										<li>
+											To provide a focus for clinical practice amongst members
+										</li>
+										<li>
+											To identify common audit data amongst members
+										</li>
+										<li>
+											To provide a way for members to store their otology data
+										</li>
+										<li>
+											To provide a patient base for meaningful statistical analysis
+										</li>
+										<li>
+											To provide standards for future otology audit
+										</li>
+										<li>
+											To create an environment to encourage collaborative studies amongst members
+										</li>
+									</ul>
+								</div>
+								<div class="contentText">
+									<h2><a>When?</a></h2>
+									<p class="word-wrap">
+										Data collection started end of February. However you can register and join in anytime.
+									</p>
+									<h2><a>Introduction</a></h2>
+									<p class="word-wrap">
+										The last national comparative myringoplasty audit was carried out 8 years ago (Clin Oto 1999 24:126-129). This audit will use the same web-based technology as the recent Tonsillectomy Audit, and is a tailored version of the general EarUK Otology Audit available on www.ear-audit.net
+									</p>
+									<h2><a>Who?</a></h2>
+									<p class="word-wrap">
+										<span class="underline">All</span> surgeons doing myringoplasty - trainees, SAS, consultants
+									</p>
+									<h2><a>Why?</a></h2>
+									<p class="word-wrap">
+										To:
+										<br/>
+										1. Enable the participating surgeons to compare their performance with that of two standard deviations of the mean of others entering data
+										<br />
+										2. Find the overall incidence of intact tympanic membrane and disease-free ears following myringoplasty, in children and in adults
+										<br />
+										3. Identify variables that could influence success rate
+									</p>
+									<h2><a>Confidentiality?</a></h2>
+									<p class="word-wrap">
+										<span class="underline">Patient confidentiality</span> will be protected, as all hospital numbers will be stored in the database as encrypted numbers.
+										<br />
+										<span class="underline">Surgeon confidentiality</span> will be provided by enabling participants to change their password to one only they know.
+									</p>
+									<h2><a>Method?</a></h2>
+									<p class="word-wrap">
+										Data entry will be via the web-based database. This can either be entered directly from the notes in real time, or via a paper form printed from the web-site, completed for each patient, and then transcribed electronically to the database. Data completeness will be ensured by the presence of obligatory fields (an advantage of entering data in real time electronically), and data validation will be carried out by random site visits to participating hospitals by an external inspector/auditor to perform random inspection of patient records.
+									</p>
+									<p class="word-wrap">
+										<strong>MREC</strong> has confirmed that formal approval by them or <strong>LREC</strong> is NOT required.
+										Should local LRECs demand proof of this we can provide a copy of the relevant MREC letter on application.
+									</p>
+									<p class="word-wrap">
+										<strong><em>Inclusion criteria:</em></strong>
+										<br />
+										1. All perforations of the pars tensa
+										<br />
+										2. All age groups
+										<br />
+										3. Cortical mastoidectomy and myringoplasty for non-cholesteatoma ears
+									</p>
+									<p class="word-wrap">
+										<strong><em>Exclusion criteria:</em></strong>
+										<br />
+										1. Surgery for Cholesteatoma
+										<br />
+										2. Cases when concomitant ossiculoplasty is performed
+									</p>
+									<h2><a>How to register as a user?</a></h2>
+									<p class="word-wrap">
+										<em>New users:</em>
+										<br />
+										Phone Stephen Wilson on 01473 704382, or email him to obtain login user name and password.
+										<br />
+										The latter can be changed by you so you alone know it
+									</p>
+									<p class="word-wrap">
+										<em>Current users of the EarUK web-based audit system:</em>
+										<br />
+										After registering, can continue to input the otology data in the usual way but the input for the myringoplasty data will be through the hyperlink in the website.
+									</p>
+									<h2><a>Getting Started</a></h2>
+									<p class="word-wrap"></p>
+									<ul>
+										<li>
+											Register as above and get a user name and password.
+										</li>
+										<li>
+											Access the Common Otology Audit home page either directly (www.ear-audit.net) and click on "UK Myringoplasty Audit",
+											or via the ENT-UK web site (www.entuk.org) and click on "Audits" on left side of the home page, and then on "web-based Common Otology Database" and then on "UK Myringoplasty Audit" as above
+										</li>
+										<li>
+											"UK Myringoplasty Audit" page - Scroll down on "Hospital Name" to find your hospital, and then enter your user name and password. When finished click "submit" to access the "Myringoplasty Menu".
+										</li>
+										<li>
+											"Myringoplasty Menu" page - on first visit personalise your password by clicking on "Change Password". Otherwise "Click on "Create New Case" or "Review/Update" depending if patient is new, or follow-up or if you are entering operative data
+										</li>
+										<li>
+											Data will be entered once preoperatively, preferably when listing the patient for surgery
+										</li>
+										<li>
+											The pre-op audiogram is the one closest to surgery, so will be found on the "Operation" page. Just click on the dB figure for AC or BC and it will automatically appear on the grid. Postoperative data is entered at dated intervals of your own choosing postoperatively.
+										</li>
+										<li>
+											The pre-operative/operative/postoperative forms will be linked by using a case code (combination of patient Number, date of listing and side of operation) to distinguish it from a later, separate, episode involving the other side.
+										</li>
+										<li>
+											Any problems contact Stephen Wilson, Webmaster, as above
+										</li>
+									</ul>
+									<p></p>
+								</div>
+								<div class="contentText">
+									<H2><A Name="DataInput">Data Input</A></H2>
+									<P class="word-wrap">
+										It is good audit practice to enter preop data before surgery takes place to avoid reporting bias. This practice is required of Level 2 Benchmark users. However, for their own audit purposes Level 1 and Level 2 users can also enter data retrospectively.
+										<br />
+										Different data entry forms are available on the website for pre-operative, operative-findings, operative and post-operative data entry. Every field on the data form needs to be completed before the form is accepted, thus ensuring completeness of data entry.
+									</P>
+									<P class="word-wrap">
+										Separate post-op forms are available for 3, 6, 12, 24, 36, 48 and 60 months after surgery.
+									</P>
+									<H2><A Name="Feedback">Feedback</A></H2>
+									<P class="word-wrap">
+										The data from each hospital/surgeon is stored in a SQL Server database and can be distributed to the hospital on a regular basis. Each hospital can only access its own data, but not the data of another hospital. However, a table with the cumulative results of all the participating hospitals will also be provided to each hospital.
+									</P>
+									<P>
+										The web master can be contacted via <A HREF="mailto: stephen.wilson@ipswichhospital.nhs.uk">e-mail</A> for surgeons to make enquiries regarding specific comparative audit with other hospitals or surgeons. The identity of the hospitals will be protected unless individual hospitals wish to collaborate in their audit.
+									</P>
+									<H2><A Name="Validation">Validation</A></H2>
+									<P class="word-wrap">
+										Any bias or incorrect entry from one hospital can contaminate the accuracy of the overall database. Validation can be provided by each hospital being visited once a year by an appointed inspector to carry out a random examination of patient records. The results of all Level 2 Benchmark data is externally validated by a peer.If any Level 1 and Level 2 users wish to compare their results with Level 2 Benchmark in a publicaton they can request an external validation provided by the Common Otology Audit group.
+									</P>
+									<H2><A Name="Security">Security</A></H2>
+									<P class="word-wrap">
+										Each surgeon of a hospital is allocated an access code and a password. The identity of the patients and the surgeons is anonymous. Each hospital is given a Hospital Code Number and each surgeon a Surgeon Code Number. Users give each patient a unique identifier. This identifier is stored in the database in an encrypted form, so it is safe to enter identifiers issued by the hospital administration system. The identifier used is decrypted by the system whenever data is downloaded.
+									</P>
+									<H2><A Name="Interested">Join Us?</A></H2>
+									<P class="word-wrap">
+										To register your interest, please write to the <A HREF="mailto:matthewyung@btconnect.com">project leader</A> and we shall contact you in due course.
+									</P>
+								</div>
+							</div>
+						</div>
+					</ul>
+					<ul id="tab-Downloads" data-title="Downloads" data-role="listview" data-inset="true" data-corners="false" class="contentBlock">
+						<li data-role="list-divider" data-theme="e" class="reponsiveText">
+							Downloads
+						</li>
+						<li data-theme="c">
+							<a href="http://www.ear-audit.net/Downloads/User_Guide.pdf" rel="external" target="_blank">User Guide</a>
+						</li>
+						<li data-theme="c">
+							<a href="http://www.ear-audit.net/Downloads/COA_LEVEL1_2006.pdf" rel="external" target="_blank">Level1 Form (pdf)</a>
+						</li>
+						<li data-theme="c">
+							<a href="http://www.ear-audit.net/Downloads/COA_LEVEL1_2006.doc" rel="external" target="_blank">Level1 Form (doc)</a>
+						</li>
+						<li data-theme="c">
+							<a href="http://www.ear-audit.net/Downloads/COA_LEVEL2_2006.pdf" rel="external" target="_blank">Level2 Form (pdf)</a>
+						</li>
+						<li data-theme="c">
+							<a href="http://www.ear-audit.net/Downloads/COA_LEVEL2_2006.doc" rel="external" target="_blank">Level2 Form (doc)</a>
+						</li>
+						<li data-theme="c">
+							<a href="http://www.ear-audit.net/Downloads/Level2_Info.pdf" rel="external" target="_blank">Level2 Information</a>
+						</li>
+						<li data-theme="c">
+							<a href="http://www.ear-audit.net/Downloads/Practical_Points.pdf" rel="external" target="_blank">Practical Points</a>
+						</li>
+						<li data-theme="c">
+							<a href="http://www.ear-audit.net/Downloads/Myringoplasty_Data_Form.pdf" rel="external" target="_blank">UK Myringoplasty Forms (pdf)</a>
+						</li>
+						<li data-theme="c">
+							<a href="http://www.ear-audit.net/Downloads/Myringoplasty_Data_Form.doc" rel="external" target="_blank">UK Myringoplasty Forms (doc)</a>
+						</li>
+						<li data-theme="c">
+							<a href="http://www.ear-audit.net/Downloads/Data_Access_Demo.pdf" rel="external" target="_blank">Data Access Demo</a>
+						</li>
+					</ul>
+					<ul id="tab-Links" data-title="Useful link" data-role="listview" data-inset="true" data-corners="false" class="contentBlock">
+						<li data-role="list-divider" data-theme="e" class="reponsiveText">
+							Useful Links
+						</li>
+						<li data-theme="c">
+							<a href="http://www.orl-nko.be" target="_blank" rel="external">Belgian ENT Society</a>
+						</li>
+						<li data-theme="c">
+							<a href="http://www.hno.org" target="_blank" rel="external">German ENT Association</a>
+						</li>
+						<li data-theme="c">
+							<a href="http://www.kno.nl" target="_blank" rel="external">Dutch ENT Association</a>
+						</li>
+						<li data-theme="c">
+							<a href="http://www.orl.hu" target="_blank" rel="external">Hungarian ENT Society</a>
+						</li>
+						<li data-theme="c">
+							<a href="http://ent.pote.hu" target="_blank" rel="external">Pecs University ENT Dept</a>
+						</li>
+						<li data-theme="c">
+							<a href="http://www.entuk.org" target="_blank" rel="external">UK ENT Association</a>
+						</li>
+						<li data-theme="c">
+							<a href="http://www.kbc-zagreb.hr" target="_blank" rel="external">KBC Zagreb</a>
+						</li>
+						<li data-theme="c">
+							<a href="http://www.rcseng.ac.uk" target="_blank" rel="external">Royal College of Surgeons England</a>
+						</li>
+						<li data-theme="c">
+							<a href="http://www.rcsed.ac.uk" target="_blank" rel="external">Royal College of Surgeons Edinburgh</a>
+						</li>
+						<li data-theme="c">
+							<a href="http://www.ors.uk.net" target="_blank" rel="external">ORL Research Society UK</a>
+						</li>
+						<li data-theme="c">
+							<a href="http://www.eaono.org" target="_blank" rel="external">European Academy of Otology and Neurotology</a>
+						</li>
+					</ul>
+					<ul id="tab-MyProfile" data-role="listview" data-inset="true" data-corners="false" class="contentBlock">
+						<div class="tab" id="myProfileTab">
+							<ul class="resp-tabs-list">
+								<li>
+									My Profile
+								</li>
+								<li>
+									Change Password
+								</li>
+							</ul>
+							<div class="resp-tabs-container">
+								<div class="contentText">
+									<form id="updateProfileForm">
+										<div class="ui-grid-b grid-breakpoint">
+											<div class="ui-block-a">
+												<label for="input-Title">Title:</label>
+												<input type="text" name="input-Title" id="input-Title" value="" />
+											</div>
+											<div class="ui-block-b">
+												<label for="input-Forename">Forename:</label>
+												<input type="text" name="input-Forename" id="input-Forename" value="" />
+											</div>
+											<div class="ui-block-c">
+												<label for="input-Surname">Surname:</label>
+												<input type="text" name="input-Surname" id="input-Surname" value="" />
+											</div>
+										</div>
+										<div class="ui-grid-solo grid-breakpoint">
+											<div class="ui-block-a">
+												<label for="input-HospitalName">Hospital Name:</label>
+												<input type="text" name="input-HospitalName" id="input-HospitalName" value="" />
+											</div>
+											<div class="ui-block-a">
+												<label for="input-HospitalAddress">Hospital Address:</label>
+												<input type="text" name="input-HospitalAddress" id="input-HospitalAddress" value="" />
+											</div>
+										</div>
+										<div class="ui-grid-a grid-breakpoint">
+											<div class="ui-block-a">
+												<label for="input-EmailHome">Email (Home):</label>
+												<input type="email" name="input-EmailHome" id="input-EmailHome" value="" />
+											</div>
+											<div class="ui-block-b">
+												<label for="input-EmailWork">Email (Work):</label>
+												<input type="email" name="input-EmailWork" id="input-EmailWork" value="" />
+											</div>
+											<div class="ui-block-a">
+												<label for="input-OtherContact">Other Contact:</label>
+												<input type="text" name="input-OtherContact" id="input-OtherContact" value="" />
+											</div>
+											<div class="ui-block-b">
+												<label for="input-CaseMix">Case mix:</label>
+												<div class="chkList" id="input-CaseMix">
+													<fieldset class="displayInline">
+														<label>
+															<input type="checkbox" value="Y" name="input-CaseMix-Mastoidectomy" id="input-CaseMix-Mastoidectomy" value="Y"/>
+															Mastoidectomy</label>
+													</fieldset>
+													<fieldset class="displayInline">
+														<label>
+															<input type="checkbox" value="Y" name="input-CaseMix-Tympanoplasty" id="input-CaseMix-Tympanoplasty" value="Y"/>
+															Tympanoplasty</label>
+													</fieldset>
+													<fieldset class="displayInline">
+														<label>
+															<input type="checkbox" value="Y" name="input-CaseMix-Stapedectomy" id="input-CaseMix-Stapedectomy" value="Y"/>
+															Stapedectomy</label>
+													</fieldset>
+												</div>
+											</div>
+										</div>
+										<div class="ui-grid-solo grid-breakpoint">
+											<div class="ui-block-a">
+												<label for="input-AdditionalInformation">Additional Information:</label>
+												<textarea name="input-AdditionalInformation" id="input-AdditionalInformation"></textarea>
+											</div>
+										</div>
+										<div class="alignRight">
+											<fieldset class="displayInline">
+												<input id="submit-myProfile" type="button" value="Submit Change" data-theme="b"/>
+											</fieldset>
+										</div>
+									</form>
+								</div>
+								<div class="contentText">
+									<form id="changePasswordForm">
+										<div class="ui-grid-solo grid-breakpoint">
+											<div class="ui-block-a">
+												<label for="input-CurrentPassword">Current Password:</label>
+												<input type="password" autocomplete="off" name="input-CurrentPassword" id="input-CurrentPassword" />
+											</div>
+											<div class="ui-block-a">
+												<hr/>
+											</div>
+											<div class="ui-block-a">
+												<label for="input-NewPassword">New Password:</label>
+												<input type="password" autocomplete="off" name="input-NewPassword" id="input-NewPassword" />
+											</div>
+											<div class="ui-block-a">
+												<label for="input-NewPasswordConfirm">New Password (Confirm):</label>
+												<input type="password" autocomplete="off" name="input-NewPasswordConfirm" id="input-NewPasswordConfirm" />
+											</div>
+										</div>
+										<div class="alignRight">
+											<fieldset class="displayInline">
+												<input id="submit-changePassword" type="button" value="Submit" data-theme="b"/>
+											</fieldset>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- javascript -->
+		<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="jquery-ui-1.10.3.custom.min.js"></script>
+		<script type="text/javascript" src="jquery.mobile-1.3.2.min.js"></script>
+		<script type="text/javascript" src="easyResponsiveTabs.js"></script>
+		<script type="text/javascript" src="common.js"></script>
+		<!-- JS coaOffline-->
+		<script type="text/javascript"  src="websqlHelper.js"></script>
+		<script type="text/javascript" src="jquery.xml2json.js"></script>
+		<script type="text/javascript" src="coaOffline.js"></script>
+		<!-- JS coaOffline end -->
+		<script type="text/javascript" src="coa.js"></script>
+		<!-- css3-mediaqueries.js for IE less than 9, can only support @media on-page <style> -->
+		<!--[if lt IE 9]>
+		<!--script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+		<![endif]-->
+		<!-- end javascript -->
+
+				<script type="text/javascript" src="lawnchair-0.6.1.min.js"></script>
+        <script type="text/javascript" src="datamanager.js"></script>
+        <script type="text/javascript" src="jquery.md5.js"></script>
+		<script type="text/javascript" src="mobile_common.js"></script>
+
+		
+			<script type="text/javascript" src="loggedIn.js"></script>
+
+		<script type="text/javascript" src="jquery.json2xml.js"></script>	
+		<script type="text/javascript" src="spinner.js"></script>
+	
+		<script type="text/javascript">
+		
+		//<!-- JS coaOffline-->
+		/*$(function() {
+			coaOfflineMode = confirm("[Testing]:Offline mode?");
+			if(coaOfflineMode){
+			if(!coaOffline.DBReady) {
+				var login_data = { "HospCode": getURLParameter("hospital_no"), "area": getURLParameter("area"), "username": getURLParameter("hospital_name"), "password": getURLParameter("hospital_name"), "sinceDateTime": "", "isEncrypted": "false"};
+				coaOffline.initDB(login_data,
+			function(json) {
+				coaOffline.DBReady = true;
+			});
+		}
+
+			$('a[href="#tab-DataAnalysis"]').addClass("ui-disabled");
+			$('a[href="#tab-Downloads"]').addClass("ui-disabled");
+			$('a[href="#tab-Links"]').addClass("ui-disabled");
+			$('#btnViewOpNote', '#review-OpProcedureForm').addClass("ui-disabled");
+			$('#btnViewOpNote', '#review-OperationForm').addClass("ui-disabled");
+			$('#editProfileLink').addClass("ui-disabled");
+		}
+		});*/
+		if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
+       		
+       		isWeb=false;
+       		include('phonegap.js');
+        	include('SQLitePlugin.js');
+       		document.addEventListener("deviceready", function() {
+				document.addEventListener("resume", onResume, false);  //app out of focus
+				onDeviceReady();
+			}, false);
+
+        } else {
+			isWeb=true;
+			$( document ).ready( function(){
+				$(window).bind("focus", onResume);
+				onDeviceReady();
+			});
+			
+        
+        }
+	
+	function onDeviceReady(){
+		if (navigator.userAgent.match(/(Android)/)) {
+			document.addEventListener("backbutton", onBackKeyDown, false);
+			function onBackKeyDown(e) {
+				// Handle the back button
+				e.preventDefault();
+				return false;
+			}
+		}
+		appendYear();
+		hideloading();
+				
+	  
+	                //document.addEventListener("backbutton", onBack, false);
+ 		
+
+		/*	$("#a-logoff").hide();
+                     
+			$('a[href="#tab-DataAnalysis"]').addClass("ui-disabled");
+$('a[href="#tab-DataAnalysis"]').hide();
+			$('a[href="#tab-Downloads"]').addClass("ui-disabled");
+$('a[href="#tab-Downloads"]').hide();
+			$('a[href="#tab-Links"]').addClass("ui-disabled");
+$('a[href="#tab-Links"]').hide();
+$("#tab-Links").hide();
+$('#tab-Downloads').hide();
+$('#tab-DataAnalysis').hide();*/
+			$('#btnViewOpNote', '#review-OpProcedureForm').addClass("ui-disabled");
+			$('#btnViewOpNote', '#review-OperationForm').addClass("ui-disabled");
+			$('#btnViewOpNote', '#review-OpProcedureForm').hide();
+			$('#btnViewOpNote', '#review-OperationForm').hide();
+			$('#editProfileLink').addClass("ui-disabled");
+			  init();
+          //  initLoggedInPage(coaOffline.user.HospCode , coaOffline.user.area);
+		}
+		
+		function onResume()
+	    {
+			console.log("onResume", isDoctorLogin);
+			
+			if(isDoctorLogin) {
+				checkDoctorKeyDialog();
+			}
+	    }
+		
+		//<!-- JS coaOffline end -->
+		</script>
+
+	
+
+
+	</body>
+</html>

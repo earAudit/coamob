@@ -1,0 +1,81 @@
+@import "jquery-ui-fixDatepickerWithMobile.css";
+html{font-size:100%}
+#loggedInPage,#loginPage{display:none}
+#phoneIndicator{display:none}
+.center{margin-left:auto;margin-right:auto}
+.mainTitle{font-size:1.5em;margin:.5em 0;text-align:center}
+.headerBar{line-height:4.5em;padding:.1em;background:white;background-image:url(headBar.png);background-size:auto 100%;background-repeat:no-repeat;background-position:center left;border:1px solid}
+.logo{height:4em;float:right;position:relative;top:.25em;right:.25em}
+#navMenuBtn{display:none}
+#mypanel{background:#333}
+.valginWithBtn{margin-top:1.5em}
+.word-wrap{white-space:normal}
+.contentText,.contentText p{font-size:1em;font-weight:normal;color:#555}
+.contentBlock label{font-weight:normal;font-size:1em}
+.underline{text-decoration:underline}
+#aboutUsTab{background-color:#eee}
+.contentList{width:80%}
+.grid-breakpoint>.ui-block-a,.grid-breakpoint>.ui-block-b,.grid-breakpoint>.ui-block-c,.grid-breakpoint>.ui-block-d,.grid-breakpoint>.ui-block-e{padding:5px 10px}
+.welcomeDiv{float:right;margin:5px 0;font-size:.8em}
+.displayInline{display:inline-block;margin-left:auto !important;margin:right:auto !important}
+.alignRight{text-align:right}
+.sectionHeader{font-size:1.1em;margin-top:1em;color:#2489ce}
+.noDisplay{display:none !important}
+.dataNotFind{text-align:center;color:#666}
+div.ui-disabled,.ui-select .ui-disabled,.ui-state-disabled{filter:Alpha(Opacity=90);opacity:.9;zoom:1;color:#000 !important}
+.ui-input-text.ui-disabled{background:transparent;-moz-box-shadow:none;-webkit-box-shadow:none;box-shadow:none}
+.ui-select .ui-disabled{background:transparent;-moz-box-shadow:none;-webkit-box-shadow:none;box-shadow:none}
+.ui-checkbox.ui-disabled>label,.ui-radio.ui-disabled>label{-moz-box-shadow:none;-webkit-box-shadow:none;box-shadow:none;background-image:none}
+.table-Audiogram{width:100%;border:1px solid}
+.table-Audiogram th,.table-Audiogram td{text-align:center}
+.table-Audiogram th:first-child,.table-Audiogram td:first-child{width:30%}
+.errorText{font-size:.8em;color:red;padding-left:10px}
+.footerText{font-size:.9em;}
+.topTips {border-bottom: 1px solid black; background-color: #FFFF99; z-index:2; line-height:20px; padding: 10px 10px; white-space:nowrap; overflow:hidden;  text-overflow:ellipsis;}
+.is-disabled {
+    background-color: #EBEBEB;
+    color: black !important;   
+}
+.score_section {
+	text-align: right;
+	color: blue;
+}
+@media screen and (max-width:760px){body{font-size:1em}
+#phoneIndicator{display:block}
+.reponsiveText{font-size:1.2em !important}
+.headerBar{line-height:3em}
+.logo{height:2.5em}
+#menuBarH{display:none}
+.contentBlock{margin:-15px !important}
+#navMenuBtn{display:block}
+.responsiveGrid .ui-block-a,.responsiveGrid .ui-block-b,.responsiveGrid .ui-block-c,.responsiveGrid .ui-block-d,.responsiveGrid .ui-block-e{width:100%;float:none}
+.valginWithBtn{margin-top:auto}
+.grid-breakpoint>.ui-block-a,.grid-breakpoint>.ui-block-b,.grid-breakpoint>.ui-block-c,.grid-breakpoint>.ui-block-d,.grid-breakpoint>.ui-block-e{width:100%;float:none}
+.welcomeDiv{display:none}
+#reviewBackBtn{display:none}
+#reviewBackBtnSmall{display:auto}
+.phoneOnly{display:auto!important;}
+.desktopOnly{display:none!important;}
+}
+@media screen and (min-width:761px){body{font-size:1em}
+.resize{width:80%;max-width:960px;min-width:720px}
+#reviewBackBtn{display:auto}
+#reviewBackBtnSmall{display:none}
+.phoneOnly{display:none!important;}
+.desktopOnly{display:auto!important;}
+}
+#overlay {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-color: #000000;
+    filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+    z-index: 10000;
+}
+
+

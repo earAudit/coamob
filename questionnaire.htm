@@ -1,0 +1,1046 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+		<meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+		 
+		<link rel="prerender" href="loggedIn.htm" />
+		<link rel="stylesheet" href="jquery-ui-1.10.3.custom.min.css" />
+		<link rel="stylesheet" href="jquery.mobile-1.3.2.min.css" />
+		<link rel="stylesheet" type="text/css" href="common.min.css" />
+		<link rel="stylesheet" type="text/css" href="easy-responsive-tabs.css" />
+		<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="jquery-ui-1.10.3.custom.min.js"></script>
+		<script type="text/javascript" src="jquery.mobile-1.3.2.min.js"></script>
+		<script type="text/javascript" src="cookies.js"></script>
+		<title>Common Otology Audit</title>
+
+		<style>
+        span.blue 
+        {
+        	color: blue;
+        }
+		.example
+		{
+			border:1px solid #000000;
+			padding-top:10px;
+			padding-bottom:10px;
+			padding-right:10px;
+			padding-left:10px;
+		}
+		.examplenote {margin-left:50px;}
+		.ui-controlgroup-controls
+		{
+		    width:100%;
+
+		}
+		
+		.ui-radio {
+		    width:100%;
+		}
+		
+		.radio1 .ui-radio {
+		    width:16.5%;
+		}
+		.radio2 .ui-radio {
+		    width:33%;
+		}
+		.radio3 .ui-radio {
+		    width:100%;
+		}
+		
+		.radio4 .ui-radio {
+		    width:20%;
+		}
+		
+        .back-to-top {
+            position: fixed;
+            bottom: 2em;
+            right: 0px;
+            text-decoration: none;
+            color: #000000;
+            background-color: rgba(235, 235, 235, 0.80);
+            font-size: 12px;
+            padding: 1em;
+            display: none;
+        }
+        
+        .back-to-top:hover {    
+            background-color: rgba(135, 135, 135, 0.50);
+        }
+		</style>
+	</head>
+	<body>
+		<div id="Loading">Loading.... </div>
+		<!--MenuPage-->
+		<div id="MenuPage" data-role="page"  data-theme="c">
+			<div data-role="header" data-theme="f" class="resize center">
+				<div class="mainTitle center ">Common Otology Audit</div>
+				<div class="headerBar center"> &nbsp; <img class="logo" src="EarAudit.gif" /> </div>
+			</div>
+			<div data-role="content" class="content resize center" >
+				<ul id="tab-Menu" data-role="listview" data-inset="true" data-corners="false" class="contentBlock">
+					<li data-role="list-divider" data-theme="e" class="reponsiveText">Main Menu</li>
+					<li data-theme="c" id = "but-questionnaire"><a href="#LoginPage" onclick="setEmpty($('#t_patientcode','#patientForm'))">Questionnaire</a></li>
+					<li data-theme="c" id = "but-doctorsection"><a href="#DocSecPage" onclick="setEmpty($('#t_checksecuritypin','#secForm'))">Doctor Section</a></li>
+				</ul>
+		    </div>
+		    <div data-role="footer" data-theme="f" class="content resize center" >
+				 <div class="footerText">Copyright © Common Otology Audit <br/><a href="mailto:matthewyung@btconnect.com" >Contact Project Lead</a>  &nbsp | &nbsp  <a href="mailto:stephen.wilson@ipswichhospital.nhs.uk" >Contact Webmaster</a> &nbsp | &nbsp <a href="privacy.htm" rel="external">Privacy Policy</a> <br/> <br/> </div>
+			</div>
+		</div> <!--MenuPage end-->
+
+		<!--DocPage-->
+		<div id="DocPage" data-role="page"  data-theme="c">
+			<div data-role="header" data-theme="f" class="resize center">
+				<div class="mainTitle center ">Common Otology Audit</div>
+				<div class="headerBar center"> &nbsp; <img class="logo" src="EarAudit.gif" /> </div>	
+			</div>
+			<div data-role="content" class="content resize center" >
+                <ul id="tab-Section" data-role="listview" data-inset="true" data-corners="false" class="contentBlock">
+					<a href="" data-role="button" id="back-DocSection" data-icon="arrow-l" data-mini="true" class="ui-btn-left" onclick="setisDoctorLogin(false);$.mobile.changePage('#MenuPage');setEmpty($('#t_checksecuritypin','#secForm'))">Back</a><br/><br/>
+                    <li data-role="list-divider" data-theme="e" class="reponsiveText">Doctor Section</li>
+					<li data-theme="c" id="but-viewquestionnaire"><a href="">View Questionnaire records</a></li>
+					<li data-theme="c" id="but-online"><a href="">COA - Offline Site</a></li>
+					<li data-theme="c" id="syncBtn"><a href="">Syncing data with COA <br/> (Online network is required.)</a></li>
+                </ul>
+    		</div>
+   			<div data-role="footer" data-theme="f" class="content resize center" >
+		 		<div class="footerText">Copyright © Common Otology Audit <br/><a href="mailto:matthewyung@btconnect.com" >Contact Project Lead</a>  &nbsp | &nbsp  <a href="mailto:stephen.wilson@ipswichhospital.nhs.uk" >Contact Webmaster</a> &nbsp | &nbsp <a href="privacy.htm" rel="external">Privacy Policy</a> <br/> <br/> </div>
+			</div>
+		</div> <!--DocPage end-->
+		
+		<!--Login Page-->
+		 <div id="LoginPage" data-role="page"  data-theme="c">
+			<div data-role="header" data-theme="f" class="resize center">
+				<div class="mainTitle center ">Common Otology Audit</div>
+				<div class="headerBar center"> &nbsp; <img class="logo" src="EarAudit.gif" /> </div>
+			</div>
+			<div data-role="content" class="content resize center" >
+             	<ul id="tab-PatientCode" data-role="listview" data-inset="true" data-corners="false" class="contentBlock">
+             		  <a href="" data-role="button" id="back-Patient" data-icon="arrow-l" data-mini="true" class="ui-btn-left" onclick="setisDoctorLogin(false);$.mobile.changePage('#MenuPage');setEmpty($('#t_patientcode','#patientForm'))">Back</a><br/><br/>
+					<li data-role="list-divider" data-theme="e" class="reponsiveText">Questionnaire - Settings</li>
+					<li data-theme="c">
+						  <div align="justify">
+						Patient is required to answer a set of questionnaires.<br/>
+						Please input the Patient Code for the Patient.<br/><br/>
+						Then, let the Patient input the Patient Security PIN for their privacy protection. <br/><br/>
+                      	<form id="patientForm">
+                             <label for="t_patientcode">Enter Patient Code to start:</label>
+
+                           <input type="text" name="t_patientcode" id="t_patientcode" value=""  />
+                    		<input type="submit"  id="patientcode" value="Submit" />
+                    		<br/>
+                        <br/>
+                        </form>
+                    </div>
+                    </li>
+	           </ul>
+	           <br/>
+	        </div>
+		    <div data-role="footer" data-theme="f" class="content resize center" >
+				<div class="footerText">Copyright © Common Otology Audit <br/><a href="mailto:matthewyung@btconnect.com" >Contact Project Lead</a>  &nbsp | &nbsp  <a href="mailto:stephen.wilson@ipswichhospital.nhs.uk" >Contact Webmaster</a> &nbsp | &nbsp <a href="privacy.htm" rel="external">Privacy Policy</a> <br/> <br/> </div>
+			</div>
+		</div> <!--LoginPage end-->
+
+		<!--SecPage-->
+		 <div id="SecPage" data-role="page" data-them ="c">
+		 	<div data-role="header" data-theme="f" class="resize center">
+						<div class="mainTitle center ">Common Otology Audit</div>
+						<div class="headerBar center"> &nbsp; <img class="logo" src="EarAudit.gif" /> </div>
+					</div>
+						<div data-role="content" class="content resize center" >
+		 	  <ul id="tab-SecurityPin" data-role="listview" data-inset="true" data-corners="false" class="contentBlock">
+		                	  <a href="" data-role="button" id="back-Security" data-icon="arrow-l" data-mini="true" class="ui-btn-left" onclick="setisDoctorLogin(false);$.mobile.changePage('#MenuPage');setEmpty($('#t_securitypin','#secsetForm'))">Back</a><br/><br/>
+						<li data-role="list-divider" data-theme="e" class="reponsiveText">Questionnaire - Patient</li>
+							<li data-theme="c">
+								  <div align="justify">
+								Patient is required to complete a set of questionnaires, in order to facilitate better understanding of patient’s condition.<br/><br/>
+								Please set a Patient Security PIN.<br/><br/>
+								It is used to protect your privacy when you are working on the questionnaires.<br/>
+								You are required to input when the App is idle for a long time, or the app is out-focused.<br/>
+								<br/>
+								Remarks: <br/>
+								- Only you will know the Security PIN.  If you forgot your security PIN, you will need to inform the reception and answer all the questions again.<br/>
+								- The questionnaire data will be stored for future reference by Common Otology Audit without capturing the privacy data.<br/>
+								- It may takes several minutes to initialize the questionnaire when first use.<br/><br/>
+		                      <form id="secsetForm">
+		                        	<label for="name">Enter Patient Security PIN:</label>
+									<input type="password" name="name" id="t_securitypin" value="" />
+		                        
+		                        <input type="button"  id="b_securitypin" value="Submit"/>
+		                    </form>
+		                        </div>
+		                    </li>
+		                </ul>
+		            </div>
+		                 <div data-role="footer" data-theme="f" class="content resize center" >
+						<div class="footerText">Copyright © Common Otology Audit <br/><a href="mailto:matthewyung@btconnect.com" >Contact Project Lead</a>  &nbsp | &nbsp  <a href="mailto:stephen.wilson@ipswichhospital.nhs.uk" >Contact Webmaster</a> &nbsp | &nbsp <a href="privacy.htm" rel="external">Privacy Policy</a> <br/> <br/> </div>
+					</div>
+		 </div><!--SecPage end-->
+
+
+		 <div id="DocSecPage" data-role="page" data-them ="c">
+		 	<div data-role="header" data-theme="f" class="resize center">
+						<div class="mainTitle center ">Common Otology Audit</div>
+						<div class="headerBar center"> &nbsp; <img class="logo" src="EarAudit.gif" /> </div>
+					</div>
+						<div data-role="content" class="content resize center" >
+		 	 	<ul id="tab-CheckSecurityPin" data-role="listview" data-inset="true" data-corners="false" class="contentBlock">
+		  					  <a href="" data-role="button" id="back-CheckSecurity" data-icon="arrow-l" data-mini="true" class="ui-btn-left" onclick="setisDoctorLogin(false);$.mobile.changePage('#MenuPage');setEmpty($('#t_checksecuritypin','#secForm'))">Back</a><br/><br/>
+							<li data-role="list-divider" data-theme="e" class="reponsiveText">Doctor Section</li>
+							<li data-theme="c">
+		                        <div align="justify">
+		                        	<form id="secForm">
+		                            <label for="t_checksecuritypin">Enter Doctor Security (this device) PIN:</label>
+		                            <input type="password" autocomplete="off" name="t_checksecuritypin" id="t_checksecuritypin" value="" />
+		                        </div>
+		                        <input type="button"  id="b_checksecuritypin" value="Submit"  />
+		                    </form>
+		                        <br/>
+		                        <br/>
+		                    </li>
+		                </ul>
+		            </div>
+		                 <div data-role="footer" data-theme="f" class="content resize center" >
+						<div class="footerText">Copyright © Common Otology Audit <br/><a href="mailto:matthewyung@btconnect.com" >Contact Project Lead</a>  &nbsp | &nbsp  <a href="mailto:stephen.wilson@ipswichhospital.nhs.uk" >Contact Webmaster</a> &nbsp | &nbsp <a href="privacy.htm" rel="external">Privacy Policy</a> <br/> <br/> </div>
+					</div>
+		 </div><!--SecPage end-->
+
+		 <!--QuesPage-->
+		<div id="QuesPage" data-role="page"  data-theme="c">
+			<div data-role="header" data-theme="f" class="resize center">
+				<div class="mainTitle center ">Common Otology Audit</div>
+				<div class="headerBar center"> &nbsp; <img class="logo" src="EarAudit.gif" /> </div>
+			</div>
+			<div data-role="content" class="content resize center" >
+				
+	            <div id="mainContent">
+					<ul id="tab-Questionaire" data-role="listview"data-inset="true" data-corners="false" class="contentBlock">
+	                 
+                    </ul>
+	            </div>
+	        </div>
+	    </div> <!--QuesPage end-->
+
+       
+
+		<script type="text/javascript" src="websqlHelper.js"></script>
+		<script type="text/javascript" src="coaOffline.js"></script>
+
+		<script type="text/javascript" src="easyResponsiveTabs.js"></script>
+		<script type="text/javascript" src="common.js"></script>
+		<script type="text/javascript" src="coa.js"></script>
+       
+        <script type="text/javascript" src="lawnchair-0.6.1.min.js"></script>
+        <script type="text/javascript" src="datamanager.js"></script>
+        <script type="text/javascript" src="jquery.md5.js"></script>
+        <script type="text/javascript" src="mobile_common.js"></script>
+        
+		<!-- JS coaOffline-->
+		<script type="text/javascript" src="jquery.xml2json.js"></script>	
+		<script type="text/javascript" src="jquery.json2xml.js"></script>	
+		<script type="text/javascript" src="cookies.js"></script>
+		<script type="text/javascript" src="spinner.js"></script>
+		<!--<script type="text/javascript" src="loadingindicator.js"></script>-->
+		<!-- javascript --> 
+		<!-- css3-mediaqueries.js for IE less than 9, can only support @media on-page <style> --> 
+		<!--[if lt IE 9]>
+		<!--script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+		<![endif]--> 
+		<script type="text/javascript">
+
+		var web_url= webserive_url;
+		var isWeb=false;
+
+		var hospital_no ;
+		var area ;
+		var username;
+		var patientcode;
+   		
+        if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
+       	
+       	isWeb=false;
+       	include('phonegap.js');
+        include('SQLitePlugin.js');
+ 
+       document.addEventListener("deviceready",function (){
+
+			document.addEventListener("resume", onResume, false);  //app out of focus
+			onDeviceReady();
+
+       },false);
+        } else {
+        
+        isWeb=true;
+
+         $(document).ready(function() {
+			$(window).bind("focus", onResume);
+			
+            onDeviceReady();
+        });
+        
+        }
+        
+
+
+		function onDeviceReady() {
+			if (navigator.userAgent.match(/(Android)/)) {
+				document.addEventListener("backbutton", onBackKeyDown, false);
+				function onBackKeyDown(e) {
+					// Handle the back button
+					e.preventDefault();
+					return false;
+				}
+			}
+				 //**** Set Up ***//
+				 appendYear();
+			 	 isShow=false;
+				 hospital_no = getURLParameter("hospital_no");
+				 area = getURLParameter("area");
+				 username = getURLParameter("username");
+
+				if(!hospital_no || !area ||!username)
+				{
+					notifyUser("URL invalid");;
+				}
+
+               	var dm=new datamanager('userinfo');
+
+			 	if(!coaOffline.DBReady) {
+
+			 		var mykey= dm.getData('pin')
+						if(mykey)
+						
+						myWebSQL.webdb.open();
+						coaOffline.user.HospCode = getURLParameter("hospital_no");
+						coaOffline.user.area = getURLParameter("area");
+						coaOffline.user.name = getURLParameter("username");
+						coaOffline.DBReady = true;
+						coaOfflineMode=true;
+				}
+				//*** Set Up End ***//
+
+				//****Online Sync Button
+
+				$('#syncBtn').on('click', function(){
+					window.location.assign('sync_data.htm?username='+username+'&hospital_no='+hospital_no+'&area='+area);
+				});
+
+				//**** Online Synce Button End
+
+				//**** Patient Code Button
+				$( "#patientcode" ).click(function() {
+				  $( "#patientForm" ).submit();
+				});
+
+				$('#patientForm').submit(function(){
+
+					//$('#t_patientcode').blur();
+
+						var code=getValueWithCheckBlank($('#t_patientcode'));
+						
+						setEmpty($('#t_securitypin','#secsetForm'));
+					if(!isEmpty(code)){
+
+						$.mobile.silentScroll(0);
+
+						getJsonFromWS(false,web_url+"isPatientExists",{'HospCode': hospital_no, 'username':username ,'area':area, 'PatCode':code},
+						function(json){ 
+							if(json.result=="true")
+							{
+								setEmpty($('#t_patientcode','#patientForm'));
+								patientcode=code;
+	                            //$('#t_patientcode').val('');
+	                         	
+								$.mobile.changePage('#SecPage');   
+							
+							}else
+							{
+								errorPlacement("Patient code does not exist in COA", $('#t_patientcode','#patientForm'));
+							}
+						});
+								
+					}	
+				});
+				//**** Patient Code Button End
+
+
+				$( "#b_checksecuritypin" ).click(function() {
+				  $( "#secForm" ).submit();
+				});
+				//**** DocPage Security Pin Button
+				$('#secForm').submit(function(){
+					//$('#t_checksecuritypin').blur();
+					var key=getValueWithCheckBlank($('#t_checksecuritypin'));
+					
+					if(!isEmpty(key)){
+						
+						//console.log(dm.getData('pin'));
+						//console.log($.md5(key));
+						if(dm.getData('pin').value==$.md5(key)){
+							setEmpty($('#t_checksecuritypin','#secForm'));
+							setisDoctorLogin(true);
+							$.mobile.changePage('#DocPage');
+							//$('#t_checksecuritypin').val("");
+							//setEmpty($('#t_checksecuritypin','#secForm'));
+						
+						}
+						else
+							errorPlacement('Wrong key',$('#t_checksecuritypin'));
+					}
+				});
+
+				//**** DocPage Security Pin Button End
+
+				// Initial QuesPage Security Code Submit button
+			//notifyUser("hello");
+			$( "#b_securitypin" ).click(function() {
+				  $( "#secsetForm" ).submit();
+				});
+				$('#secsetForm').submit(function(){
+					//$('#t_securitypin').blur();
+					var key=getValueWithCheckBlank($('#t_securitypin'));
+					
+					
+					if(!isEmpty(key)){
+						setEmpty($('#t_securitypin','#secsetForm'));
+						assignKey(key);
+				
+					  	document.addEventListener("touchstart", resetTimer, false);
+					  	document.addEventListener("touchend", startTimer, false);
+                    
+						$.mobile.silentScroll(0);
+						//$('#t_securitypin').val('');
+						
+						//
+						showloading();
+						setisDoctorLogin(false);
+						$.mobile.changePage("#QuesPage");//setEmpty($('#t_securitypin','#secsetForm'));
+						
+						
+					}
+				});
+
+				$(document).delegate('#LoginPage', 'pageshow', function () {
+				    //Your code for each page load here
+				  	setEmpty($('#t_patientcode','#patientForm'))
+
+				});
+
+				$(document).delegate('#DocSecPage', 'pageshow', function () {
+				    //Your code for each page load here
+				   setEmpty($('#t_checksecuritypin','#secForm'))
+
+				});
+				$(document).delegate('#SecPage', 'pageshow', function () {
+				    //Your code for each page load here
+				  	setEmpty($('#t_securitypin','#secsetForm'));
+
+				});
+
+				$(document).delegate('#QuesPage', 'pageshow', function () {
+				    //Your code for each page load here
+				    if(patientcode==null) {
+						setisDoctorLogin(false);
+				    	$.mobile.changePage("#LoginPage");
+					}
+				    else{
+						
+						getQuesPageContent();
+					}
+
+				});
+
+				// Initial QuesPage Security Code Submit button End
+				$('#but-viewquestionnaire').click(function(){
+					window.location.assign('viewquestionnaire.htm?username='+username+'&hospital_no='+hospital_no+'&area='+area);
+				})
+
+				// COA button	
+				$('#but-online').click(function(){
+					showloading();
+					var dm =new datamanager('userinfo');
+					var mhospital_no=dm.getData("hospital_no").value;
+				    var mhospital_name=dm.getData("hospital_name").value;
+				    var marea=dm.getData("area").value;
+				    var musername=dm.getData("username").value;
+				    var mlevel=dm.getData("level").value;
+					var param ="?hospital_no=" + mhospital_no;
+					param +="&hospital_name=" + mhospital_name;
+					param += "&area=" + marea;
+					param += "&level=" + mlevel;
+                    param += "&username=" + musername;
+					window.location.replace('loggedIn.htm' +param);
+					
+				});
+ 				// To DocPage button                  
+                /*$('#but-doctorsection').click(function(){
+				 	$.mobile.changePage("#DocSecPage");
+				});*/
+
+				$("#Loading").hide();
+
+		}
+		    
+	    function onResume()
+	    {
+			console.log("onResume", isDoctorLogin);
+	    	if(hasKey())
+	        	checkKeyDialog();
+			
+			if(isDoctorLogin) {
+				checkDoctorKeyDialog();
+			}
+	    }
+	   /* to update different section of Questionnaire*/
+	    function QuestionnaireParts(finished)
+	    {
+	    	$('#tab-Questionaire').siblings().hide();
+
+		    $('#tab-Questionaire').show();
+		  
+		   	for(var i=1; i<finished.length+1;i++){
+		   		$('#b-part'+i).empty();
+		   
+				   if(finished[i-1])
+				     $('#b-part'+i).append('<span class="blue">[Complete]</span> ' + $('#b-part'+i).attr("data-name") );
+				   else
+		  		$('#b-part'+i).append('<span class="blue">[Incomplete]</span> ' + $('#b-part'+i).attr("data-name") );
+			}
+
+	    }
+
+
+		function xmlParser(xml) {
+			var size = $(xml).find("questionnaire").size();
+			var temp =new Array (size);
+			generateQuestionByXML(xml);
+		  
+			$("#tab-Questionaire").listview('refresh');
+
+			for(var i = 0 ;i<size;i++)
+				temp[i]=false;
+			
+			QuestionnaireParts(temp); //update section page complete or not
+		 	
+			document.addEventListener("touchstart", resetTimer, false);
+			document.addEventListener("touchend", startTimer, false);
+			
+			startTimer();
+		 	
+		 	hideloading();
+		}
+		
+		function getQuesPageContent(){
+			
+			if(coaOfflineMode && coaOffline["getQuestionnaires"] != null) {
+				//console.log("Offline Mode: ", "getQuestionnaires");
+
+				coaOffline["getQuestionnaires"]({}, function(json) {
+					//console.log("Offline Mode: " + "getQuestionnaires "+ json);
+				
+					if(!json || json==="null" || json===null || json==="" || typeof json === "undefined"){
+						//console.error(JSON.stringify(json));
+						return false;
+					}
+					if(json.Error) {
+						//console.error(JSON.stringify(json));
+						return false;
+					}
+					xmlParser(json);
+					hideloading();
+				});
+
+			}			
+		}
+		function generateQuestionByXML(xml){
+			
+			var question = [];
+			var answerArray = new Array($(xml).find("question").size());
+			var size = new Array($(xml).find("questionnaire").size());
+			$("#tab-Questionaire").hide();
+	   		$("#tab-Questionaire").append('<a href="" data-role="button" id="back-Questionnaire" data-icon="arrow-l" data-mini="true" class="ui-btn-left" >Back</a><br/><br/>');
+	   		$("#tab-Questionaire").append('<li data-role="list-divider" data-theme="e" class="reponsiveText">Questionnaires</li>');
+			
+			$(xml).find("questionnaire").each(function(index){
+			
+				var questionnaire_Realid=$(this).find("id").first().text();
+				var questionnaire_id=index+1;
+				var footer_text;
+				$("#tab-Questionaire").append('<li ><a herf="#" id="b-part'+questionnaire_id+'" data-name="'+$(this).find("name").first().text()+'"></a></li>');
+				 //table
+				$("#mainContent").append('<ul id="tab-'+questionnaire_id+'" data-role="listview" data-inset="true" data-corners="false" class="contentBlock"></ul>').trigger('create');
+				$("#tab-"+questionnaire_id).append('<li data-role="list-divider" data-theme="e"  class="reponsiveText">'+$(this).find("name").first().text()+'</li>');
+				
+				//start-page and question page create
+				$("#tab-"+questionnaire_id).append('<li data-theme="c"><div id="questions-s'+questionnaire_id+'" align="justify" ></div><form id="form-questionnaire-'+questionnaire_id+'"><div id="questions-p'+questionnaire_id+'" align="justify"></div></form></li>');
+				
+				size[questionnaire_id-1]=$(this).find("question").size();
+				$("#questions-p"+questionnaire_id).hide();
+				footer_text=init_QStartPage(questionnaire_id,$(this));
+		
+			$(this).find("section").each(function (){
+				
+				var section_id=$(this).find("id").first().text();
+			
+				$(this).find("header").each(function () {
+		 			$("#questions-p"+questionnaire_id).append('<br/>'+htmlEntities($(this).text())+'<br/>');
+		 		});
+		 	
+		 		
+				
+				
+				$(this).find("question").each(function () {
+					
+					var question_id = $(this).find("id").first().text();
+					var question_index = $(this).find("index").text();
+					var question_type= $(this).find("type").text();
+					var question_text=htmlEntities($(this).find("text").text());
+	 			
+					answerArray[question_id-1]=-1;
+
+					if(question_type=="radio"){
+						 $("#questions-p"+questionnaire_id).append('<fieldset data-role="controlgroup" data-type="horizontal"><legend>'+question_index+'. <b id="legend_'+question_id+'">'+question_text+'</b></legend><div id="questions-p'+questionnaire_id+'-'+question_id+'"  class="radio'+questionnaire_Realid+'"></div></fieldset>');
+						var question_info={"id":question_id,"text":$('#legend_'+question_id).text(),answer:{"id":"-1","display":"-1",value:"-1"}};
+						
+						$(this).find("answer").each(function () {
+							var answer_id=$(this).find("id").text();
+							var answer_value=$(this).find("value").text();
+							var answer_display=$(this).find("display").text();
+							if(answer_display=='')
+								answer_display="0";
+				         	$("#questions-p"+questionnaire_id+"-"+question_id).append('<input type="radio" name="'+question_id+'" id="'+answer_id+'" value="'+answer_value+'" data-mini="true"/><label for="'+answer_id+'">'+answer_display+'</label>');
+				         });
+							
+						$('input:radio[name="'+question_id+'"]').change(function(){
+
+							if ($(this).is(':checked') ) {
+								var q_answer_id=$(this).attr('id');
+								
+								if(q_answer_id=="") 
+									q_answer_id="0";
+								
+								var q_answer_text=$('label[for='+$('input:radio[name="'+question_id+'"]:checked').attr('id')+']').text();
+								
+								if(q_answer_text=="")
+									$('label[for='+$('input:radio[name="'+question_id+'"]:checked').attr('id')+']').text()="0";
+								
+								var q_answer_val=$('input:radio[name="'+question_id+'"]:checked').val();
+								
+								if(q_answer_val=="")
+									q_answer_val="0";
+								
+								question_info.answer={"id":q_answer_id,"display":q_answer_text,value:q_answer_val};
+
+								answerArray[question_id-1]=$('input:radio[name="'+question_id+'"]:checked').val();
+							
+							}
+
+						});
+							//$("#questions-p"+questionnaire_id+"-"+question_id).trigger('create');
+							
+						}
+						else if (question_type=="text"){
+
+							var question_text=$(this).find("text").text();
+
+							$("#questions-p"+questionnaire_id).append('<br><label for="'+question_id+'">'+question_text+'</label></br>');
+							
+							var question_info={"id":question_id,"text":$('#legend_'+question_id).text(),answer:{"id":"-1","display":"-1",value:"-1"}};
+						 	
+						 	$("#questions-p"+questionnaire_id).append('<input type="text" name='+question_id+' id="'+question_id+'text" value=""  />');
+						 	
+						 	$('#'+question_id+'text' ).on("propertychange change keyup paste input", function(){
+				  
+							if(!$(this).val())
+								answerArray[question_id-1]=-1;
+							else {
+								 	var value = $(this).val().replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+								  	var intRegex = /^\d+$/;
+
+								    if(!intRegex.test(value)) {
+								      //alert( " This field must be numeric." );
+								      errorPlacement(" This field must be integer.", $(this));
+								      answerArray[question_id-1]=-1;
+								      
+								    } else if(( parseInt(value) >100 )||(parseInt(value)<0)){
+									  errorPlacement(" This field must be bewteen 0 and 100.", $(this));
+									  answerArray[question_id-1]=-1;
+									}
+								    else{
+								   		errorPlacement("", $(this));
+								    	answerArray[question_id-1]=$(this).val();
+								 	}
+								}
+									var q_var=$(this).val();
+									if(q_var=="") q_var="0";
+									question_info.answer={value:q_var};
+						});
+					}
+	 				question.push(question_info);
+				});
+				$(this).find("footer").each(function () {
+					$("#questions-p"+questionnaire_id).append('<br/>'+htmlEntities($(this).text())+'<br/>');
+					//footer_text='<br/>'+htmlEntities($(this).text())+'<br/>';
+				});
+			});
+			//questionnaire buttons
+			$("#questions-p"+questionnaire_id).append(footer_text);
+			var footer_btn = '';
+			if(questionnaire_id != size.length) {
+				footer_btn = '<div class="ui-grid-b grid-breakpoint"><div class="ui-block-a"><input type="button" id="innerSkip-'+questionnaire_id+'" value="Skip and back" /></div><div class="ui-block-b"><input type="button" id="submit-'+questionnaire_id+'" value="Save and back" /></div><div class="ui-block-b"><input type="button" id="next-'+questionnaire_id+'" value="Next" /></div></div>';
+			} else {
+				footer_btn = '<div class="ui-grid-a grid-breakpoint"><div class="ui-block-a"><input type="button" id="innerSkip-'+questionnaire_id+'" value="Skip and back" /></div><div class="ui-block-b"><input type="button" id="submit-'+questionnaire_id+'" value="Save and back" /></div></div>';
+			}
+			
+			$("#questions-p"+questionnaire_id).append(footer_btn);
+			
+			$("#questions-p"+questionnaire_id).trigger('create');
+			
+			$("#tab-"+questionnaire_id).listview('refresh');
+			$("#questions-p"+questionnaire_id).show();
+			$("#tab-"+questionnaire_id).hide();
+			
+			//show questionnaire button function
+			$('#b-part'+questionnaire_id).click(function(){
+				$('#tab-'+questionnaire_id).show();
+
+				$('#tab-'+questionnaire_id).siblings().hide();
+				$('#questions-s'+questionnaire_id).show();
+				$('#questions-p'+questionnaire_id).hide();
+				$('#back-'+questionnaire_id).show();
+			});
+			$("#tab-Questionaire").show();
+			//back-button function
+			$("#back-"+questionnaire_id).click(function(){
+			
+				QuestionnaireParts(checkFinished(answerArray, size));
+					
+			});
+
+			//start button function
+			$("#start-"+questionnaire_id).click(function(){
+				$.mobile.silentScroll(0);
+				$('#questions-s'+questionnaire_id).hide();
+				$('#back-'+questionnaire_id).hide();
+				$('#questions-p'+questionnaire_id).show();
+			});
+			
+			//skip button function
+			$("#skip-"+questionnaire_id).click(function(){
+				// back to questionnaire menu
+				$('#tab-Questionaire').siblings().hide();
+				$('#tab-Questionaire').show();
+			});
+			
+			var click_questionnaire_btn = function(b_goNext) {
+				if(isPartDone(answerArray, size, questionnaire_id))
+				{
+					QuestionnaireParts(checkFinished(answerArray, size));
+					if(b_goNext) {
+						var next = questionnaire_id +1;
+						if(next <= size.length) {
+							$('#b-part'+next).click();
+						}
+					}
+				}
+				else
+				{
+					// requirement change @ May2014
+					//alert('Please answer all questions');
+					if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/))
+					navigator.notification.confirm(
+					    'The questionnaire has not been completed yet.',  // message
+					    function(buttonIndex){
+							
+					    	if(buttonIndex==2){
+							
+					    	 	QuestionnaireParts(checkFinished(answerArray, size));
+								if(b_goNext) {
+									var next = questionnaire_id +1;
+									if(next <= size.length) {
+										$('#b-part'+next).click();
+									}
+								}
+							}
+					    },              // callback to invoke with index of button pressed
+					    'Confirm to submit?',            // title
+					    ['Cancel','Submit']          // buttonLabels
+					    );
+					else
+					{
+						var complete=confirm('The questionnaire has not been completed yet. Confirm to submit?');
+						if(complete) {
+							QuestionnaireParts(checkFinished(answerArray, size));
+							if(b_goNext) {
+								var next = questionnaire_id +1;
+								if(next <= size.length) {
+									$('#b-part'+next).click();
+								}
+							}
+						}
+					}
+					
+				}
+		};
+
+		//submit button function
+		$("#submit-"+questionnaire_id).click(function(){
+			click_questionnaire_btn(false);
+			
+		});
+		
+		//next button function
+		$("#next-"+questionnaire_id).click(function(){
+			click_questionnaire_btn(true);
+			
+		});
+		
+		//next button function
+		$("#innerSkip-"+questionnaire_id).click(function(){
+			if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)){
+					navigator.notification.confirm(
+					    'Confirm to skip this questionnaire? (All answers in this questionnaire will not be saved.)',  // message
+					    function(buttonIndex){
+					    	 	$("#form-questionnaire-"+questionnaire_id).trigger("reset");
+								QuestionnaireParts(checkFinished(answerArray, size));	
+							
+					    },              // callback to invoke with index of button pressed
+					    'Confirm to skip?',            // title
+					    ['Cancel','Skip and back']          // buttonLabels
+					    );
+			}
+			else
+			{
+				var skip=confirm('Confirm to skip this questionnaire? (All answers in this questionnaire will not be saved.)');
+				if(skip) {
+					$("#form-questionnaire-"+questionnaire_id).trigger("reset");
+					QuestionnaireParts(checkFinished(answerArray, size));	
+				}
+			}
+		
+			
+		});
+		
+		
+			
+			
+		});
+
+	      	$('#back-Questionnaire').click(function(){
+		        if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/))
+					navigator.notification.confirm(
+					    'Questionnaire is not saved! Confirm to quit?',  // message
+					    function(buttonIndex){
+							
+					    	if(buttonIndex==2){
+					    	 	backToMenu();
+							}
+					    },              // callback to invoke with index of button pressed
+					    'Confirm to quit?',            // title
+					    ['Cancel','Quit']          // buttonLabels
+					    );
+					else
+					{
+						var quit=confirm('Questionnaire is not saved! Confirm to quit?');
+						if(quit)
+							backToMenu();
+					}
+			});
+
+			$("#tab-Questionaire").append('<a herf="#" data-role="button" id="but_done">Done</a>').trigger('create');
+			
+			var confirmSubmitQuestionnaire = function(question) {
+			 if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)){
+					    navigator.notification.confirm(
+					        'No correction can be made after submission. Press "Confirm" to submit your answers and return the device to the reception.  Thank you.',  // message
+					         
+					         function(buttonIndex){
+					            if(buttonIndex==2){
+					            	submitQuestionnaire(question);
+					          	 }
+					         },              // callback to invoke with index of button pressed
+					         'Confirm to submit?',            // title
+					         ['Cancel','Confirm']       // buttonLabels
+					    );
+				}	
+				else{
+					var ToSubmit=confirm('No correction can be made after submission. Press "Confirm" to submit your answers and return the device to the reception.  Thank you. Are you sure to submit?');
+					if(ToSubmit)
+						submitQuestionnaire(question);
+				}
+			};
+			
+			$("#but_done").click(function(){
+				
+			    if(isAllDone(answerArray, size)){
+			       confirmSubmitQuestionnaire(question);
+			    }else{
+					if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)){
+							navigator.notification.confirm(
+								'Some questionnaire(s) is/are not completed. Confirm to submit?',  // message
+								 
+								 function(buttonIndex){
+									if(buttonIndex==2){
+										confirmSubmitQuestionnaire(question);
+									 }
+								 },              // callback to invoke with index of button pressed
+								 'Confirm to submit?',            // title
+								 ['Cancel','Submit']       // buttonLabels
+							);
+					}	
+					else{
+						var complete = confirm("Some questionnaire(s) is/are not completed. Confirm to submit?");
+						if(complete){
+							 confirmSubmitQuestionnaire(question);
+						}
+					}
+			   
+
+			    }
+			});	
+		}
+
+		function submitQuestionnaire(question){
+			if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/))
+				isShow=true;
+			 showloading();
+			var questionnairesResult={"questionnairesResult":{"question":question}};
+			//console.log("question ",question); 
+            var json = JSON.stringify(questionnairesResult);
+        	//console.log(json); 
+            coaOffline.saveQuestionnaire({ "hospitalCode":hospital_no, "username": username, "PatCode": patientcode, "paramString": json},
+            function(json){
+            //alert(JSON.stringify(json));
+				hideloading();
+                if(json.Update=="Success")
+                {
+                	if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/))
+                   		navigator.notification.alert('Questionnaire is saved. Please return the device to the reception.',backToMenu,"Success","OK");
+               		else 
+               		{
+               			alert('Questionnaire is saved. Please return the device to the reception.');
+               			backToMenu();
+               		}
+                } else {
+					if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/))
+                   		navigator.notification.alert('Failed to save the questionnaire. Please return the device to the reception.',backToMenu,"Failed","OK");
+               		else 
+               		{
+               			alert('Failed to save the questionnaire. Please retry or return the device to the reception for help.');
+               		}
+				}
+            });
+		}
+		
+		function checkFinished(answerArray, size)
+		{
+			/*var finish = new Array(size.length);
+		 	var last = 0;	
+			
+			for ( j = 0 ; j < size.length ; j ++){
+				finish[j]=true;
+				
+				var from=0;
+				
+				if( j > 0 ) 
+					from =last;
+
+				last += size [j];
+
+				for ( var i = from ; i < last; i++){
+							
+					if(answerArray[i]==-1){
+						finish[j]=false;
+						break;
+					}
+				}
+			}*/
+			var tabs = $("#mainContent>ul").filter(function() {
+				return $(this).attr("id").search(/tab-\d/)==0;
+			});
+			var finish = new Array(tabs.size());
+			tabs.each(function(index){
+				finish[index] = true;
+				var radios = $(this).find('input[type="radio"]');
+				
+				var names = {};
+				radios.each(function() { // find unique names
+					  names[$(this).attr('name')] = true;
+				});
+				var count = 0;
+				$.each(names, function() { // then count them
+					  count++;
+				});
+				if($(this).find('input[type="radio"]:checked').length != count) {
+					 finish[index] = false;
+				}
+				else if($(this).find('input[type="text"][value=""]').size() > 0) {
+					finish[index] = false;
+				}
+			});
+			return finish;
+		}
+		function init_QStartPage(_questionnaire_id,_xml)
+		{
+			$("#questions-s"+_questionnaire_id).append('<br/>'+htmlEntities(_xml.find("header").first().text())+'<br/>');
+			//$("#questions-s"+_questionnaire_id).append('<br/>'+htmlEntities(_xml.find("footer").first().text())+'<br/>');
+			var tmp_footer='<br/>'+htmlEntities(_xml.find("footer").first().text())+'<br/>';
+			
+			var buttons_html = '<div class="ui-grid-a grid-breakpoint">' +
+			'<div class="ui-block-a">' + '<input type="button" id="skip-'+_questionnaire_id+'" value="Skip" />' + '</div>' +
+			'<div class="ui-block-b">' + '<input type="button" id="start-'+_questionnaire_id+'" value="Start" />' + '</div><br/><br/>' ;
+			$("#questions-s"+_questionnaire_id).append(buttons_html).trigger('create');
+			return tmp_footer;
+		}
+
+		function isAllDone(_answerArray, _size){
+			var finished=checkFinished(_answerArray, _size);
+			for(var i = 1; i < finished.length; i++)
+        	{
+				
+            	if(finished[i] !== finished[0])
+               		return false;
+            	
+            	if(!finished[0])
+            		return false;
+					
+        	}
+
+        	return true;
+		}
+
+		function isPartDone(_answerArray, _size,_index){
+
+			var finished=checkFinished(_answerArray, _size);
+			return finished[_index-1];
+		}
+		
+		function htmlEntities(str) {
+			//if(isWeb)
+			return String(str).replace(/&apos;/g, "'")
+		               .replace(/&quot;/g, '"')
+		               .replace(/&gt;/g, '>')
+		               .replace(/&lt;/g, '<')
+		               .replace(/&amp;/g, '&');
+		//	return String(str).replace('&lt;br/&gt;',' <br/> ').replace('&lt;',' <').replace('&gt;','>');
+		//	else
+		//	return str;
+		}
+
+</script> 
+
+<script type="text/jscript">
+
+<!--
+//try{jQuery.ready();}catch(e){}
+
+// -->
+</script>
+		<!-- end javascript -->
+		
+		
+	</body>
+</html>

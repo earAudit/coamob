@@ -1,0 +1,460 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+		<link rel="prefetch" href="loggedIn.htm" />
+		<link rel="prerender" href="loggedIn.htm" />
+		<link rel="stylesheet" href="jquery-ui-1.10.3.custom.min.css" />
+		<link rel="stylesheet" href="jquery.mobile-1.3.2.min.css" />
+		<link rel="stylesheet" type="text/css" href="common.min.css" />
+		<link rel="stylesheet" type="text/css" href="easy-responsive-tabs.css" />
+		<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="jquery-ui-1.10.3.custom.min.js"></script>
+		<script type="text/javascript" src="jquery.mobile-1.3.2.min.js"></script>
+		<script type="text/javascript" src="cookies.js"></script>
+		<title>Common Otology Audit</title>
+		
+
+		<style>
+            span.blue {
+                color: blue;
+            }
+		.example
+		{
+		border:1px solid #000000;
+		padding-top:10px;
+		padding-bottom:10px;
+		padding-right:10px;
+		padding-left:10px;
+		}
+		.examplenote {margin-left:50px;}
+		.ui-controlgroup-controls
+		{
+		    width:100%;
+
+		}
+		.custom-btn {
+   			 width: 33%;
+		}
+		.radio1 .ui-radio {
+		    width:16.5%;
+		}
+		.radio2 .ui-radio {
+		    width:33%;
+		}
+		.radio3 .ui-radio {
+		    width:100%;
+		}
+        .back-to-top {
+            position: fixed;
+            bottom: 2em;
+            right: 0px;
+            text-decoration: none;
+            color: #000000;
+            background-color: rgba(235, 235, 235, 0.80);
+            font-size: 12px;
+            padding: 1em;
+            display: none;
+        }
+        
+        .back-to-top:hover {    
+            background-color: rgba(135, 135, 135, 0.50);
+        }
+		</style>
+	</head>
+	<body>
+		<div id="loginPage" data-role="page"  data-theme="c">
+	
+			<!-- /panel -->
+			<div data-role="header" data-theme="f" class="resize center">
+				<div class="mainTitle center ">Common Otology Audit</div>
+				<div class="headerBar center"> &nbsp; <img class="logo" src="EarAudit.gif" /> </div>
+	</div>
+			<div data-role="content" class="content resize center" >
+               
+			<a href="" data-role="button" id="back-all" data-icon="arrow-l" data-mini="true" class="ui-btn-left" onclick="window.history.back();setEmpty($('#t_coaPassword','#syncForm'))">Back</a><br/><br/>
+                    <ul id="tab-PatientCode" data-role="listview" data-inset="true" data-corners="false" class="contentBlock">
+						<li data-role="list-divider" data-theme="e" class="reponsiveText">Syncing Data with COA</li>
+						<li data-theme="c">
+							Your offline data (if any) will send to COA online database, and get the most updated data to this device for offline operation.<br/>The process may take several minutes.<br/><br/>
+							The following actions will sync to COA site:<br/>
+							<div id="ActionsDiv">
+								No new action.
+							</div>
+							<br/>
+							<form id="syncForm">
+                                <label for="pwd">Please input COA Password (i.e. online website one) to connect COA Database:</label>
+                                            <input type="password" name="pwd" id="t_coaPassword" value=""  />
+                        
+                          			<input type="button" id="b-sub" value="Submit"/>
+                          		</form>
+                   			<br/>
+							<div id="SyncDiv">
+							</div>
+                        </li>
+             
+                        
+                    </ul>
+
+	</div>
+		<div data-role="footer" data-theme="f" class="content resize center" >
+		 
+		<div class="footerText">Copyright © 2003-<span class="footer-year"></span> Common Otology Audit <br/><a href="mailto:matthewyung@btconnect.com" >Contact Project Lead</a>  &nbsp | &nbsp  <a href="mailto:stephen.wilson@ipswichhospital.nhs.uk" >Contact Webmaster</a> &nbsp | &nbsp <a href="privacy.htm" rel="external">Privacy Policy</a> <br/> <br/> </div>
+		
+	</div>
+</div>
+
+
+		<script type="text/javascript" src="websqlHelper.js"></script>
+		<script type="text/javascript" src="coaOffline.js"></script>
+
+		<script type="text/javascript" src="easyResponsiveTabs.js"></script>
+		<script type="text/javascript" src="common.js"></script>
+		<script type="text/javascript" src="coa.js"></script>
+       
+        <script type="text/javascript" src="lawnchair-0.6.1.min.js"></script>
+        <script type="text/javascript" src="datamanager.js"></script>
+        <script type="text/javascript" src="jquery.md5.js"></script>
+        <script type="text/javascript" src="mobile_common.js"></script>
+        <!--<script type="text/javascript" src="phonegap.js"></script>-->
+		<!-- JS coaOffline-->
+		<script type="text/javascript" src="jquery.xml2json.js"></script>	
+		<script type="text/javascript" src="jquery.json2xml.js"></script>	
+		<script type="text/javascript" src="cookies.js"></script>
+		<script type="text/javascript" src="spinner.js"></script>
+		<script type="text/javascript">
+
+		var web_url= webserive_url;
+		var isWeb=false;
+        if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
+       		isWeb=false;
+       		include('phonegap.js');
+        	include('SQLitePlugin.js');
+			document.addEventListener("deviceready", function() {
+				document.addEventListener("resume", onResume, false);  //app out of focus
+				onDeviceReady();
+			}, false);
+
+
+        } else {
+			isWeb=true;
+
+			$(document).ready(function() {
+				$(window).bind("focus", onResume);
+				onDeviceReady();
+			});
+        
+        }
+		
+		//show Action Log
+		function showActionLog() {
+			//console.log("getActionLog");
+			coaOffline.getActionLog (function(json) {
+			//	//console.log(JSON.stringify(json));
+				var s = "";
+				if(json.Rows.length == 0) {
+						//console.log("nothin");
+					$("#ActionsDiv").html("No new action.<br/>");
+					//$('#syncForm').hide();
+					return;
+				}
+				for(var i = 0; i < json.Rows.length; i++) {
+					s += json.Rows[i].captureTime + " : " + json.Rows[i].func;
+					if(json.Rows[i].RefKey != "") {
+						s+= " - " + json.Rows[i].RefKey;
+					}
+
+					s += "<br/>";
+				}
+				if(s != "") {
+					$("#ActionsDiv").html(s);
+				}
+				
+			});
+		};
+		
+		function  onDeviceReady() {
+			if (navigator.userAgent.match(/(Android)/)) {
+				document.addEventListener("backbutton", onBackKeyDown, false);
+				function onBackKeyDown(e) {
+					// Handle the back button
+					e.preventDefault();
+					return false;
+				}
+			}
+				
+				appendYear();
+		
+		
+				 hospital_no = getURLParameter("hospital_no");
+				 area = getURLParameter("area");
+				 username = getURLParameter("username");
+
+				if(!hospital_no || !area ||!username)
+				{
+					notifyUser("URL invalid");;
+				}
+
+               var dm=new datamanager('userinfo');
+			 	if(!coaOffline.DBReady) {
+
+			 		var mykey= dm.getData('pin');
+						if(mykey)
+						//myWebSQL.webdb.db = window.sqlitePlugin.openDatabase({name: "offline_db", key: mykey.value});
+						myWebSQL.webdb.open();//= window.sqlitePlugin.openDatabase({name: "offline_db", key: 'pin'});
+						coaOffline.user.HospCode = getURLParameter("hospital_no");
+						coaOffline.user.area = getURLParameter("area");
+						coaOffline.user.name = getURLParameter("username");
+						coaOffline.DBReady = true;
+						coaOfflineMode=true;
+						
+						
+				}
+                
+				
+				showActionLog();
+			
+               $( "#b-sub" ).click(function() {
+				  $( "#syncForm" ).submit();
+				});
+				//Sync data Submit button
+				$('#syncForm').submit(function()
+				{
+					if(checkConnection()!='No network connection')
+					{
+					
+						var password = $('#t_coaPassword').val();
+						
+
+						
+						checkLogin(dm,password,function(pass){
+							
+						coaOfflineMode=false;
+						showloading();
+						coaOffline.syncUploadData(pass, 
+							function progress(json){
+							/*	var s ="";
+								if($('#SyncDiv').text() == "") {
+									s="The following actions has been sync to COA database";
+								}
+								
+								s += json.item.captureTime + " : " + json.item.func;
+								if(json.item.RefKey != "") {
+									s+= " - " + json.item.RefKey;
+								}
+								s += "<br/>";
+								$('#SyncDiv').append(s);
+								//console.info("syncUploadData- progress", json);
+								showActionLog();*/
+							},
+							function success(json){
+								//console.log("syncUploadData - success", json);
+								/*var login_data = { "HospCode": hospital_no, "area": area, "username": username, "password": pass, "sinceDateTime": "", "isEncrypted": "false"};
+									coaOffline.initDB(login_data,function(json){
+										
+										}); 
+									//init DB will not clear ActionLog, if need clear, use coaOffline.clearAllAction()
+									coaOffline.clearAllAction();
+									coaOfflineMode=true;*/
+										// var dm =new datamanager('userinfo');
+
+								//	alert('success');
+								var s ="[Success] ";
+																
+								s += json.item.captureTime + " : " + json.item.func;
+								if(json.item.RefKey != "") {
+									s+= " - " + json.item.RefKey;
+								}
+								s += "<br/>";
+								$('#SyncDiv').append(s);	
+								
+							
+							},
+							function fail(json){
+								//notifyUser("syncUploadData - failed" + JSON.stringify(json));
+								var s ="[Fail] ";
+																
+								s += json.item.captureTime + " : " + json.item.func;
+								if(json.item.RefKey != "") {
+									s+= " - " + json.item.RefKey;
+								}
+								s += "<br/>";
+								$('#SyncDiv').append(s);	
+								var inputs,func,data;
+								if(json.data.inputs) {
+									inputs = JSON.parse(json.data.inputs);
+								 	func = inputs.func;
+								 	data = JSON.parse(inputs.data);
+								}
+								//alert("syncUploadData - fail" + json + inputs);
+								/*var s = "";
+								switch(func) {
+										case "createPreOp":
+											
+											s = "Failed to create Case for " + data.CaseCode +".\r\n";
+											s += "Reason: " + json.result.Reason;
+											break;
+										case "createOperation":
+											s = "Failed to create Operation for " + data.CaseCode +".\r\n";
+											s += "Reason: " + json.result.Reason;
+											break;
+										case "createPostOp":
+											s = "Failed to create FollowUp for " + data.CaseCode +".\r\n";
+											s += "Reason: " + json.result.Reason;
+											break;
+										case "createProcedure":
+											s = "Failed to create Procedure for " + data.CaseCode +".\r\n";
+											s += "Reason: " + json.result.Reason;
+											break;
+										case "saveQuestionnaire":
+											s = "Failed to save Questionnaire for " + data.paramString.questionnairesResult.resultCode +".\r\n";
+											s += "Reason: " + json.result.Reason;
+											break;
+										default:
+											s = "Failed to sync data.\r\n";
+											s += "Reason: " + json.result.Reason;
+											break;
+								}
+								s += "\r\nAre you sure you want to continue the sync process?";
+								
+								return confirm(s);*/
+							},
+							function complete(json){
+							
+								//console.log("complete". json);
+								for(var i=0; i<json.success.actionLog.length;i++){
+									var item = json.success.actionLog[i];
+									//console.log("remove scuccess:", item);
+									myWebSQL.webdb.Delete("actionLog", "id = " + item.id);
+								}
+								
+								showActionLog();
+								var sync_msg = "";
+								if(json.success.count > 0 || json.fail.count > 0) {
+									sync_msg += "Data Sync completed with Success = " + json.success.count +", Fail = " + json.fail.count +".";
+									//notifyUser("Sync upload complete with Success = " + json.success.count +", Fail = " + json.fail.count );
+								}
+								
+								var hospital_no=dm.getData("hospital_no").value;
+								var hospital_name=dm.getData("hospital_name").value;
+								var area=dm.getData("area").value;
+								var username=dm.getData("username").value;
+								var level=dm.getData("level").value;
+								coaOfflineMode=false;
+								//notifyUser("Start to get data from COA database. It may take several minutes.");
+								showloading();
+								var cur_progress = 0;
+								coaOffline.initDB({ "HospCode": hospital_no, "area": area, "username": username, "password": pass, "sinceDateTime": "", "isEncrypted": "false" }, 
+								function(json) {
+									//console.log("db ready");
+									if(sync_msg == "") {
+										sync_msg = "Data syncing is completed.";
+									}
+									notifyUser(sync_msg, function() {
+										hideloading();
+										$('#back-all').click(); 
+									});
+								},function(e){
+									notifyUser("Error - " + e);
+									hideloading();
+								},
+								function(progress, status) {
+									//console.info("initDB", progress, (progress*100).toFixed(0) +"%");
+									var new_progress = (progress*100).toFixed(0);
+									if(cur_progress != new_progress) {
+										cur_progress = new_progress;
+										showloading(status + " ... " + new_progress +"%");
+									}
+								});	
+			 		
+								
+								
+								coaOfflineMode=true;
+								
+							});
+						});
+					}else {
+						notifyUser("This function is only for Online Mode");
+					}
+				
+				});
+
+      			 			//$('#Loading').hide();
+				            $('#loginPage').show();
+
+	}
+    
+    function onResume()
+    {
+    	//if(hasKey())
+    	//dialogShow();
+    }
+   function checkLogin(dm,pass,syncfunc){
+					//var mhospital_no=dm.getData("hospital_no").value;
+				    var mhospital_name=dm.getData("hospital_name").value;
+				    var marea=dm.getData("area").value;
+				    var musername=dm.getData("username").value;
+   	 getJsonFromWS(true, webserive_url + 'login', 
+		{"hospitalName": mhospital_name, "userName": musername, "password": pass, "area" : marea}, function(json) {
+			//$('#t_coaPassword','#syncForm').blur();
+			if(json.Error) {
+				notifyUser("Login Failed - " + json.Reason);
+				//setEmpty($('#t_coaPassword','#syncForm'))
+				return false;
+			}
+			
+			if(json.Rows.length != 1) {
+				notifyUser("Login Failed");
+				//setEmpty($('#t_coaPassword','#syncForm'))
+				return false;
+			}		
+
+			if(json.Rows[0].user_level == '2a' || json.Rows[0].user_level == '2b' ) {
+				if(json.Rows[0].hospital_no == '999' ) {
+					notifyUser('Admin page is not available in COA Mobile');
+					//setEmpty($('#t_coaPassword','#syncForm'))
+					return false;
+				}
+			}
+			syncfunc(pass);
+		});
+   }
+
+
+
+function htmlEntities(str) {
+	//if(isWeb)
+	return String(str).replace(/&apos;/g, "'")
+               .replace(/&quot;/g, '"')
+               .replace(/&gt;/g, '>')
+               .replace(/&lt;/g, '<')
+               .replace(/&amp;/g, '&');
+//	return String(str).replace('&lt;br/&gt;',' <br/> ').replace('&lt;',' <').replace('&gt;','>');
+//	else
+//	return str;
+}
+
+function onResume()
+{
+	console.log("onResume", isDoctorLogin);
+	
+	if(isDoctorLogin) {
+		checkDoctorKeyDialog();
+	}
+}
+</script> 
+
+<script type="text/jscript">
+
+<!--
+//try{jQuery.ready();}catch(e){}
+
+// -->
+</script>
+		<!-- end javascript -->
+		
+		
+	</body>
+</html>

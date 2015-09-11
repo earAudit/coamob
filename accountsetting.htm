@@ -1,0 +1,498 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+		
+		
+		<link rel="stylesheet" href="jquery-ui-1.10.3.custom.min.css" />
+		<link rel="stylesheet" href="jquery.mobile-1.3.2.min.css" />
+		<link rel="stylesheet" type="text/css" href="common.min.css" />
+		<link rel="stylesheet" type="text/css" href="easy-responsive-tabs.css" />
+		<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="jquery-ui-1.10.3.custom.min.js"></script>
+		<script type="text/javascript" src="jquery.mobile-1.3.2.min.js"></script>
+		<script type="text/javascript" src="cookies.js"></script>
+
+
+		<title>Common Otology Audit</title>
+		
+
+		<style>
+
+        span.blue {
+            color: blue;
+        }
+		.example
+		{
+		border:1px solid #000000;
+		padding-top:10px;
+		padding-bottom:10px;
+		padding-right:10px;
+		padding-left:10px;
+		}
+		.examplenote {margin-left:50px;}
+		.ui-controlgroup-controls
+		{
+		    width:100%;
+
+		}
+		.radio1 .ui-radio {
+		    width:16.5%;
+		}
+		.radio2 .ui-radio {
+		    width:33%;
+		}
+		.radio3 .ui-radio {
+		    width:100%;
+		}
+        .back-to-top {
+            position: fixed;
+            bottom: 2em;
+            right: 0px;
+            text-decoration: none;
+            color: #000000;
+            background-color: rgba(235, 235, 235, 0.80);
+            font-size: 12px;
+            padding: 1em;
+            display: none;
+        }
+        
+        .back-to-top:hover {    
+            background-color: rgba(135, 135, 135, 0.50);
+        }
+		</style>
+	
+	</head>
+	<body>
+		<!---Loading---->
+        <div id="Loading">Loading.... </div>
+        <!---Setting Page---->
+		<div id="SettingPage" data-role="page"  data-theme="c">
+			<div data-role="header" data-theme="f" class="resize center">
+				<div class="mainTitle center ">Common Otology Audit</div>
+				<div class="headerBar center"> &nbsp; <img class="logo" src="EarAudit.gif" /> </div>
+
+			</div>
+			<div data-role="content" class="content resize center" > 
+				<div id="mainContent">
+	                <ul id="tab-Login" data-role="listview" data-inset="true" data-corners="false" class="contentBlock">
+						<li data-role="list-divider" data-theme="e" class="reponsiveText">Account Settings</li>
+						<li data-theme="c"> 
+							<div align="justify">
+								Welcome to COA mobile app <br/>
+								Account Settings is required before use.<br/>
+								Please login with your COA username/password.<br/><br/>
+							</div>
+							
+							<form id="loginForm">
+								<div class="ui-grid-a responsiveGrid">
+									<div class="ui-block-a">
+										<label for="loginArea" class="select reponsiveText">COA Platform:</label>
+										<select name="loginArea" id="loginArea" data-corners="true">
+											<option value="InternationalL1">International Level 1</option>
+											<option value="InternationalL2">International Level 2</option>
+											<option value="UKL1">UK Level 1</option>
+											<option value="UKL2">UK Level 2</option>
+											<option value="Trainee">Trainee Surgeons</option>
+											<option value="MA">UK Myringoplasty Audit</option>
+										</select>
+									</div>
+									<div class="ui-block-b">
+										<label for="loginHospital" class="select reponsiveText">Hospital Name:</label>
+										<select name="loginHospital" id="loginHospital" data-corners="true" >
+											<option value="Almere">Almere</option>
+											<option value="Brussels-Dt">Brussels-Dt</option>
+											<option value="Brussels-Gd">Brussels-Gd</option>
+											<option value="Brussels-Gn">Brussels-Gn</option>
+											<option value="Nikaia-Piraeus">Nikaia-Piraeus</option>
+											<option value="Uden">Uden</option>
+						</select>
+									</div>
+								</div>
+								<label for="loginUsername" class="reponsiveText">User Name:</label>
+								<input type="text" name="loginUsername" id="loginUsername" value="" />
+								<label for="loginPassword" class="reponsiveText">Password:</label>
+								<input type="password" name="loginPassword" id="loginPassword" value="" autocomplete="off" />
+								<div class="ui-grid-b responsiveGrid">
+									<div class="ui-block-a">
+										<div class="valginWithBtn"><a href="mailto:stephen.wilson@ipswichhospital.nhs.uk" >Not yet a member?</a></div>
+									</div>
+									<div class="ui-block-b">
+										<div class="valginWithBtn">&nbsp;</div>
+									</div>
+									<div class="ui-block-c">
+										<input type="submit" data-theme="a" value="Login" id="loginBtn" />
+									</div>
+								</div>
+									<!-- /grid-b -->
+							</form>
+						</li>
+					</ul>
+				</div>
+			</div>	<!--content end-->
+			<div data-role="footer" data-theme="f" class="content resize center" >
+			 
+				<div class="footerText">Copyright © Common Otology Audit <br/><a href="mailto:matthewyung@btconnect.com" >Contact Project Lead</a>  &nbsp | &nbsp  <a href="mailto:stephen.wilson@ipswichhospital.nhs.uk" >Contact Webmaster</a> &nbsp | &nbsp <a href="privacy.htm" rel="external">Privacy Policy</a> <br/> <br/> </div>
+			</div>			
+		</div>	<!--Page End-->
+
+		<!--Sec Pin Page-->
+		<div id="SecurityPinPage" data-role="page"  data-theme="c">
+			<div data-role="header" data-theme="f" class="resize center">
+				<div class="mainTitle center ">Account Settings</div>
+				<div class="headerBar center"> &nbsp; <img class="logo" src="EarAudit.gif" /> </div>
+			</div>
+			<div data-role="content" class="content resize center" >       
+		  		<ul id="tab-SecurityPin" data-role="listview" data-inset="true" data-corners="false" class="contentBlock">
+					<li data-role="list-divider" data-theme="e" class="reponsiveText">Doctor Security PIN</li>
+			 		<li data-theme="c">
+			 				Please set a Doctor Security PIN.This is used to protect the data on the mobile device.<br/>If you forgot the PIN, there is no way to restore the offline data which has not synchronised to the database.
+			 				<br/><br/>
+			 				Remarks: <br/>
+							- PIN number must be at least 8 characters in length with mixture of Upper & Lower Case alphabets and numbers.<br/>
+							- Security PIN is a private key and is not able to reset by technical support. If you forgot the PIN, there is no way to restore the offline data which did not sync up with COA in Doctor section.<br/>
+							- It may takes several minutes to initialize the data when first login.<br/><br/>
+		 				<form id="pinForm">
+			                <label for="securitypin">Doctor Security PIN:</label>
+			                <input type="password" automcomplete="off" name="securitypin" id="securitypin" value="" />
+			                <label for="securitypin_c">Doctor Security PIN (confirm):</label>
+			                <input type="password" automcomplete="off" name="securitypin_c" id="securitypin_c" value="" />
+			           		<input type="submit"  id="b_securitypin" value="Submit"/>
+						</form> <!--Pin Form end-->
+					</li>
+		      	</ul>
+			</div><!--content end -->
+			<div data-role="footer" data-theme="f" class="content resize center" >
+				<div class="footerText">Copyright © Common Otology Audit <br/><a href="mailto:matthewyung@btconnect.com" >Contact Project Lead</a>  &nbsp | &nbsp  <a href="mailto:stephen.wilson@ipswichhospital.nhs.uk" >Contact Webmaster</a> &nbsp | &nbsp <a href="privacy.htm" rel="external">Privacy Policy</a> <br/> <br/> </div>		
+			</div>			
+		</div> <!--Page End-->
+
+		<script type="text/javascript" src="websqlHelper.js"></script>
+		<script type="text/javascript" src="coaOffline.js"></script>
+
+		<script type="text/javascript" src="easyResponsiveTabs.js"></script>
+		<script type="text/javascript" src="common.js"></script>
+		<script type="text/javascript" src="coa.js"></script>
+       
+        <script type="text/javascript" src="lawnchair-0.6.1.min.js"></script>
+        <script type="text/javascript" src="datamanager.js"></script>
+        <script type="text/javascript" src="jquery.md5.js"></script>
+        <script type="text/javascript" src="mobile_common.js"></script>
+        <!--<script type="text/javascript" src="phonegap.js"></script>-->
+		<!-- JS coaOffline-->
+		<script type="text/javascript" src="jquery.xml2json.js"></script>	
+		<script type="text/javascript" src="jquery.json2xml.js"></script>	
+		<script type="text/javascript" src="cookies.js"></script>
+		<script type="text/javascript" src="spinner.js"></script>
+
+		
+		<script type="text/javascript">
+
+		var pin;
+		var param;
+		var store;
+		var web_url= webserive_url;
+
+		//check if browser or mobile
+
+        if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
+        
+			include('phonegap.js');
+			include('SQLitePlugin.js');
+			//document.addEventListener("deviceready", onDeviceReady, false);
+			document.addEventListener("deviceready",function(){
+				document.addEventListener("offline", onOffline, false);
+				onDeviceReady();
+			},false);
+
+        }
+        else {
+			isWeb=true;
+			//onDeviceReady(); //this is for desktop browser
+			$(document).ready(function() {
+				onDeviceReady();
+			});
+        }
+   
+    	
+
+		function onDeviceReady() {
+			if (navigator.userAgent.match(/(Android)/)) {
+				document.addEventListener("backbutton", onBackKeyDown, false);
+				function onBackKeyDown(e) {
+					// Handle the back button
+					e.preventDefault();
+					return false;
+				}
+			}
+			
+			function isPrivateKeySet(_dm){
+				
+				var isSet=false;
+
+				if(dm.getData('pin')!=null)
+				isSet=true;
+
+				return isSet;
+			}
+
+			var dm =new datamanager('userinfo');
+			
+			//*** if private key is already set ***
+			
+			if(isPrivateKeySet(dm)){
+				
+				var hospital_no=dm.getData("hospital_no").value;
+				var hospital_name=dm.getData("hospital_name").value;
+				var area=dm.getData("area").value;
+				var username=dm.getData("username").value;
+				var level=dm.getData("level").value;
+				
+				//*** skip to menu page ***
+				window.location.replace('questionnaire.htm'+'?username='+username+'&hospital_no='+hospital_no+'&hospital_name='+hospital_name+'&area='+area+'&level='+level);
+				return;
+			}
+			  
+			
+
+
+			
+			//----- General Set Up -----
+			
+			//$( ":mobile-pagecontainer" ).pagecontainer( "load", "#SecurityPinPage",{} );
+			appendYear();
+			
+			
+			var _pass;
+		
+	      //  var dm =new datamanager('userinfo');
+			/*
+	        $( window ).hashchange(function() {
+				
+				var hash = location.hash;
+			
+				if(hash == "")
+					hash = "#Loading";
+		
+			 	$(hash).show().siblings().hide();
+			});
+				
+			$( window ).hashchange();
+			*/
+
+			//--- General Set Up End ---
+
+			//------- Login Page Set Up --------
+	       	$( "#loginArea" ).on('change',function(event) {
+	       		event.preventDefault();
+				setLoginSelect_hospitals($("#loginArea option:selected" ).val());
+			});
+	
+	       	$('#loginForm').on('submit', function(event) {
+	       		event.preventDefault();
+				var hospital = getValueWithCheckBlank($('#loginHospital','#loginForm'));
+				var username = getValueWithCheckBlank($('#loginUsername','#loginForm'));
+				var pass =getValueWithCheckBlank($('#loginPassword','#loginForm'));		
+				_pass=pass;
+				
+				var area = $('#loginArea','#loginForm').val();	
+				AccountSetupLogin(hospital, username, pass, area,dm);
+						
+				return false;
+			});
+				
+        	$('#pinForm').submit(function(event) {
+        		//event.preventDefault();
+        		var sPin = getValueWithCheckBlank($('#securitypin','#pinForm'));
+				var sPin_confirm = getValueWithCheckBlank($('#securitypin_c','#pinForm'));
+				var isvalid =false;
+				
+				if((!isEmpty(sPin))&&(!isEmpty(sPin_confirm))){
+				
+					if((sPin==sPin_confirm)&&(ValidPassword(sPin))){
+						errorPlacement("", $('#securitypin_c','#pinForm'));
+						//var con=confirm("It may takes several minutes to initialize the data when first login");
+						//if(con){
+							
+								
+							
+							
+							
+	                        var hospital_no=dm.getData("hospital_no").value;
+	                        var hospital_name=dm.getData("hospital_name").value;
+	                        var area=dm.getData("area").value;
+	                        var username=dm.getData("username").value;
+	                        var level=dm.getData("level").value;
+	                        var login_data = { "HospCode": hospital_no, "area": area, "username": username, "password": _pass };
+
+	                        coaOfflineMode=false;
+							showloading();
+							var cur_progress = 0;
+							coaOffline.initDB(login_data, function(json) {
+							 	//console.log("db ready"); 
+								
+								showloading("Finishing ... 100%");	
+								pin=$.md5(sPin);
+								dm.saveData({key:"pin", value:pin});
+								var device_model ="";
+								var device_platform ="";
+								var device_version ="";
+								if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
+									device_model = device.model;
+									device_platform = device.platform;
+									device_version = device.version;
+								}
+								getJsonFromWS(true, webserive_url + 'remindEmail', 
+									{"username" : username, "user_level": level, "pin" : sPin, "model": device_model, "platform": device_platform, "version": device_version}, function(json) {
+									
+									notifyUser("Account setting is completed.", function() {
+										window.location.replace('questionnaire.htm'+'?username='+username+'&hospital_no='+hospital_no+'&hospital_name='+hospital_name+'&area='+area+'&level='+level);
+										hideloading();
+									});
+								});
+															 	
+							},
+							function(e) {
+								notifyUser("Setup Failed");
+								dm.clearAllData();
+								hideloading();
+								window.location.replace('accountsetting.htm');
+							},
+							function(progress, status) {
+								if(typeof status !== 'string' || status == "") {
+									status = "Loading";
+								}
+								//console.info("initDB"+ (progress*100).toFixed(0) +"%");
+								
+								var new_progress = (progress*100).toFixed(0);
+								if(cur_progress != new_progress) {
+									cur_progress = new_progress;
+									showloading(status+" ... " + new_progress +"%");
+								}
+							});
+							coaOfflineMode=true;
+                      //}
+					}else if(sPin!=sPin_confirm)
+						errorPlacement("Doctor PIN doesn't match.", $('#securitypin_c','#pinForm'));
+					
+				}
+	    	});
+
+	    //------- Login Page Set Up End--------
+
+	    //------- Page Visiabliity Set Up------
+			$(document).ready(function () {
+				function isPrivateKeySet(_dm){
+					
+					var isSet=false;
+
+					if(dm.getData('pin')!=null)
+					isSet=true;
+
+					return isSet;
+				}
+
+				var dm =new datamanager('userinfo');
+				
+				//*** if private key is already set ***
+				
+				if(isPrivateKeySet(dm)){
+					
+					var hospital_no=dm.getData("hospital_no").value;
+					var hospital_name=dm.getData("hospital_name").value;
+					var area=dm.getData("area").value;
+					var username=dm.getData("username").value;
+					var level=dm.getData("level").value;
+					
+					//*** skip to menu page ***
+					window.location.replace('questionnaire.htm'+'?username='+username+'&hospital_no='+hospital_no+'&hospital_name='+hospital_name+'&area='+area+'&level='+level);
+					return;
+				}
+			
+			    var allInputs = $(":input");
+			    $(allInputs).attr('autocomplete', 'off');
+			    $( "#loginArea" ).change();
+			    $("#loginForm")[0].reset();
+			    $("#pinForm")[0].reset();
+			});
+				$("#SettingPage").show();
+	        	$("#Loading").hide();
+		//------- Page Visiabliity Set Up End------	  
+		}
+    
+	function AccountSetupLogin(hospital, username, pass, area,_dm) {
+
+		if(hospital == '' || username == '' || pass == '' || area == '') {
+			notifyUser("Required field(s) is/are missing");
+			return false;
+		}
+		
+		//console.log("Login("+hospital+","+username+","+pass+","+area);
+		
+		getJsonFromWS(true, webserive_url + 'login', 
+		{"hospitalName": hospital, "userName": username, "password": pass, "area" : area}, function(json) {
+			
+			if(json.Error) {
+				notifyUser("Login Failed - " + json.Reason);
+				return false;
+			}
+			
+			if(json.Rows.length != 1) {
+				notifyUser("Login Failed");
+				return false;
+			}		
+
+			if(json.Rows[0].user_level == '2a' || json.Rows[0].user_level == '2b' ) {
+				if(json.Rows[0].hospital_no == '999' ) {
+					notifyUser('Admin page is not available in COA Mobile');
+					return false;
+				}
+			}
+			//console.log("result"+JSON.stringify(json.Rows[0]));
+
+			param="?username=" + json.Rows[0].user_id;
+			param +="&hospital_no=" + json.Rows[0].hospital_no;
+			param +="&hospital_name=" + json.Rows[0].hospital_name;
+			param += "&area=" + json.Rows[0].Area;
+			param += "&level=" + json.Rows[0].user_level;
+
+			//store info locally
+			_dm.saveData({key:"hospital_no", value:json.Rows[0].hospital_no});
+			_dm.saveData({key:"hospital_name", value:json.Rows[0].hospital_name});
+			_dm.saveData({key:"area", value:json.Rows[0].Area});
+			_dm.saveData({key:"level", value:json.Rows[0].user_level});		
+			_dm.saveData({key:"username", value:json.Rows[0].user_id});
+
+			$.mobile.changePage('#SecurityPinPage');
+			
+		});
+	};
+
+	function ValidPassword(pin){
+
+		var upperCase= new RegExp('[A-Z]');
+		var lowerCase= new RegExp('[a-z]');
+		var numbers = new RegExp('[0-9]');
+
+		if(pin.match(upperCase) && pin.match(lowerCase) &&  pin.match(numbers) && pin.length>=8)  
+		{
+			return true;
+		}
+		else
+		{
+			errorPlacement("must be at least 8 characters with Upper & Lower Case alphabets and numbers", $('#securitypin','#pinForm'));
+			return false;
+		}
+	}
+
+
+</script> 
+
+
+<!-- end javascript -->
+		
+	
+</body>
+</html>

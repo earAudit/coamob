@@ -1,0 +1,883 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+		<link rel="prefetch" href="loggedIn.htm" />
+		<link rel="prerender" href="loggedIn.htm" />
+		<link rel="stylesheet" href="jquery-ui-1.10.3.custom.min.css" />
+		<link rel="stylesheet" href="jquery.mobile-1.3.2.min.css" />
+		<link rel="stylesheet" type="text/css" href="common.min.css" />
+		<link rel="stylesheet" type="text/css" href="easy-responsive-tabs.css" />
+		<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="jquery-ui-1.10.3.custom.min.js"></script>
+		<script type="text/javascript" src="jquery.mobile-1.3.2.min.js"></script>
+		<script type="text/javascript" src="cookies.js"></script>
+		<title>Common Otology Audit</title>
+
+		<style>
+        span.blue {
+            color: blue;
+        }
+		.example
+		{
+			border:1px solid #000000;
+			padding-top:10px;
+			padding-bottom:10px;
+			padding-right:10px;
+			padding-left:10px;
+		}
+		.examplenote {margin-left:50px;}
+		.ui-controlgroup-controls
+		{
+		    width:100%;
+
+		}
+		.custom-btn {
+    		width: 33%;
+		}
+		
+		.ui-radio {
+		    width:100%;
+		}
+		
+		.radio1 .ui-radio {
+		    width:16.5%;
+		}
+		.radio2 .ui-radio {
+		    width:33%;
+		}
+		.radio3 .ui-radio {
+		    width:100%;
+		}
+		.radio4 .ui-radio {
+		    width:20%;
+		}
+        .back-to-top {
+            position: fixed;
+            bottom: 2em;
+            right: 0px;
+            text-decoration: none;
+            color: #000000;
+            background-color: rgba(235, 235, 235, 0.80);
+            font-size: 12px;
+            padding: 1em;
+            display: none;
+        }
+        
+        .back-to-top:hover {    
+            background-color: rgba(135, 135, 135, 0.50);
+        }
+		</style>
+	</head>
+	<body>
+		<div id="loginPage" data-role="page"  data-theme="c">
+			<!-- /panel -->
+			<div data-role="header" data-theme="f" class="resize center">
+				<div class="mainTitle center ">Common Otology Audit</div>
+				<div class="headerBar center"> &nbsp; <img class="logo" src="EarAudit.gif" /> </div>
+			</div>
+			<div data-role="content" class="content resize center" >   
+				<a href="" data-role="button" id="back-all" data-icon="arrow-l" data-mini="true" class="ui-btn-left" >Back</a><br/><br/>
+                <ul id="tab-PatientCode" data-role="listview" data-inset="true" data-corners="false" class="contentBlock">
+					<li data-role="list-divider" data-theme="e" class="reponsiveText">View Questionnaire Records</li>
+					<li data-theme="c">                        
+                        <label for="name">Enter Patient Code to review:</label>
+                        <form id="pinform">
+                        <input type="text" name="name" id="t_patientcode" value=""  />
+                    	<input type="button" id="b-sub" value="Submit"/> 
+                    	</form>
+                    </li>
+        		</ul>
+			</div>
+			<div data-role="footer" data-theme="f" class="content resize center" >
+			<div class="footerText">Copyright © Common Otology Audit <br/><a href="mailto:matthewyung@btconnect.com" >Contact Project Lead</a>  &nbsp | &nbsp  <a href="mailto:stephen.wilson@ipswichhospital.nhs.uk" >Contact Webmaster</a> &nbsp | &nbsp <a href="privacy.htm" rel="external">Privacy Policy</a> <br/> <br/> </div>		
+			</div>
+		</div>
+		
+		<div id="QuestionPage" data-role="page"  data-theme="c">
+			<!-- /panel -->
+			<div data-role="header" data-theme="f" class="resize center">
+				<div class="mainTitle center ">Common Otology Audit</div>
+				<div class="headerBar center"> &nbsp; <img class="logo" src="EarAudit.gif" /> </div>		
+			</div>
+			<div data-role="content" class="content resize center" >
+				<a href="" data-role="button" id="back-PatCode" data-icon="arrow-l" data-mini="true" class="ui-btn-left" >Back</a><br/><br/>
+                <ul id="tab-QuestionnaireList" data-role="listview" data-inset="true" data-corners="false" class="contentBlock">
+					
+				</ul>
+			</div>
+			<div data-role="footer" data-theme="f" class="content resize center" >
+			<div class="footerText">Copyright © Common Otology Audit <br/><a href="mailto:matthewyung@btconnect.com" >Contact Project Lead</a>  &nbsp | &nbsp  <a href="mailto:stephen.wilson@ipswichhospital.nhs.uk" >Contact Webmaster</a> &nbsp | &nbsp <a href="privacy.htm" rel="external">Privacy Policy</a> <br/> <br/> </div>
+			</div>
+		</div>
+
+		<div id="ResultPage" data-role="page"  data-theme="c">
+			<!-- /panel -->
+			<div data-role="header" data-theme="f" class="resize center">
+				<div class="mainTitle center ">Common Otology Audit</div>
+				<div class="headerBar center"> &nbsp; <img class="logo" src="EarAudit.gif" /> </div>
+			</div>
+			<div data-role="content" class="content resize center">
+				<a href="" data-role="button" id="back-Questionnaire" data-icon="arrow-l" data-mini="true" class="ui-btn-left" >Back</a><br/><br/>
+				<div id="resultContent">
+
+                <div data-role="controlgroup" data-type="horizontal" id="tab-Questionaire" data-mini="true">
+					
+											
+				
+				</div><br/><br/>
+  				<ul id="tab-q" data-role="listview" data-inset="true" data-corners="false" class="contentBlock">
+         	
+                </ul>
+				<br/><br/>
+				
+				<div style="text-align:right;"><a href="#" id="scrollToTopLink">Back to Top</a></div>
+				<div class="ui-grid-a grid-breakpoint">
+						<div class="ui-block-a">
+							<label for="input-OpStatus">OpStatus:</label>
+							<select name="input-OpStatus" id="input-OpStatus">
+								<option value="PreOp">PreOp</option>
+								<option value="Op">Op</option>
+								<option value="PostOp">PostOp</option>
+							</select>
+						</div>
+						<div class="ui-block-b" id="input-FollowupPeriod_div">
+							<label for="input-FollowupPeriod">Follow-up Period:</label>
+							<select name="input-FollowupPeriod" id="input-FollowupPeriod">
+								<option value="3">3 months</option>
+								<option value="6">6 months</option>
+								<option value="12">12 months</option>
+								<option value="24">24 months</option>
+								<option value="36">36 months</option>
+								<option value="48">48 months</option>
+								<option value="60">60 months</option>
+								<option value="72">6 years</option>
+								<option value="84">7 years</option>
+								<option value="96">8 years</option>
+								<option value="108">9 years</option>
+								<option value="120">10 years</option>
+								<option value="132">11 years</option>
+								<option value="144">12 years</option>
+								<option value="156">13 years</option>
+								<option value="168">14 years</option>
+								<option value="180">15 years</option>
+								<option value="192">16 years</option>
+								<option value="204">17 years</option>
+								<option value="216">18 years</option>
+								<option value="228">19 years</option>
+								<option value="240">20 years</option>
+							</select>
+						</div>
+						<div class="ui-block-a">
+							<label for="input-QuestionnaireDate">Questionnaire created At:</label>
+							<input type="text" name="input-QuestionnaireDate" id="input-QuestionnaireDate" value="" placeholder="dd/mm/yyyy" class="datepicker" disabled="disabled"/>
+						</div>
+						<div class="ui-block-b"></div>
+				</div>
+				<input type="hidden" name="patCode" value="" id="input-patCode" />
+				<input type="hidden" name="resultCode" value="" id="input-resultCode" />
+				<div id="btn-confirmQuestionnaire_div"><input type="submit" name="Confirm" value="Confirm" id="btn-confirmQuestionnaire"/></div>
+				</div>
+           </div>          
+			<div data-role="footer" data-theme="f" class="content resize center" >
+			<div class="footerText">Copyright © Common Otology Audit <br/><a href="mailto:matthewyung@btconnect.com" >Contact Project Lead</a>  &nbsp | &nbsp  <a href="mailto:stephen.wilson@ipswichhospital.nhs.uk" >Contact Webmaster</a> &nbsp | &nbsp <a href="privacy.htm" rel="external">Privacy Policy</a> <br/> <br/> </div>	
+			</div>
+		</div>
+
+
+		<script type="text/javascript" src="websqlHelper.js"></script>
+		<script type="text/javascript" src="coaOffline.js"></script>
+
+		<script type="text/javascript" src="easyResponsiveTabs.js"></script>
+		<script type="text/javascript" src="common.js"></script>
+		<script type="text/javascript" src="coa.js"></script>
+        
+        <script type="text/javascript" src="lawnchair-0.6.1.min.js"></script>
+        <script type="text/javascript" src="datamanager.js"></script>
+        <script type="text/javascript" src="jquery.md5.js"></script>
+        <script type="text/javascript" src="mobile_common.js"></script>
+     
+		<!-- JS coaOffline-->
+		<script type="text/javascript" src="jquery.xml2json.js"></script>	
+		<script type="text/javascript" src="jquery.json2xml.js"></script>	
+		<script type="text/javascript" src="cookies.js"></script>
+		<script type="text/javascript" src="spinner.js"></script>
+		<script type="text/javascript">
+
+		var web_url= webserive_url;
+		var isWeb=false;
+
+        if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
+       		
+       		isWeb=false;
+       		include('phonegap.js');
+        	include('SQLitePlugin.js');
+			document.addEventListener("deviceready", function() {
+				document.addEventListener("resume", onResume, false);  //app out of focus
+				onDeviceReady();
+			}, false);
+
+        } else {
+        isWeb=true;
+
+        $(document).ready(function() {
+			$(window).bind("focus", onResume);
+            onDeviceReady();
+        });//this is for desktop browser
+        
+        }
+		
+		function  onDeviceReady() {	
+			if (navigator.userAgent.match(/(Android)/)) {
+				document.addEventListener("backbutton", onBackKeyDown, false);
+				function onBackKeyDown(e) {
+					// Handle the back button
+					e.preventDefault();
+					return false;
+				}
+			}
+		
+			appendYear();		
+			hospital_no = getURLParameter("hospital_no");
+			area = getURLParameter("area");
+			username = getURLParameter("username");
+
+			if(!hospital_no || !area ||!username)
+			{
+				notifyUser("URL invalid");;
+			}
+
+            var dm=new datamanager('userinfo');
+		 	if(!coaOffline.DBReady) {
+
+		 		var mykey= dm.getData('pin')
+				if(mykey)
+				//myWebSQL.webdb.db = window.sqlitePlugin.openDatabase({name: "offline_db", key: mykey.value});
+				myWebSQL.webdb.open();//= window.sqlitePlugin.openDatabase({name: "offline_db", key: 'pin'});
+				coaOffline.user.HospCode = getURLParameter("hospital_no");
+				coaOffline.user.area = getURLParameter("area");
+				coaOffline.user.name = getURLParameter("username");
+				coaOffline.DBReady = true;
+				coaOfflineMode=true;
+			}
+         
+         $('#b-sub').click(function(){
+         	$('#pinform').submit();
+         });
+			//Patient Code Submit button
+		$('#pinform').submit(function(){
+
+			var code=getValueWithCheckBlank($('#t_patientcode'));
+			if(!isEmpty(code)){
+				
+				getJsonFromWS(false,web_url+"isPatientExists",{'HospCode': hospital_no, 'username':username ,'area':area, 'PatCode':code},
+				function(json){ 
+					if(json.result=="true")
+					{
+						
+						getJsonFromWS(false, web_url+'getQuestionnaireResultCodeList',
+						{'HospCode':hospital_no,'username':username,'PatCode':code},
+						function(json){
+							if(json.Rows.length == 0) {
+								notifyUser("No questionnaire exists for the patient.");
+								return;
+							}
+						
+							$('#tab-PatientCode').hide();
+								
+							//$.mobile.changePage("#QuestionPage");
+							$.mobile.changePage("#ResultPage");
+							showloading();
+							
+							$('#input-patCode').val(code);
+							
+							parseResult(json.Rows);
+							
+							//auto select the first one
+							$('#tab-QuestionnaireList li[data-role!="list-divider"] a').first().click();
+							//hideloading();
+						});
+					}else
+					{
+						errorPlacement("Patient code does ont exist", $('#t_patientcode'));
+					}
+				});
+				
+			}
+		});
+
+						//$('#Loading').hide();
+		$('#loginPage').show();
+
+
+		$("#back-PatCode").click(function(){
+			$('#tab-PatientCode').show();
+			// window.history.back();
+			
+			$.mobile.changePage("#loginPage");	
+			return;
+		});
+		
+		$("#back-all").click(function(){
+			window.location.assign('questionnaire.htm?username='+username+'&hospital_no='+hospital_no+'&area='+area+'#DocPage');
+			return;
+		});
+			
+		$("#back-Questionnaire").click(function(){
+
+		  //window.history.back();
+		  
+			$.mobile.changePage("#QuestionPage");	
+			$('#tab-QuestionnaireList').listview('refresh');
+			return;
+		});
+		
+		$('#input-FollowupPeriod_div').hide();
+		$('#input-OpStatus').change(function() {
+			if($(this).val() == "PostOp") {
+				$('#input-FollowupPeriod_div').show();
+			} else {
+				$('#input-FollowupPeriod_div').hide();
+			}
+			
+		});
+		var confirmSubmit = function() {
+			var opStatus = $('#input-OpStatus').val();
+			var followUpPeriod = $('#input-FollowupPeriod').val();
+			if(opStatus != "PostOp") {
+				followUpPeriod = "";
+			}
+			var createdAt = $('#input-QuestionnaireDate').val();
+			var resultCode = $('#input-resultCode').val();
+			var question = [];
+			//[question_id],[answer_id],[answer]
+			var question_id, answer_id, answer;
+			var question_info;
+			$('#tab-q input:radio:checked').each(function() {
+				
+				question_id = $(this).attr('name');
+				answer_id = $(this).attr('id');
+				answer = $(this).val();
+				question_info={"id":question_id, answer:{"id": answer_id,value: answer}};
+				question.push(question_info);
+				
+			});
+			
+			$('#tab-q input:text').each(function() {
+				
+				question_id = $(this).attr('name');
+				if($(this).val() != "") {
+					answer = $(this).val();
+					question_info={"id":question_id, answer:{value: answer}};
+					question.push(question_info);
+				}
+				
+			});
+			
+			
+			var paramString ={"questionnairesResult":{
+				"resultCode":resultCode,
+				"opStatus": opStatus, 
+				"followUpPeriod": followUpPeriod, 
+				"createdAt": createdAt,
+				"confirmed" : 1,
+				"question": question
+				
+				}};
+			//console.log("btn-confirmQuestionnaire click: ", paramString);
+			var hospitalCode = getURLParameter("hospital_no");
+			var username = getURLParameter("username");
+			var PatCode = $('#input-patCode').val();
+			var json = JSON.stringify(paramString);
+			 coaOffline.saveQuestionnaire({ "hospitalCode":hospitalCode, "username": username , "PatCode": PatCode, "paramString": json},
+			function(json){
+			//alert(JSON.stringify(json));
+				hideloading();
+				if(json.Update=="Success")
+				{
+					if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/))
+						navigator.notification.alert('Questionnaire is confirmed.', function() {
+						var resultCode = $('#input-resultCode').val();
+						$('#'+resultCode).text($('#'+resultCode).text().replace(" (Not confirmed)",""));
+						$('#'+resultCode).click();
+						
+						} ,"Success","OK");
+					else 
+					{
+						alert('Questionnaire is confirmed.');
+						var resultCode = $('#input-resultCode').val();
+						$('#'+resultCode).text($('#'+resultCode).text().replace(" (Not confirmed)",""));
+						$('#'+resultCode).click();
+					}
+				} else {
+					if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/))
+						navigator.notification.alert('Failed to update. Please try again later.', null,"Failed","OK");
+					else 
+					{
+						alert('Failed to update. Please try again later.');
+					}
+				}
+			});
+		
+		};
+		
+		$('#btn-confirmQuestionnaire').click(function() {
+			
+			if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)){
+					navigator.notification.confirm(
+						'No correction can be made after confirmed. ',  // message
+						 
+						 function(buttonIndex){
+							if(buttonIndex==2){
+								confirmSubmit();
+								return;
+							 }
+						 },              // callback to invoke with index of button pressed
+						 'Continue to submit?',            // title
+						 ['Cancel','Continue']       // buttonLabels
+					);
+			}	
+			else{
+				var ToSubmit=confirm('No correction can be made after confirmed. Continue to submit?');
+				if(ToSubmit) {
+					confirmSubmit();
+					return;
+				}
+			}
+		
+		
+		});
+		
+		$(document).delegate('a#scrollToTopLink', 'click', function () {
+			$('html, body').stop().animate({ scrollTop : 0 }, 100);
+			return false;
+		});
+
+		
+	}
+    
+    function onResume()
+    {
+    	//if(hasKey())
+    	//dialogShow();
+    }
+   
+   	function parseResult(json)
+	{
+		$('#tab-QuestionnaireList').hide();
+		$('#tab-QuestionnaireList').empty();
+		
+		for(var i = 0; i< json.length ; i++)
+		{
+			var result=json[i].resultCode;
+			var confirmed = json[i].confirmed == "1";
+			if(confirmed) {
+				$('#tab-QuestionnaireList').prepend("<li><a href='#' id='"+result+"'>"+json[i].createdAt+"</a> </li>");
+			}else {
+				$('#tab-QuestionnaireList').prepend("<li><a href='#' id='"+result+"'>"+json[i].createdAt+" (Not confirmed)</a> </li>");
+			}
+			$('#'+result).click(function() {
+				$('#resultContent').hide();
+				var result = $(this).attr('id');
+				
+				
+				$("#mainContent").empty();
+				$('#tab-Questionaire').empty();
+				$('#tab-q').empty();
+				//alert(result);
+				/*getJsonFromWS(false, web_url+'getQuestionnairesResultFormJSON',
+						{'resultCode':result},
+						function(json){
+						parseQuestion(json.questionnaires.questionnaire)
+						});*/
+				if(coaOfflineMode && coaOffline["getQuestionnairesResultForm"] != null) {
+					showloading();
+					$('#input-resultCode').val(result);
+					//console.log("Offline Mode: ", "getQuestionnairesResultForm");
+									//loading('show');
+					coaOffline["getQuestionnairesResultForm"]({'resultCode':result}, function(json) {
+						//console.log("Offline Mode: " + "getQuestionnairesResultForm ", json);
+									
+						if(!json || json==="null" || json===null || json==="" || typeof json === "undefined"){
+							if(errorHandle) {
+								errorHandle(json);
+								return false;
+							}
+						}
+						if(json.Error) {
+							if(errorHandle) {
+								errorHandle(json);
+								return false;
+							}	
+						}
+						
+						var j = $.xml2json(json);
+						////console.log(JSON.stringify(j));
+						parseXML(json);
+						hideloading();
+						$('#resultContent').show();
+										//loading('hide');
+					});
+
+					$.mobile.changePage("#ResultPage");
+					
+				}	
+		//	getJsonFromWS(false,web_url+"getQuestionnairesResultForm",{'resultCode':result},parseXML);
+			/*$.ajax({
+					    type: "POST",
+					    url:web_url+"getQuestionnairesResultForm",// "questionnaires.xml",
+					    dataType: "xml",
+					    data:{'resultCode':result},
+					    success: parseXML,
+					    beforeSend: function() {
+						$.mobile.loading('show');
+						},
+						complete: function() {
+						$.mobile.loading('hide');
+
+						}
+
+					   });*/
+					   return;
+			});
+		}
+
+		$('#tab-QuestionnaireList').prepend('<li data-role="list-divider" data-theme="e" class="reponsiveText">Questionnaire List</li>');
+		//$('#tab-QuestionnaireList').listview('refresh');
+
+		$('#tab-QuestionnaireList').show();
+		//$('#tab-QuestionnaireList').siblings().hide();
+	}  
+ 	function parseQuestion(json)
+ 	{
+ 		for(var i = 0; i< json.length ; i++)
+		{
+ 			$('#tab-Questionaire').append("<li>"+json[0].id+" </li>");
+ 			
+		
+
+		}
+			$('#tab-Questionaire').show();
+			$('#tab-Questionaire').siblings().hide();
+			$('#tab-Questionaire').listview('refresh');
+
+ 	}
+	
+	function updateScore(questionnaire_id, section_id) {
+		var old_total_score = parseInt($('#que_score_' + questionnaire_id).text());
+		if(isNaN(old_total_score)) {
+			old_total_score = 0;
+		}
+		var old_section_score = parseInt($('#score_section_' + section_id + '_val').text());
+		if(isNaN(old_section_score)) {
+			old_section_score = 0;
+		}
+		var section_score = 0;
+		$('#que_section_'+ section_id +' input:radio:checked').each(function() {
+			var score = parseInt($(this).attr("value"));
+			if(score != -1 || !isNaN(score)) { 
+				section_score += score;
+			}
+		});
+		$('#que_section_'+ section_id +' input:text').each(function() {
+			var score = parseInt($(this).val());
+			if(score != -1 || !isNaN(score)) { 
+				section_score += score;
+			}
+		});
+		if(!isNaN(section_score)) {
+			$('#score_section_' + section_id + '_val').text(section_score);
+		}
+		
+		var total_score = old_total_score - old_section_score + section_score;
+		//console.log("total_score, old_total_score, old_section_score, section_score", total_score, old_total_score, old_section_score, section_score);
+		
+		if(!isNaN(total_score)) {
+			////console.log($('#que_score_'+questionnaire_id));
+			$('#que_score_'+questionnaire_id).text(total_score);
+			$('#que_score2_'+questionnaire_id).text(total_score);
+		}
+	}
+
+ 	function parseXML(xml)
+ 	{
+
+	var confirmed = $(xml).find("confirmed").text() == "1";
+	
+	var opStatus = $(xml).find("opStatus").text();
+	if(opStatus != null || opStatus != ''){
+		$('#input-OpStatus').val(opStatus);
+		if(opStatus == 'PostOp') {
+			$('#input-FollowupPeriod_div').show();
+		} else {
+			$('#input-FollowupPeriod_div').hide();
+		}
+	}
+	var followUpPeriod = $(xml).find("followUpPeriod").text();
+	if(followUpPeriod != null || followUpPeriod != ''){
+		$('#input-FollowupPeriod').val(followUpPeriod);
+	}
+	
+	var createdAt = $(xml).find("createdAt").text();
+	if(createdAt != null || createdAt != ''){
+		$('#input-QuestionnaireDate').val(createdAt);
+	}
+	
+	if(confirmed) {
+		$('#input-OpStatus').attr('disabled',true).selectmenu('refresh');
+		$('#input-OpStatus').parent().addClass('ui-disabled');
+		$('#input-FollowupPeriod').attr('disabled',true).selectmenu('refresh');
+		$('#input-FollowupPeriod').parent().addClass('ui-disabled');
+		$('#btn-confirmQuestionnaire_div').hide();
+	} else {
+		$('#input-OpStatus').attr('disabled',false).selectmenu('refresh');
+		$('#input-OpStatus').parent().removeClass('ui-disabled');
+		$('#input-FollowupPeriod').attr('disabled',false).selectmenu('refresh');
+		$('#input-FollowupPeriod').parent().removeClass('ui-disabled');
+		$('#btn-confirmQuestionnaire_div').show();
+	}
+	
+	
+
+	$('#tab-Questionaire').hide();
+	$('#tab-Questionaire').empty();
+	$('#tab-q').empty();
+
+
+	$("#tab-Questionaire").append('<div id="ques_tablist">Questionnaires: </div>');
+	$(xml).find("questionnaire").each(function(index){
+		
+	var questionnaire_Realid=$(this).find("id").first().text();
+	var questionnaire_id=index+1;
+	//questionnaire button
+		var footer_text;
+		$("#ques_tablist").append('<a href="#" id="b-part'+questionnaire_id+'"  >' + $(this).find("name").first().text()+'</a>');
+		
+		 //table
+		//$("#mainContent").append('<ul id="tab-'+questionnaire_id+'" data-role="listview" data-inset="true" data-corners="false" class="contentBlock"></ul>').trigger('create');
+		
+		//back button
+		//$("#tab-q").append('').trigger('create');
+
+		$("#tab-q").append('<li data-role="list-divider" data-theme="e" id="title-'+questionnaire_id+'" class="reponsiveText">'+$(this).find("name").first().text()+'</li>');
+		//start-page and question page create
+		$("#tab-q").append('<li data-theme="c"  id="questions-s'+questionnaire_id+'" align="justify" ></li>');
+		$("#questions-s"+questionnaire_id).append('<div class="score_section">(Total Score : <span id="que_score_'+questionnaire_id+'">0</span>)</div>');
+
+		$("#tab-q").append('<li id="questions-p'+questionnaire_id+'" align="justify"></li>');
+		$("#questions-p"+questionnaire_id).hide();
+		footer_text=init_QStartPage(questionnaire_id,$(this));
+		
+		$(this).find("section").each(function () {
+
+			var section_id=$(this).find("id").first().text();
+				$("#questions-p"+questionnaire_id).append('<div id="que_section_'+ section_id +'"></div>');
+				$('#que_section_'+ section_id).hide();
+			$(this).find("header").each(function () {
+				
+	 			$('#que_section_'+ section_id).append('<br/>'+htmlEntities($(this).text())+'<br/>');
+				$('#que_section_'+ section_id).append('<div id="score_section_'+section_id+'" class="score_section">(Score: sub-total = <span id="score_section_'+section_id+'_val"></span>)</div>');
+				
+	 		});
+
+			
+			$(this).find("question").each(function () {
+
+				var question_id = $(this).find("id").first().text();
+				
+				var question_index = $(this).find("index").text();
+				var question_type= $(this).find("type").text();
+				var question_text=htmlEntities($(this).find("text").text());
+ 				if(question_type=="radio"){
+					$('#que_section_'+ section_id).append('<fieldset id="ques_f'+questionnaire_id+'-'+question_id+'" data-role="controlgroup" data-type="horizontal"><legend>'+question_index+'. <b id="legend_'+question_id+'">'+question_text+'</b></legend></fieldset>');
+					
+					$('#ques_f'+questionnaire_id+'-'+question_id).append('<div id="questions-p'+questionnaire_id+'-'+question_id+'"  class="radio'+questionnaire_Realid+'"></div>');
+					
+					//var question_info={"id":question_id,"text":$('#legend_'+question_id).text(),answer:{"id":"-1","display":"-1",value:"-1"}};
+						var result_id = $(this).find("result answer_id").text();
+						//console.debug("question_id, result_id: ", question_id, result_id);
+						
+						$(this).find(">answer").each(function () {
+						
+						
+							var answer_id=$(this).find("id").text();
+							var answer_value=$(this).find("value").text();
+							var answer_display=$(this).find("display").text();
+							if(answer_value==''){ answer_value="0";}
+							if(answer_display==''){ answer_display="0";}
+							//console.log("answer_id, answer_value, answer_display, result_id", answer_id, answer_value, answer_display, result_id);
+								
+							if(answer_id == result_id){
+								$("#questions-p"+questionnaire_id+"-"+question_id).append('<input type="radio" name="'+question_id+'" id="'+answer_id+'" value="'+answer_value+'" data-mini="true" checked="checked"/><label for="'+answer_id+'">'+answer_display+'</label>');
+							} else {
+								$("#questions-p"+questionnaire_id+"-"+question_id).append('<input type="radio" name="'+question_id+'" id="'+answer_id+'" value="'+answer_value+'" data-mini="true"/><label for="'+answer_id+'">'+answer_display+'</label>');
+							}
+							
+				         });
+						 
+				
+						$('input:radio[name="'+question_id+'"]').change(function(){
+							updateScore(questionnaire_id, section_id);
+						});
+
+										
+					}
+				else if (question_type=="text"){
+					
+						var question_text=$(this).find("text").text();
+						var result = $(this).find('result').find('answer').first().text();
+						
+							
+
+							$('#que_section_'+ section_id).append('<label for="'+question_id+'">'+question_text+'</label>');
+							
+							//var question_info={"id":question_id,"text":$('#legend_'+question_id).text(),answer:{"id":"-1","display":"-1",value:"-1"}};
+						 	if(result != -1)
+								$('#que_section_'+ section_id).append('<input type="text" name='+question_id+' id="'+question_id+'text" value="'+result+'"  />');
+						 	else
+								$('#que_section_'+ section_id).append('<input type="text" name='+question_id+' id="'+question_id+'text" value=""  />');
+						 	$('#'+question_id+'text' ).on("propertychange change keyup paste input", function(){
+				  
+							if(!$(this).val()) {
+								//answerArray[question_id-1]=-1;
+							}
+							else 
+							{
+								var value = $(this).val().replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+								var intRegex = /^\d+$/;
+
+								if(!intRegex.test(value)) {
+								  //alert( " This field must be numeric." );
+								  errorPlacement(" This field must be integer.", $(this));
+								//  answerArray[question_id-1]=-1;
+								  
+								} 
+								else if(( parseInt(value) >100 )||(parseInt(value)<0)){
+									errorPlacement(" This field must be bewteen 0 and 100.", $(this));
+									//answerArray[question_id-1]=-1;
+								}
+								else{
+									errorPlacement("", $(this));
+									//answerArray[question_id-1]=$(this).val();
+									updateScore(questionnaire_id, section_id);
+								}
+							}
+							/*var q_var=$(this).val();
+							if(q_var=="") q_var="0";
+							question_info.answer={value:q_var};*/
+						});
+				}
+				
+				if(confirmed) {
+					$('input[name="'+question_id+'"]').attr('disabled',true);
+				}
+				
+			}); //questions
+
+				$(this).find("footer").each(function () {
+				
+					$('#que_section_'+ section_id).append('<br/>'+htmlEntities($(this).text())+'<br/>');
+				
+				}); 
+				
+				updateScore(questionnaire_id, section_id);
+				
+				$('#que_section_'+ section_id).trigger('create');
+				$('#que_section_'+ section_id).show();
+				
+			}); //sections
+			$("#questions-p"+questionnaire_id).append(footer_text);
+			$("#questions-p"+questionnaire_id).append('<br/><div class="score_section">(Total Score : <span id="que_score2_'+questionnaire_id+'">0</span>)</div>');
+			$('#que_score2_'+questionnaire_id).text($('#que_score_'+questionnaire_id).text());
+			
+			
+			$('#b-part'+questionnaire_id).buttonMarkup();
+			
+			$('#b-part'+questionnaire_id).click(function(){
+				
+
+				//	$('#tab-q').siblings().hide();
+				
+				$(this).siblings().removeClass("ui-btn-active");
+				$(this).addClass("ui-btn-active");
+				$('#questions-s'+questionnaire_id).siblings().hide();
+					
+				$('#questions-p'+questionnaire_id).siblings().hide();
+				//$('#title-'+questionnaire_id).siblings().hide();
+				$('#title-'+questionnaire_id).show();
+				//$('#tab-q').show();
+				
+				$('#questions-s'+questionnaire_id).show();
+				$('#questions-p'+questionnaire_id).show();
+
+					//	$('#questions-s'+questionnaire_id).show();
+					//	$('#questions-p'+questionnaire_id).show();
+					//$('#back-'+questionnaire_id).show();
+					// alert(questionnaire_id);
+			});
+
+
+		//$("#questions-p"+questionnaire_id).append('<input type="button" id="submit-'+questionnaire_id+'" value="Submit" data-mini="true"/>').trigger('create');
+		
+		$("#tab-q").listview('refresh');
+		$("#ques_OpStatus").trigger('create');
+	
+		$("#questions-p"+questionnaire_id).show();
+		
+		//$("#tab-q").hide();
+		});
+		$('#tab-Questionaire').controlgroup( "refresh" );
+		$('#tab-Questionaire').show();
+			//$('#tab-Questionaire').siblings().hide();
+			//$('#tab-Questionaire').listview('refresh');
+		hideloading();
+		$('#b-part1').trigger('click');
+	
+ 	}
+
+ 	function init_QStartPage(_questionnaire_id,_xml)
+{
+	$("#questions-s"+_questionnaire_id).append('<br/>'+htmlEntities(_xml.find("header").first().text())+'<br/>');
+	//$("#questions-s"+_questionnaire_id).append('<br/>'+htmlEntities(_xml.find("footer").first().text())+'<br/>');
+	var tmp_footer='<br/>'+htmlEntities(_xml.find("footer").first().text())+'<br/>';
+	return tmp_footer;
+	//$("#questions-s"+_questionnaire_id).append('<input type="button" id="start-'+_questionnaire_id+'" value="Start" data-mini="true"/>').trigger('create');
+}
+function htmlEntities(str) {
+	//if(isWeb)
+	return String(str).replace(/&apos;/g, "'")
+               .replace(/&quot;/g, '"')
+               .replace(/&gt;/g, '>')
+               .replace(/&lt;/g, '<')
+               .replace(/&amp;/g, '&');
+//	return String(str).replace('&lt;br/&gt;',' <br/> ').replace('&lt;',' <').replace('&gt;','>');
+//	else
+//	return str;
+}
+
+function onResume()
+{
+	console.log("onResume", isDoctorLogin);
+	
+	if(isDoctorLogin) {
+		checkDoctorKeyDialog();
+	}
+}
+
+
+</script> 
+
+<script type="text/jscript">
+
+<!--
+//try{jQuery.ready();}catch(e){}
+
+// -->
+</script>
+		<!-- end javascript -->
+		
+		
+	</body>
+</html>
