@@ -7,13 +7,7 @@ var alertFallback = false;
 //console.warn = function() {};
 ////console.error = function() {};
  
- $(document).bind("mobileinit", function(){
 
-
-        $.mobile.defaultPageTransition   = "none";
-        $.mobile.defaultDialogTransition = "none";
-        $.mobile.buttonMarkup.hoverDelay = 0;
-		});
 
 
 

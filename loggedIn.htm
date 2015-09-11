@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 		<meta http-equiv="X-UA-Compatible" content="chrome=1"/>
-		<link rel="stylesheet" href="jquery-ui-1.10.3.custom.min.css" />
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 		<link rel="stylesheet" href="jquery.mobile-1.3.2.min.css" />
 		<link rel="stylesheet" type="text/css" href="common.min.css" />
 		<link rel="stylesheet" type="text/css" href="easy-responsive-tabs.css" />
@@ -3198,7 +3198,7 @@
 										The data from each hospital/surgeon is stored in a SQL Server database and can be distributed to the hospital on a regular basis. Each hospital can only access its own data, but not the data of another hospital. However, a table with the cumulative results of all the participating hospitals will also be provided to each hospital.
 									</P>
 									<P>
-										The web master can be contacted via <A HREF="mailto: stephen.wilson@ipswichhospital.nhs.uk">e-mail</A> for surgeons to make enquiries regarding specific comparative audit with other hospitals or surgeons. The identity of the hospitals will be protected unless individual hospitals wish to collaborate in their audit.
+										The web master can be contacted via <A HREF="mailto: earauditworld@gmail.com">e-mail</A> for surgeons to make enquiries regarding specific comparative audit with other hospitals or surgeons. The identity of the hospitals will be protected unless individual hospitals wish to collaborate in their audit.
 									</P>
 									<H2><A Name="Validation">Validation</A></H2>
 									<P class="word-wrap">
@@ -3407,7 +3407,15 @@
 		</div>
 		<!-- javascript -->
 		<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
-		<script type="text/javascript" src="jquery-ui-1.10.3.custom.min.js"></script>
+		<script type="text/javascript">
+			 $(document).on("mobileinit", function(){
+					$.mobile.allowSamePageTransition = true;
+					$.mobile.hashListeningEnabled = false;
+					$.mobile.pushStateEnabled = false;
+					$.mobile.changePage.defaults.changeHash = false;
+			});
+		</script>
+		<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="jquery.mobile-1.3.2.min.js"></script>
 		<script type="text/javascript" src="easyResponsiveTabs.js"></script>
 		<script type="text/javascript" src="common.js"></script>

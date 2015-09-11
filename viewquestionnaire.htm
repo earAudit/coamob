@@ -6,12 +6,20 @@
 		<meta http-equiv="X-UA-Compatible" content="chrome=1">
 		<link rel="prefetch" href="loggedIn.htm" />
 		<link rel="prerender" href="loggedIn.htm" />
-		<link rel="stylesheet" href="jquery-ui-1.10.3.custom.min.css" />
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 		<link rel="stylesheet" href="jquery.mobile-1.3.2.min.css" />
 		<link rel="stylesheet" type="text/css" href="common.min.css" />
 		<link rel="stylesheet" type="text/css" href="easy-responsive-tabs.css" />
 		<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
-		<script type="text/javascript" src="jquery-ui-1.10.3.custom.min.js"></script>
+		<script type="text/javascript">
+			 $(document).on("mobileinit", function(){
+					$.mobile.allowSamePageTransition = true;
+					$.mobile.hashListeningEnabled = false;
+					$.mobile.pushStateEnabled = false;
+					$.mobile.changePage.defaults.changeHash = false;
+			});
+		</script>
+		<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="jquery.mobile-1.3.2.min.js"></script>
 		<script type="text/javascript" src="cookies.js"></script>
 		<title>Common Otology Audit</title>
@@ -92,7 +100,7 @@
         		</ul>
 			</div>
 			<div data-role="footer" data-theme="f" class="content resize center" >
-			<div class="footerText">Copyright © Common Otology Audit <br/><a href="mailto:matthewyung@btconnect.com" >Contact Project Lead</a>  &nbsp | &nbsp  <a href="mailto:stephen.wilson@ipswichhospital.nhs.uk" >Contact Webmaster</a> &nbsp | &nbsp <a href="privacy.htm" rel="external">Privacy Policy</a> <br/> <br/> </div>		
+			<div class="footerText">Copyright © Common Otology Audit <br/><a href="mailto:matthewyung@btconnect.com" >Contact Project Lead</a>  &nbsp | &nbsp  <a href="mailto:earauditworld@gmail.com" >Contact Webmaster</a> &nbsp | &nbsp <a href="privacy.htm" rel="external">Privacy Policy</a> <br/> <br/> </div>		
 			</div>
 		</div>
 		
@@ -109,7 +117,7 @@
 				</ul>
 			</div>
 			<div data-role="footer" data-theme="f" class="content resize center" >
-			<div class="footerText">Copyright © Common Otology Audit <br/><a href="mailto:matthewyung@btconnect.com" >Contact Project Lead</a>  &nbsp | &nbsp  <a href="mailto:stephen.wilson@ipswichhospital.nhs.uk" >Contact Webmaster</a> &nbsp | &nbsp <a href="privacy.htm" rel="external">Privacy Policy</a> <br/> <br/> </div>
+			<div class="footerText">Copyright © Common Otology Audit <br/><a href="mailto:matthewyung@btconnect.com" >Contact Project Lead</a>  &nbsp | &nbsp  <a href="mailto:earauditworld@gmail.com" >Contact Webmaster</a> &nbsp | &nbsp <a href="privacy.htm" rel="external">Privacy Policy</a> <br/> <br/> </div>
 			</div>
 		</div>
 
@@ -178,11 +186,11 @@
 				</div>
 				<input type="hidden" name="patCode" value="" id="input-patCode" />
 				<input type="hidden" name="resultCode" value="" id="input-resultCode" />
-				<div id="btn-confirmQuestionnaire_div"><input type="submit" name="Confirm" value="Confirm" id="btn-confirmQuestionnaire"/></div>
+				<div id="btn-confirmQuestionnaire_div"><input type="button" name="Confirm" value="Confirm" id="btn-confirmQuestionnaire"/></div>
 				</div>
            </div>          
 			<div data-role="footer" data-theme="f" class="content resize center" >
-			<div class="footerText">Copyright © Common Otology Audit <br/><a href="mailto:matthewyung@btconnect.com" >Contact Project Lead</a>  &nbsp | &nbsp  <a href="mailto:stephen.wilson@ipswichhospital.nhs.uk" >Contact Webmaster</a> &nbsp | &nbsp <a href="privacy.htm" rel="external">Privacy Policy</a> <br/> <br/> </div>	
+			<div class="footerText">Copyright © Common Otology Audit <br/><a href="mailto:matthewyung@btconnect.com" >Contact Project Lead</a>  &nbsp | &nbsp  <a href="mailto:earauditworld@gmail.com" >Contact Webmaster</a> &nbsp | &nbsp <a href="privacy.htm" rel="external">Privacy Policy</a> <br/> <br/> </div>	
 			</div>
 		</div>
 
@@ -287,8 +295,7 @@
 						
 							$('#tab-PatientCode').hide();
 								
-							//$.mobile.changePage("#QuestionPage");
-							$.mobile.changePage("#ResultPage");
+
 							showloading();
 							
 							$('#input-patCode').val(code);
@@ -313,10 +320,11 @@
 
 
 		$("#back-PatCode").click(function(){
-			$('#tab-PatientCode').show();
+			
 			// window.history.back();
 			
-			$.mobile.changePage("#loginPage");	
+			$.mobile.changePage("#loginPage");
+			$('#tab-PatientCode').show();
 			return;
 		});
 		
@@ -331,7 +339,7 @@
 		  
 			$.mobile.changePage("#QuestionPage");	
 			$('#tab-QuestionnaireList').listview('refresh');
-			return;
+			return false;
 		});
 		
 		$('#input-FollowupPeriod_div').hide();

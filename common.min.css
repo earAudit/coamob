@@ -78,4 +78,8 @@ div.ui-disabled,.ui-select .ui-disabled,.ui-state-disabled{filter:Alpha(Opacity=
     z-index: 10000;
 }
 
+* {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+}
 
